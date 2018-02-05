@@ -1,0 +1,25 @@
+\contentsline {section}{\numberline {1}Problem Description}{2}{section.1}
+\contentsline {subsection}{\numberline {1.1}Approach}{2}{subsection.1.1}
+\contentsline {section}{\numberline {2}Wake and Sleep Data Exploration}{3}{section.2}
+\contentsline {subsection}{\numberline {2.1}Falling Asleep Data}{4}{subsection.2.1}
+\contentsline {subsection}{\numberline {2.2}Waking Up Data}{4}{subsection.2.2}
+\contentsline {section}{\numberline {3}Logistic Function to Represent Transition}{5}{section.3}
+\contentsline {section}{\numberline {4}Prior Distribution for \(\beta \) and \(\alpha \)}{7}{section.4}
+\contentsline {section}{\numberline {5}Creating the Posterior Model}{8}{section.5}
+\contentsline {subsection}{\numberline {5.1}Bernoulli Variable}{8}{subsection.5.1}
+\contentsline {subsubsection}{\numberline {5.1.1}PyMC3 Model}{9}{subsubsection.5.1.1}
+\contentsline {subsection}{\numberline {5.2}Visualize Posteriors for \(\beta \) and \(\alpha \)}{10}{subsection.5.2}
+\contentsline {subsubsection}{\numberline {5.2.1}Confidence Interval}{13}{subsubsection.5.2.1}
+\contentsline {subsection}{\numberline {5.3}Posterior Probability for Specific Time}{14}{subsection.5.3}
+\contentsline {section}{\numberline {6}Convergence in Markov Chain Monte Carlo}{16}{section.6}
+\contentsline {subsection}{\numberline {6.1}Trace Plots}{16}{subsection.6.1}
+\contentsline {section}{\numberline {7}Incorporating Additional Information}{17}{section.7}
+\contentsline {subsection}{\numberline {7.1}Visualize Shifts}{20}{subsection.7.1}
+\contentsline {section}{\numberline {8}Wake Model}{21}{section.8}
+\contentsline {subsection}{\numberline {8.1}Investigate the Model}{23}{subsection.8.1}
+\contentsline {subsection}{\numberline {8.2}Confidence Intervals (95\%)}{24}{subsection.8.2}
+\contentsline {section}{\numberline {9}Length of Sleep}{24}{section.9}
+\contentsline {subsection}{\numberline {9.1}Visualize Posterior Distribution}{27}{subsection.9.1}
+\contentsline {subsubsection}{\numberline {9.1.1}Query the Posterior Model}{28}{subsubsection.9.1.1}
+\contentsline {subsection}{\numberline {9.2}Visualize the Posterior and the Data}{28}{subsection.9.2}
+\contentsline {section}{\numberline {10}Conclusions}{30}{section.10}
