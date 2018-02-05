@@ -1,8 +1,0 @@
-((* block input *))
-((* endblock input *))
-((* block output_group *))
-   % Add remainer of the document contents below.
-   ((* for output in cell.outputs *))
-        ((( render_output(output) )))
-   ((* endfor *))
-((* endblock *))
