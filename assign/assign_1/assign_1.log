@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6400 64-bit) (preloaded format=pdflatex 2017.9.24)  5 FEB 2018 13:17
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6400 64-bit) (preloaded format=pdflatex 2017.9.24)  6 FEB 2018 20:25
 entering extended mode
 **./assign_1.tex
 (assign_1.tex
@@ -552,34 +552,37 @@ Package: enumitem 2011/09/28 v3.5.2 Customized lists
 Package: ulem 2012/05/18
 \ULdepth=\dimen160
 )
-Package hyperref Info: Option `breaklinks' set `true' on input line 270.
-Package hyperref Info: Option `colorlinks' set `true' on input line 270.
- (assign_1.aux)
+Package hyperref Info: Option `breaklinks' set `true' on input line 264.
+Package hyperref Info: Option `colorlinks' set `true' on input line 264.
+ (assign_1.aux
+
+LaTeX Warning: Label `confidence-interval' multiply defined.
+
+)
 \openout1 = `assign_1.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 276.
-LaTeX Font Info:    ... okay on input line 276.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 276.
-LaTeX Font Info:    ... okay on input line 276.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 276.
-LaTeX Font Info:    ... okay on input line 276.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 276.
-LaTeX Font Info:    ... okay on input line 276.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 276.
-LaTeX Font Info:    ... okay on input line 276.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 276.
-LaTeX Font Info:    ... okay on input line 276.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 276.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 276.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 269.
+LaTeX Font Info:    ... okay on input line 269.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 269.
+LaTeX Font Info:    ... okay on input line 269.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 269.
+LaTeX Font Info:    ... okay on input line 269.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 269.
+LaTeX Font Info:    ... okay on input line 269.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 269.
+LaTeX Font Info:    ... okay on input line 269.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 269.
+LaTeX Font Info:    ... okay on input line 269.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 269.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 269.
 
-
-("C:\Program Files\MiKTeX 2.9\tex\latex\base\ts1cmr.fd"
+ ("C:\Program Files\MiKTeX 2.9\tex\latex\base\ts1cmr.fd"
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 276.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 276.
-LaTeX Font Info:    ... okay on input line 276.
-LaTeX Font Info:    Try loading font information for T1+ppl on input line 276.
+LaTeX Font Info:    ... okay on input line 269.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 269.
+LaTeX Font Info:    ... okay on input line 269.
+LaTeX Font Info:    Try loading font information for T1+ppl on input line 269.
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\psnfss\t1ppl.fd"
 File: t1ppl.fd 2001/06/04 font definitions for T1/ppl.
@@ -657,7 +660,7 @@ Package caption Info: End \AtBeginDocument code.
 File: ucsencs.def 2011/01/21 Fixes to fontencodings LGR, T3
 )
 \AtBeginShipoutBox=\box41
-Package hyperref Info: Link coloring ON on input line 276.
+Package hyperref Info: Link coloring ON on input line 269.
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\hyperref\nameref.sty"
 Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
@@ -667,58 +670,58 @@ Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
 \c@section@level=\count137
 )
-LaTeX Info: Redefining \ref on input line 276.
-LaTeX Info: Redefining \pageref on input line 276.
-LaTeX Info: Redefining \nameref on input line 276.
+LaTeX Info: Redefining \ref on input line 269.
+LaTeX Info: Redefining \pageref on input line 269.
+LaTeX Info: Redefining \nameref on input line 269.
 
 (assign_1.out) (assign_1.out)
 \@outlinefile=\write4
 \openout4 = `assign_1.out'.
 
-LaTeX Font Info:    Try loading font information for OT1+ppl on input line 280.
+LaTeX Font Info:    Try loading font information for OT1+ppl on input line 273.
 
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\psnfss\ot1ppl.fd"
 File: ot1ppl.fd 2001/06/04 font definitions for OT1/ppl.
 )
-LaTeX Font Info:    Try loading font information for OML+zplm on input line 280
+LaTeX Font Info:    Try loading font information for OML+zplm on input line 273
 .
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\psnfss\omlzplm.fd"
 File: omlzplm.fd 2002/09/08 Fontinst v1.914 font definitions for OML/zplm.
 )
-LaTeX Font Info:    Try loading font information for OMS+zplm on input line 280
+LaTeX Font Info:    Try loading font information for OMS+zplm on input line 273
 .
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\psnfss\omszplm.fd"
 File: omszplm.fd 2002/09/08 Fontinst v1.914 font definitions for OMS/zplm.
 )
-LaTeX Font Info:    Try loading font information for OMX+zplm on input line 280
+LaTeX Font Info:    Try loading font information for OMX+zplm on input line 273
 .
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\psnfss\omxzplm.fd"
 File: omxzplm.fd 2002/09/08 Fontinst v1.914 font definitions for OMX/zplm.
 )
-LaTeX Font Info:    Try loading font information for OT1+zplm on input line 280
+LaTeX Font Info:    Try loading font information for OT1+zplm on input line 273
 .
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\psnfss\ot1zplm.fd"
 File: ot1zplm.fd 2002/09/08 Fontinst v1.914 font definitions for OT1/zplm.
 )
 LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 15.0049pt on input line 280.
+(Font)              scaled to size 15.0049pt on input line 273.
 LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 10.42007pt on input line 280.
+(Font)              scaled to size 10.42007pt on input line 273.
 LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 8.33606pt on input line 280.
+(Font)              scaled to size 8.33606pt on input line 273.
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 15.0049pt on input line 280.
+(Font)              scaled to size 15.0049pt on input line 273.
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 10.42007pt on input line 280.
+(Font)              scaled to size 10.42007pt on input line 273.
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 8.33606pt on input line 280.
+(Font)              scaled to size 8.33606pt on input line 273.
 LaTeX Font Info:    Font shape `T1/ppl/bx/n' in size <17.28> not available
-(Font)              Font shape `T1/ppl/b/n' tried instead on input line 280.
+(Font)              Font shape `T1/ppl/b/n' tried instead on input line 273.
  (assign_1.toc
 LaTeX Font Info:    Font shape `T1/ppl/bx/n' in size <12> not available
 (Font)              Font shape `T1/ppl/b/n' tried instead on input line 1.
@@ -734,349 +737,346 @@ LaTeX Font Info:    Font shape `U/msb/m/n' will be
 (Font)              scaled to size 9.37807pt on input line 2.
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
 (Font)              scaled to size 7.29405pt on input line 2.
-)
-\tf@toc=\write5
-\openout5 = `assign_1.toc'.
-
 
 [1
 
-{C:/Users/Will Koehrsen/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
-<images/sleep_data_graph.PNG, id=137, 645.612pt x 230.0595pt>
+{C:/Users/Will Koehrsen/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}])
+\tf@toc=\write5
+\openout5 = `assign_1.toc'.
+
+<images/sleep_data_graph.PNG, id=152, 645.612pt x 230.0595pt>
 File: images/sleep_data_graph.PNG Graphic file (type png)
 <use images/sleep_data_graph.PNG>
-Package pdftex.def Info: images/sleep_data_graph.PNG  used on input line 285. o
-n input line 285.
+Package pdftex.def Info: images/sleep_data_graph.PNG  used on input line 280. o
+n input line 280.
 Package pdftex.def Info: Requested size: 375.80544pt x 133.91904pt on input lin
-e 285.
+e 280.
 LaTeX Font Info:    Font shape `T1/ppl/bx/n' in size <14.4> not available
-(Font)              Font shape `T1/ppl/b/n' tried instead on input line 300.
+(Font)              Font shape `T1/ppl/b/n' tried instead on input line 299.
 
-[2 <./images/sleep_data_graph.PNG>]
-LaTeX Font Info:    Try loading font information for T1+cmtt on input line 344.
+[2 <./images/sleep_data_graph.PNG>] [3]
+LaTeX Font Info:    Try loading font information for T1+cmtt on input line 395.
 
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\base\t1cmtt.fd"
 File: t1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <12> not available
-(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 346.
-LaTeX Font Info:    Try loading font information for TS1+cmtt on input line 365
+(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 397.
+LaTeX Font Info:    Try loading font information for TS1+cmtt on input line 416
 .
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\base\ts1cmtt.fd"
 File: ts1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
-) [3]
-<assign_1_files/assign_1_6_0.png, id=161, 967.615pt x 296.10625pt>
+) [4]
+<assign_1_files/assign_1_6_0.png, id=183, 954.56625pt x 283.0575pt>
 File: assign_1_files/assign_1_6_0.png Graphic file (type png)
 <use assign_1_files/assign_1_6_0.png>
-Package pdftex.def Info: assign_1_files/assign_1_6_0.png  used on input line 40
-4. on input line 404.
-Package pdftex.def Info: Requested size: 967.61266pt x 296.10551pt on input lin
-e 404.
-
-Underfull \hbox (badness 10000) in paragraph at lines 406--407
-
- []
-
-<assign_1_files/assign_1_8_0.png, id=162, 967.615pt x 296.10625pt>
-File: assign_1_files/assign_1_8_0.png Graphic file (type png)
-<use assign_1_files/assign_1_8_0.png>
-Package pdftex.def Info: assign_1_files/assign_1_8_0.png  used on input line 42
-1. on input line 421.
-Package pdftex.def Info: Requested size: 967.61266pt x 296.10551pt on input lin
-e 421.
-
-Underfull \hbox (badness 10000) in paragraph at lines 423--424
-
- []
-
-[4 <./assign_1_files/assign_1_6_0.png> <./assign_1_files/assign_1_8_0.png>]
-<assign_1_files/assign_1_10_0.png, id=169, 942.52126pt x 385.44pt>
-File: assign_1_files/assign_1_10_0.png Graphic file (type png)
-<use assign_1_files/assign_1_10_0.png>
-Package pdftex.def Info: assign_1_files/assign_1_10_0.png  used on input line 4
-62. on input line 462.
-Package pdftex.def Info: Requested size: 942.51897pt x 385.43906pt on input lin
-e 462.
+Package pdftex.def Info: assign_1_files/assign_1_6_0.png  used on input line 46
+2. on input line 462.
+Package pdftex.def Info: Requested size: 954.56393pt x 283.0568pt on input line
+ 462.
 
 Underfull \hbox (badness 10000) in paragraph at lines 464--465
 
  []
 
-[5 <./assign_1_files/assign_1_10_0.png>]
-<assign_1_files/assign_1_12_0.png, id=175, 942.52126pt x 385.44pt>
+[5 <./assign_1_files/assign_1_6_0.png>]
+<assign_1_files/assign_1_8_0.png, id=191, 954.56625pt x 283.0575pt>
+File: assign_1_files/assign_1_8_0.png Graphic file (type png)
+<use assign_1_files/assign_1_8_0.png>
+Package pdftex.def Info: assign_1_files/assign_1_8_0.png  used on input line 48
+4. on input line 484.
+Package pdftex.def Info: Requested size: 954.56393pt x 283.0568pt on input line
+ 484.
+
+Underfull \hbox (badness 10000) in paragraph at lines 486--487
+
+ []
+
+<assign_1_files/assign_1_10_0.png, id=192, 936.49875pt x 377.41pt>
+File: assign_1_files/assign_1_10_0.png Graphic file (type png)
+<use assign_1_files/assign_1_10_0.png>
+Package pdftex.def Info: assign_1_files/assign_1_10_0.png  used on input line 5
+27. on input line 527.
+Package pdftex.def Info: Requested size: 936.49646pt x 377.40907pt on input lin
+e 527.
+[6 <./assign_1_files/assign_1_8_0.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 529--530
+
+ []
+
+<assign_1_files/assign_1_12_0.png, id=200, 936.49875pt x 377.41pt>
 File: assign_1_files/assign_1_12_0.png Graphic file (type png)
 <use assign_1_files/assign_1_12_0.png>
 Package pdftex.def Info: assign_1_files/assign_1_12_0.png  used on input line 5
-05. on input line 505.
-Package pdftex.def Info: Requested size: 942.51897pt x 385.43906pt on input lin
-e 505.
-
-Underfull \hbox (badness 10000) in paragraph at lines 507--508
+69. on input line 569.
+Package pdftex.def Info: Requested size: 936.49646pt x 377.40907pt on input lin
+e 569.
+[7 <./assign_1_files/assign_1_10_0.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 571--572
 
  []
 
-[6 <./assign_1_files/assign_1_12_0.png>]
 LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 18.00587pt on input line 516.
+(Font)              scaled to size 18.00587pt on input line 579.
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 18.00587pt on input line 516.
-<assign_1_files/assign_1_16_0.png, id=181, 964.60374pt x 405.515pt>
-File: assign_1_files/assign_1_16_0.png Graphic file (type png)
-<use assign_1_files/assign_1_16_0.png>
-Package pdftex.def Info: assign_1_files/assign_1_16_0.png  used on input line 5
-63. on input line 563.
-Package pdftex.def Info: Requested size: 964.6014pt x 405.51399pt on input line
- 563.
- [7]
-Underfull \hbox (badness 10000) in paragraph at lines 565--566
+(Font)              scaled to size 18.00587pt on input line 579.
+[8 <./assign_1_files/assign_1_12_0.png>]
+<assign_1_files/assign_1_15_0.png, id=214, 953.5625pt x 392.46625pt>
+File: assign_1_files/assign_1_15_0.png Graphic file (type png)
+<use assign_1_files/assign_1_15_0.png>
+Package pdftex.def Info: assign_1_files/assign_1_15_0.png  used on input line 6
+23. on input line 623.
+Package pdftex.def Info: Requested size: 953.56018pt x 392.46527pt on input lin
+e 623.
+
+Underfull \hbox (badness 10000) in paragraph at lines 625--626
 
  []
 
-[8 <./assign_1_files/assign_1_16_0.png>] [9]
-<assign_1_files/assign_1_25_0.png, id=198, 963.6pt x 625.33624pt>
-File: assign_1_files/assign_1_25_0.png Graphic file (type png)
-<use assign_1_files/assign_1_25_0.png>
-Package pdftex.def Info: assign_1_files/assign_1_25_0.png  used on input line 7
-19. on input line 719.
-Package pdftex.def Info: Requested size: 963.59766pt x 625.33472pt on input lin
-e 719.
- [10]
-Underfull \hbox (badness 10000) in paragraph at lines 721--722
+[9 <./assign_1_files/assign_1_15_0.png>] [10] [11]
+<assign_1_files/assign_1_26_0.png, id=234, 939.51pt x 612.2875pt>
+File: assign_1_files/assign_1_26_0.png Graphic file (type png)
+<use assign_1_files/assign_1_26_0.png>
+Package pdftex.def Info: assign_1_files/assign_1_26_0.png  used on input line 8
+19. on input line 819.
+Package pdftex.def Info: Requested size: 939.5077pt x 612.28601pt on input line
+ 819.
+ [12]
+Underfull \hbox (badness 10000) in paragraph at lines 821--822
 
  []
 
-[11 <./assign_1_files/assign_1_25_0.png>]
-<assign_1_files/assign_1_28_0.png, id=208, 740.7675pt x 351.3125pt>
-File: assign_1_files/assign_1_28_0.png Graphic file (type png)
-<use assign_1_files/assign_1_28_0.png>
-Package pdftex.def Info: assign_1_files/assign_1_28_0.png  used on input line 7
-65. on input line 765.
-Package pdftex.def Info: Requested size: 740.76569pt x 351.31163pt on input lin
-e 765.
+[13 <./assign_1_files/assign_1_26_0.png>]
+<assign_1_files/assign_1_30_0.png, id=247, 729.72626pt x 338.26375pt>
+File: assign_1_files/assign_1_30_0.png Graphic file (type png)
+<use assign_1_files/assign_1_30_0.png>
+Package pdftex.def Info: assign_1_files/assign_1_30_0.png  used on input line 8
+69. on input line 869.
+Package pdftex.def Info: Requested size: 729.72449pt x 338.26291pt on input lin
+e 869.
 
-Underfull \hbox (badness 10000) in paragraph at lines 767--768
-
- []
-
-<assign_1_files/assign_1_29_0.png, id=209, 740.7675pt x 405.515pt>
-File: assign_1_files/assign_1_29_0.png Graphic file (type png)
-<use assign_1_files/assign_1_29_0.png>
-Package pdftex.def Info: assign_1_files/assign_1_29_0.png  used on input line 7
-85. on input line 785.
-Package pdftex.def Info: Requested size: 740.76569pt x 405.51399pt on input lin
-e 785.
-[12 <./assign_1_files/assign_1_28_0.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 787--788
+Underfull \hbox (badness 10000) in paragraph at lines 871--872
 
  []
 
-[13 <./assign_1_files/assign_1_29_0.png>]
-<assign_1_files/assign_1_35_0.png, id=221, 740.7675pt x 405.515pt>
-File: assign_1_files/assign_1_35_0.png Graphic file (type png)
-<use assign_1_files/assign_1_35_0.png>
-Package pdftex.def Info: assign_1_files/assign_1_35_0.png  used on input line 8
-37. on input line 837.
-Package pdftex.def Info: Requested size: 740.76569pt x 405.51399pt on input lin
-e 837.
-
-Underfull \hbox (badness 10000) in paragraph at lines 839--840
-
- []
-
-<assign_1_files/assign_1_38_0.png, id=222, 744.7825pt x 296.10625pt>
-File: assign_1_files/assign_1_38_0.png Graphic file (type png)
-<use assign_1_files/assign_1_38_0.png>
-Package pdftex.def Info: assign_1_files/assign_1_38_0.png  used on input line 8
-67. on input line 867.
-Package pdftex.def Info: Requested size: 744.78069pt x 296.10551pt on input lin
-e 867.
-[14 <./assign_1_files/assign_1_35_0.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 869--870
+<assign_1_files/assign_1_33_0.png, id=248, 729.72626pt x 392.46625pt>
+File: assign_1_files/assign_1_33_0.png Graphic file (type png)
+<use assign_1_files/assign_1_33_0.png>
+Package pdftex.def Info: assign_1_files/assign_1_33_0.png  used on input line 9
+04. on input line 904.
+Package pdftex.def Info: Requested size: 729.72449pt x 392.46527pt on input lin
+e 904.
+[14 <./assign_1_files/assign_1_30_0.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 906--907
 
  []
 
-<assign_1_files/assign_1_39_0.png, id=228, 744.7825pt x 296.10625pt>
+[15 <./assign_1_files/assign_1_33_0.png>]
+<assign_1_files/assign_1_39_0.png, id=260, 729.72626pt x 392.46625pt>
 File: assign_1_files/assign_1_39_0.png Graphic file (type png)
 <use assign_1_files/assign_1_39_0.png>
-Package pdftex.def Info: assign_1_files/assign_1_39_0.png  used on input line 8
-77. on input line 877.
-Package pdftex.def Info: Requested size: 744.78069pt x 296.10551pt on input lin
-e 877.
+Package pdftex.def Info: assign_1_files/assign_1_39_0.png  used on input line 9
+57. on input line 957.
+Package pdftex.def Info: Requested size: 729.72449pt x 392.46527pt on input lin
+e 957.
 
-Underfull \hbox (badness 10000) in paragraph at lines 879--880
-
- []
-
-<assign_1_files/assign_1_40_0.png, id=229, 745.78625pt x 296.10625pt>
-File: assign_1_files/assign_1_40_0.png Graphic file (type png)
-<use assign_1_files/assign_1_40_0.png>
-Package pdftex.def Info: assign_1_files/assign_1_40_0.png  used on input line 8
-87. on input line 887.
-Package pdftex.def Info: Requested size: 745.78444pt x 296.10551pt on input lin
-e 887.
-
-Underfull \hbox (badness 10000) in paragraph at lines 889--890
+Underfull \hbox (badness 10000) in paragraph at lines 959--960
 
  []
 
-[15 <./assign_1_files/assign_1_38_0.png> <./assign_1_files/assign_1_39_0.png> <
-./assign_1_files/assign_1_40_0.png>]
-<assign_1_files/assign_1_43_0.png, id=237, 842.14626pt x 417.56pt>
+<assign_1_files/assign_1_43_0.png, id=261, 732.7375pt x 283.0575pt>
 File: assign_1_files/assign_1_43_0.png Graphic file (type png)
 <use assign_1_files/assign_1_43_0.png>
 Package pdftex.def Info: assign_1_files/assign_1_43_0.png  used on input line 9
-30. on input line 930.
-Package pdftex.def Info: Requested size: 842.14421pt x 417.55896pt on input lin
-e 930.
- [16]
-Underfull \hbox (badness 10000) in paragraph at lines 932--933
+91. on input line 991.
+Package pdftex.def Info: Requested size: 732.73572pt x 283.0568pt on input line
+ 991.
+[16 <./assign_1_files/assign_1_39_0.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 993--994
 
  []
 
-[17 <./assign_1_files/assign_1_43_0.png>] [18] [19]
-<assign_1_files/assign_1_57_0.png, id=257, 1189.44376pt x 513.92pt>
-File: assign_1_files/assign_1_57_0.png Graphic file (type png)
-<use assign_1_files/assign_1_57_0.png>
-Package pdftex.def Info: assign_1_files/assign_1_57_0.png  used on input line 1
-115. on input line 1115.
-Package pdftex.def Info: Requested size: 1189.44086pt x 513.91873pt on input li
-ne 1115.
+<assign_1_files/assign_1_44_0.png, id=268, 732.7375pt x 283.0575pt>
+File: assign_1_files/assign_1_44_0.png Graphic file (type png)
+<use assign_1_files/assign_1_44_0.png>
+Package pdftex.def Info: assign_1_files/assign_1_44_0.png  used on input line 1
+001. on input line 1001.
+Package pdftex.def Info: Requested size: 732.73572pt x 283.0568pt on input line
+ 1001.
 
-Underfull \hbox (badness 10000) in paragraph at lines 1117--1118
+Underfull \hbox (badness 10000) in paragraph at lines 1003--1004
 
  []
 
-[20 <./assign_1_files/assign_1_57_0.png>] [21]
-<assign_1_files/assign_1_61_0.png, id=267, 740.7675pt x 351.3125pt>
+<assign_1_files/assign_1_45_0.png, id=269, 732.7375pt x 283.0575pt>
+File: assign_1_files/assign_1_45_0.png Graphic file (type png)
+<use assign_1_files/assign_1_45_0.png>
+Package pdftex.def Info: assign_1_files/assign_1_45_0.png  used on input line 1
+011. on input line 1011.
+Package pdftex.def Info: Requested size: 732.73572pt x 283.0568pt on input line
+ 1011.
+
+Underfull \hbox (badness 10000) in paragraph at lines 1013--1014
+
+ []
+
+[17 <./assign_1_files/assign_1_43_0.png> <./assign_1_files/assign_1_44_0.png> <
+./assign_1_files/assign_1_45_0.png>]
+<assign_1_files/assign_1_48_0.png, id=278, 859.21pt x 425.59pt>
+File: assign_1_files/assign_1_48_0.png Graphic file (type png)
+<use assign_1_files/assign_1_48_0.png>
+Package pdftex.def Info: assign_1_files/assign_1_48_0.png  used on input line 1
+055. on input line 1055.
+Package pdftex.def Info: Requested size: 859.20792pt x 425.58894pt on input lin
+e 1055.
+
+Underfull \hbox (badness 10000) in paragraph at lines 1057--1058
+
+ []
+
+[18 <./assign_1_files/assign_1_48_0.png>] [19] [20]
+<assign_1_files/assign_1_61_0.png, id=296, 1177.39874pt x 504.88625pt>
 File: assign_1_files/assign_1_61_0.png Graphic file (type png)
 <use assign_1_files/assign_1_61_0.png>
 Package pdftex.def Info: assign_1_files/assign_1_61_0.png  used on input line 1
-201. on input line 1201.
-Package pdftex.def Info: Requested size: 740.76569pt x 351.31163pt on input lin
-e 1201.
-
-Underfull \hbox (badness 10000) in paragraph at lines 1203--1204
-
- []
-
-[22 <./assign_1_files/assign_1_61_0.png>]
-<assign_1_files/assign_1_62_0.png, id=273, 740.7675pt x 405.515pt>
-File: assign_1_files/assign_1_62_0.png Graphic file (type png)
-<use assign_1_files/assign_1_62_0.png>
-Package pdftex.def Info: assign_1_files/assign_1_62_0.png  used on input line 1
-221. on input line 1221.
-Package pdftex.def Info: Requested size: 740.76569pt x 405.51399pt on input lin
-e 1221.
-
-Underfull \hbox (badness 10000) in paragraph at lines 1223--1224
+232. on input line 1232.
+Package pdftex.def Info: Requested size: 1177.39587pt x 504.885pt on input line
+ 1232.
+ [21]
+Underfull \hbox (badness 10000) in paragraph at lines 1234--1235
 
  []
 
-[23 <./assign_1_files/assign_1_62_0.png>]
-<assign_1_files/assign_1_67_0.png, id=279, 740.7675pt x 405.515pt>
-File: assign_1_files/assign_1_67_0.png Graphic file (type png)
-<use assign_1_files/assign_1_67_0.png>
-Package pdftex.def Info: assign_1_files/assign_1_67_0.png  used on input line 1
-267. on input line 1267.
-Package pdftex.def Info: Requested size: 740.76569pt x 405.51399pt on input lin
-e 1267.
+[22 <./assign_1_files/assign_1_61_0.png>] [23]
+<assign_1_files/assign_1_66_0.png, id=313, 729.72626pt x 338.26375pt>
+File: assign_1_files/assign_1_66_0.png Graphic file (type png)
+<use assign_1_files/assign_1_66_0.png>
+Package pdftex.def Info: assign_1_files/assign_1_66_0.png  used on input line 1
+327. on input line 1327.
+Package pdftex.def Info: Requested size: 729.72449pt x 338.26291pt on input lin
+e 1327.
 
-Underfull \hbox (badness 10000) in paragraph at lines 1269--1270
-
- []
-
-[24 <./assign_1_files/assign_1_67_0.png>]
-<assign_1_files/assign_1_70_0.png, id=285, 624.3325pt x 514.92375pt>
-File: assign_1_files/assign_1_70_0.png Graphic file (type png)
-<use assign_1_files/assign_1_70_0.png>
-Package pdftex.def Info: assign_1_files/assign_1_70_0.png  used on input line 1
-293. on input line 1293.
-Package pdftex.def Info: Requested size: 624.33098pt x 514.92249pt on input lin
-e 1293.
-
-Underfull \hbox (badness 10000) in paragraph at lines 1295--1296
+Underfull \hbox (badness 10000) in paragraph at lines 1329--1330
 
  []
 
-<assign_1_files/assign_1_72_0.png, id=286, 629.35126pt x 514.92375pt>
-File: assign_1_files/assign_1_72_0.png Graphic file (type png)
-<use assign_1_files/assign_1_72_0.png>
-Package pdftex.def Info: assign_1_files/assign_1_72_0.png  used on input line 1
-316. on input line 1316.
-Package pdftex.def Info: Requested size: 629.34972pt x 514.92249pt on input lin
-e 1316.
-[25 <./assign_1_files/assign_1_70_0.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 1318--1319
+<assign_1_files/assign_1_69_0.png, id=314, 729.72626pt x 392.46625pt>
+File: assign_1_files/assign_1_69_0.png Graphic file (type png)
+<use assign_1_files/assign_1_69_0.png>
+Package pdftex.def Info: assign_1_files/assign_1_69_0.png  used on input line 1
+361. on input line 1361.
+Package pdftex.def Info: Requested size: 729.72449pt x 392.46527pt on input lin
+e 1361.
+[24 <./assign_1_files/assign_1_66_0.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 1363--1364
 
  []
 
-[26 <./assign_1_files/assign_1_72_0.png>]
-<assign_1_files/assign_1_76_1.png, id=298, 629.35126pt x 514.92375pt>
-File: assign_1_files/assign_1_76_1.png Graphic file (type png)
-<use assign_1_files/assign_1_76_1.png>
-Package pdftex.def Info: assign_1_files/assign_1_76_1.png  used on input line 1
-384. on input line 1384.
-Package pdftex.def Info: Requested size: 629.34972pt x 514.92249pt on input lin
-e 1384.
- [27]
-Underfull \hbox (badness 10000) in paragraph at lines 1386--1387
+pdfTeX warning (ext4): destination with the same identifier (name{confidence-in
+terval}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.1387 ...ce Interval}\label{confidence-interval}}
+                                                   [25 <./assign_1_files/assign
+_1_69_0.png>]
+<assign_1_files/assign_1_77_0.png, id=327, 614.295pt x 501.875pt>
+File: assign_1_files/assign_1_77_0.png Graphic file (type png)
+<use assign_1_files/assign_1_77_0.png>
+Package pdftex.def Info: assign_1_files/assign_1_77_0.png  used on input line 1
+437. on input line 1437.
+Package pdftex.def Info: Requested size: 614.29349pt x 501.87376pt on input lin
+e 1437.
+
+Underfull \hbox (badness 10000) in paragraph at lines 1439--1440
 
  []
 
-[28 <./assign_1_files/assign_1_76_1.png>]
-<assign_1_files/assign_1_80_0.png, id=308, 629.35126pt x 514.92375pt>
-File: assign_1_files/assign_1_80_0.png Graphic file (type png)
-<use assign_1_files/assign_1_80_0.png>
-Package pdftex.def Info: assign_1_files/assign_1_80_0.png  used on input line 1
-433. on input line 1433.
-Package pdftex.def Info: Requested size: 629.34972pt x 514.92249pt on input lin
-e 1433.
+[26 <./assign_1_files/assign_1_77_0.png>]
+<assign_1_files/assign_1_79_0.png, id=334, 617.30624pt x 501.875pt>
+File: assign_1_files/assign_1_79_0.png Graphic file (type png)
+<use assign_1_files/assign_1_79_0.png>
+Package pdftex.def Info: assign_1_files/assign_1_79_0.png  used on input line 1
+463. on input line 1463.
+Package pdftex.def Info: Requested size: 617.30473pt x 501.87376pt on input lin
+e 1463.
 
-Underfull \hbox (badness 10000) in paragraph at lines 1435--1436
+Underfull \hbox (badness 10000) in paragraph at lines 1465--1466
 
  []
 
-[29 <./assign_1_files/assign_1_80_0.png>]
-Overfull \hbox (42.64485pt too wide) in paragraph at lines 1452--1452
-[]\T1/cmtt/m/n/12 * Posterior probability I am asleep at a given time with more
- info using Bayes Rule[] 
+[27 <./assign_1_files/assign_1_79_0.png>] [28]
+<assign_1_files/assign_1_83_1.png, id=345, 617.30624pt x 501.875pt>
+File: assign_1_files/assign_1_83_1.png Graphic file (type png)
+<use assign_1_files/assign_1_83_1.png>
+Package pdftex.def Info: assign_1_files/assign_1_83_1.png  used on input line 1
+532. on input line 1532.
+Package pdftex.def Info: Requested size: 617.30473pt x 501.87376pt on input lin
+e 1532.
+
+Underfull \hbox (badness 10000) in paragraph at lines 1534--1535
+
  []
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1475.
-[30]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1475.
+[29 <./assign_1_files/assign_1_83_1.png>]
+<assign_1_files/assign_1_87_0.png, id=353, 617.30624pt x 501.875pt>
+File: assign_1_files/assign_1_87_0.png Graphic file (type png)
+<use assign_1_files/assign_1_87_0.png>
+Package pdftex.def Info: assign_1_files/assign_1_87_0.png  used on input line 1
+583. on input line 1583.
+Package pdftex.def Info: Requested size: 617.30473pt x 501.87376pt on input lin
+e 1583.
+
+Underfull \hbox (badness 10000) in paragraph at lines 1585--1586
+
+ []
+
+[30 <./assign_1_files/assign_1_87_0.png>]
+LaTeX Font Info:    Try loading font information for TS1+ppl on input line 1601
+.
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\psnfss\ts1ppl.fd"
+File: ts1ppl.fd 2001/06/04 font definitions for TS1/ppl.
+)
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1641.
+ [31]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1641.
  (assign_1.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1475.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1475.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1641.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1641.
 
 Package rerunfilecheck Info: File `assign_1.out' has not changed.
-(rerunfilecheck)             Checksum: 3BF7CA29A9DB6B23899908CE6F2ECDBA;1779.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1475.
+(rerunfilecheck)             Checksum: 9E6BA9051A6A0F70E93DD52F24192F32;2111.
+
+
+LaTeX Warning: There were multiply-defined labels.
+
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1641.
  ) 
 Here is how much of TeX's memory you used:
- 11080 strings out of 493314
- 166971 string characters out of 3138841
- 266905 words of memory out of 3000000
- 14319 multiletter control sequences out of 15000+200000
- 47972 words of font info for 120 fonts, out of 3000000 for 9000
+ 11139 strings out of 493314
+ 168210 string characters out of 3138841
+ 267156 words of memory out of 3000000
+ 14342 multiletter control sequences out of 15000+200000
+ 48542 words of font info for 122 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 36i,6n,38p,579b,465s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 36i,6n,38p,619b,465s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/cm-super/cm-super-ts1.enc}{C:/Pr
 ogram Files/MiKTeX 2.9/fonts/enc/dvips/cm-super/cm-super-t1.enc}{C:/Program Fil
 es/MiKTeX 2.9/fonts/enc/dvips/base/8r.enc}<C:/Program Files/MiKTeX 2.9/fonts/ty
 pe1/public/amsfonts/cm/cmex10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/publ
 ic/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfon
 ts/cm/cmsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/mathpazo/fplmr
-i.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/cm-super/sfit1200.pfb><C:
-/Program Files/MiKTeX 2.9/fonts/type1/public/cm-super/sftt1200.pfb><C:/Program 
-Files/MiKTeX 2.9/fonts/type1/urw/palatino/uplb8a.pfb><C:/Program Files/MiKTeX 2
-.9/fonts/type1/urw/palatino/uplr8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1
-/urw/palatino/uplri8a.pfb>
-Output written on assign_1.pdf (30 pages, 832862 bytes).
+.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/mathpazo/fplmri.pfb><C:/Pr
+ogram Files/MiKTeX 2.9/fonts/type1/public/cm-super/sfit1200.pfb><C:/Program Fil
+es/MiKTeX 2.9/fonts/type1/public/cm-super/sftt1200.pfb><C:/Program Files/MiKTeX
+ 2.9/fonts/type1/urw/palatino/uplb8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/typ
+e1/urw/palatino/uplr8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/palatin
+o/uplri8a.pfb>
+Output written on assign_1.pdf (31 pages, 774872 bytes).
 PDF statistics:
- 368 PDF objects out of 1000 (max. 8388607)
- 63 named destinations out of 1000 (max. 500000)
- 311 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 424 PDF objects out of 1000 (max. 8388607)
+ 94 named destinations out of 1000 (max. 500000)
+ 330 words of extra memory for PDF output out of 10000 (max. 10000000)
 

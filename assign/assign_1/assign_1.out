@@ -5,21 +5,24 @@
 \BOOKMARK [2][-]{subsection.2.2}{Waking Up Data}{section.2}% 5
 \BOOKMARK [1][-]{section.3}{Logistic Function to Represent Transition}{}% 6
 \BOOKMARK [1][-]{section.4}{Prior Distribution for \134beta and \134alpha}{}% 7
-\BOOKMARK [1][-]{section.5}{Creating the Posterior Model}{}% 8
-\BOOKMARK [2][-]{subsection.5.1}{Bernoulli Variable}{section.5}% 9
-\BOOKMARK [3][-]{subsubsection.5.1.1}{PyMC3 Model}{subsection.5.1}% 10
-\BOOKMARK [2][-]{subsection.5.2}{Visualize Posteriors for \134beta and \134alpha}{section.5}% 11
-\BOOKMARK [3][-]{subsubsection.5.2.1}{Confidence Interval}{subsection.5.2}% 12
-\BOOKMARK [2][-]{subsection.5.3}{Posterior Probability for Specific Time}{section.5}% 13
-\BOOKMARK [1][-]{section.6}{Convergence in Markov Chain Monte Carlo}{}% 14
-\BOOKMARK [2][-]{subsection.6.1}{Trace Plots}{section.6}% 15
-\BOOKMARK [1][-]{section.7}{Incorporating Additional Information}{}% 16
-\BOOKMARK [2][-]{subsection.7.1}{Visualize Shifts}{section.7}% 17
-\BOOKMARK [1][-]{section.8}{Wake Model}{}% 18
-\BOOKMARK [2][-]{subsection.8.1}{Investigate the Model}{section.8}% 19
-\BOOKMARK [2][-]{subsection.8.2}{Confidence Intervals \(95\045\)}{section.8}% 20
-\BOOKMARK [1][-]{section.9}{Length of Sleep}{}% 21
-\BOOKMARK [2][-]{subsection.9.1}{Visualize Posterior Distribution}{section.9}% 22
-\BOOKMARK [3][-]{subsubsection.9.1.1}{Query the Posterior Model}{subsection.9.1}% 23
-\BOOKMARK [2][-]{subsection.9.2}{Visualize the Posterior and the Data}{section.9}% 24
-\BOOKMARK [1][-]{section.10}{Conclusions}{}% 25
+\BOOKMARK [2][-]{subsection.4.1}{Markov Chain Monte Carlo}{section.4}% 8
+\BOOKMARK [1][-]{section.5}{Posterior Probability of Sleep given Time}{}% 9
+\BOOKMARK [2][-]{subsection.5.1}{Bernoulli Variable}{section.5}% 10
+\BOOKMARK [3][-]{subsubsection.5.1.1}{PyMC3 Model}{subsection.5.1}% 11
+\BOOKMARK [2][-]{subsection.5.2}{Visualize Posteriors for \134beta and \134alpha}{section.5}% 12
+\BOOKMARK [2][-]{subsection.5.3}{Posterior for Sleep Visualization}{section.5}% 13
+\BOOKMARK [3][-]{subsubsection.5.3.1}{Confidence Interval}{subsection.5.3}% 14
+\BOOKMARK [2][-]{subsection.5.4}{Posterior Probability Distribution for Specific Time}{section.5}% 15
+\BOOKMARK [2][-]{subsection.5.5}{Convergence in Markov Chain Monte Carlo}{section.5}% 16
+\BOOKMARK [2][-]{subsection.5.6}{Trace Plots}{section.5}% 17
+\BOOKMARK [1][-]{section.6}{Full Bayesian Model}{}% 18
+\BOOKMARK [2][-]{subsection.6.1}{Effect of Additional Information Visualization}{section.6}% 19
+\BOOKMARK [1][-]{section.7}{Wake Model}{}% 20
+\BOOKMARK [2][-]{subsection.7.1}{Visualize Posterior for Wake given Time}{section.7}% 21
+\BOOKMARK [2][-]{subsection.7.2}{Investigate the Wake Model}{section.7}% 22
+\BOOKMARK [3][-]{subsubsection.7.2.1}{Confidence Interval}{subsection.7.2}% 23
+\BOOKMARK [1][-]{section.8}{Model for Sleep Duration}{}% 24
+\BOOKMARK [2][-]{subsection.8.1}{Visualize Posterior Distribution for Sleep Duration}{section.8}% 25
+\BOOKMARK [3][-]{subsubsection.8.1.1}{Query the Posterior Model}{subsection.8.1}% 26
+\BOOKMARK [2][-]{subsection.8.2}{Visualize the Posterior and the Data}{section.8}% 27
+\BOOKMARK [1][-]{section.9}{Conclusions}{}% 28
