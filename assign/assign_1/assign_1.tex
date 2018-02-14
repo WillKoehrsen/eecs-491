@@ -141,10 +141,13 @@
     \def\gt{>}
     \def\lt{<}
     % Document parameters
-    \title{Markov Chain Monte Carlo and Bayesian Inference on Sleep Data}
+    \title{Markov Chain Monte Carlo and Bayesian Inference}
     \author{William Koehrsen wjk68}
-    \date{February 6, 2018}
+    \date{February 14, 2018}
     
+    
+    
+
     % Pygments definitions
     
 \makeatletter
@@ -252,6 +255,9 @@
     \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
     \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
 
+
+
+    
     % Prevent overflowing lines due to hard-to-break entities
     \sloppy 
     % Setup hyperref package
@@ -266,6 +272,8 @@
     
     \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
     
+    
+
     \begin{document}
     
     
@@ -273,8 +281,7 @@
     \tableofcontents
     
 
-    
-    \hypertarget{problem-description}{%
+\hypertarget{problem-description}{%
 \section{Problem Description}\label{problem-description}}
 
 \includegraphics{images/sleep_data_graph.PNG}
@@ -284,67 +291,67 @@ day using motion sensing and heart rate monitoring. To augment this
 data, I have estimated likelihoods that I am asleep based on the
 condition of my bedroom light (on/off) and if my phone is charging
 (yes/no). My objective is to use this data to create a model that
-returns the probability I am asleep at a given time for a given status
-of my bedroom light and phone. The final goal can be mathematically
-expressed as:
+returns the probability I am asleep at a specific time for a given
+status of my bedroom light and phone. For a specific time, the
+probability of sleep given information about my bedroom light and phone
+is expressed as:
 
-\[P(\text{sleep} | \text{time}, \text{bedroom light}, \text{phone charging})\].
+\[P(\text{sleep} | \text{bedroom light}, \text{phone charging})\].
 
-In probability theory terms, this is the posterior probability I am
-asleep given the time, status of my bedroom light, and condition of my
-phone. The time is a continuous variable and the two additional pieces
-of information are discrete variables each with two states.
+In probability theory terms, this is the posterior probability at a
+specific time I am asleep given the status of my bedroom light and
+condition of my phone. The time is a continuous variable and the two
+additional pieces of information are discrete variables each with two
+states.
 
     \hypertarget{approach}{%
 \subsection{Approach}\label{approach}}
 
-In order to solve this problem, I will make a number of assumptions. The
-first is that the time of day is independent the information about my
-bedroom light and phone charging. To see how this effects the end model,
-we can first express the final model in terms of Bayes Rule:
+In order to solve this problem, I first need to express the final model
+in terms of Bayes Rule. At a specific time, the probability of sleep
+given my light and phone is:
 
-\[P(s|t, L, C) = \frac{P(t, L, C|s) * P (s)}{P(t, L, C)}\]
+\[P(s|L, C) = \frac{P(L, C|s) * P (s)}{P(L, C)}\]
 
 Where \(P(s)\) is the sleep probability \(t\) is the time, \(L\) is the
-condition of my bedroom light (on/off) and \(C\) is the charging status
-of my phone (yes/no). Under the absolute independence of time
-assumption, this equation becomes:
+condition of my bedroom light (on/off), and \(C\) is the charging status
+of my phone (yes/no).
 
-\[P(s|t, L, C) = \frac{P(L, C|s) * P(t|s) * P(s)}{P(L, C) * P(t)}\]
+\(P(s)\) is the prior probability of sleep at the specified time. As
+time is a continuous varible, we will use an approximate Markov Chain
+Monte Carlo method to find the \emph{most likely} probability
+distribution to find the prior.
 
-The expression \(\frac{P(t|s) * P(s)}{P(t)}\) is just the posterior
-probability of sleep given the time \(P(s|t)\). Therefore, the
-independence assumption makes the final model:
+One main assumption we make to simplify the inference is that the
+probability of my bedroom light condition and phone charging status are
+independent of one another with the knowledge of whether or not I am
+asleep. That is, these discrete variables are conditionally independent
+on sleep. Applying this assumption, the final model becomes at a
+specific time becomes:
 
-\[P(s|t, L, C) = \frac{P(L, C|s) * P(s|t)}{P(L, C)}\]
-
-The second assumption is that the bedroom light condition and phone
-charging status are independent with the knowledge of whether or not I
-am asleep. That is, these discrete variables are conditionally
-independent on sleep. Applying this assumption, the final model becomes:
-
-\[P(s | t, L, C) = \frac{(P(L|s) * P(C|s) * P(s|t)}{P(L|s) * P(C|s) * P(s) + P(L|\bar{s}) * P(C|\bar{s}) * P(\bar{s})}\]
+\[P(s | L, C) = \frac{(P(L|s) * P(C|s) * P(s)}{P(L|s) * P(C|s) * P(s) + P(L|\bar{s}) * P(C|\bar{s}) * P(\bar{s})}\]
 
 This is the final expanded expression we need to solve to find the
-posterior probability I am asleep at a given time with the knowledge of
-my bedroom light and phone charging.
+posterior probability I am asleep at a specific time given the knowledge
+of my bedroom light and phone charging.
 
 Time is a continuous variable, and specifying the entire joint
-probability for sleep given the time, \(P(s|t)\) would be infeasible
-even with time discretized into one-minute intervals. Therefore, we will
-use an approximate method, Markov Chain Monte Carlo (MCMC), to find the
+probability for sleep given the time, \(P(s)\) would be infeasible even
+with time discretized into one-minute intervals. Therefore, we will use
+an approximate method, Markov Chain Monte Carlo (MCMC), to find the
 posterior probability parameters. Markov Chain Monte Carlo samples based
 on maximizing the likelihood of the parameters under the data. To find
 the most likely posterior probability distribution of sleep given the
 time, we can use the average of all the samples of the parameters.
 
-After the posterior probability of sleep given the time \(P(s|t)\) has
-been calculated, this becomes the prior in the final model. The other
-two variables, \(C\) and \(L\), are discrete, which means we can specify
-the entire joint probability rather easily. The final model uses Bayes
-Rule to update the probability of sleep with the additional information.
-This represents the essence of Bayesian inference: attempting to become
-less wrong by updating predictions based on new evidence.
+After the posterior probability of sleep as a function of time,
+\(P(s)\), has been calculated, this becomes the prior in the final
+model. The other two variables, \(C\) and \(L\), are discrete, which
+means we can specify the entire joint probability rather easily. The
+final model uses Bayes Rule to update the probability of sleep with the
+additional information. This represents the essence of Bayesian
+inference: attempting to become less wrong by updating predictions based
+on new evidence.
 
 The general method is as follows, with additional details provided in
 the respective sections.
@@ -355,8 +362,7 @@ the respective sections.
 \item
   Format the data (done in separate notebook) and visualize
 \item
-  Choose function to represent posterior probabilty of sleep given the
-  time
+  Choose function to represent probabilty of sleep given the time
 \item
   Use Markov Chain Monte Carlo and the data to find most likely
   parameters for the selected posterior distribution
@@ -493,11 +499,11 @@ We need to decide on a function to represent the transition from being
 awake to sleeping. There are a number of acceptable models, and here we
 will assume this transition can be modeled as a logistic function. A
 logistic function (also called a sigmoid) is a non-linear function
-bounded between 0 and 1. As \({t \to -\infty}, {p(s|t) \to 0}\) and, as
-\({t \to +\infty}, {p(s|t) \to 1}\). The expression for a logistic
+bounded between 0 and 1. As \({t \to -\infty}, {p(s) \to 0}\) and, as
+\({t \to +\infty}, {p(s) \to 1}\). The expression for a logistic
 probability distribution for sleep as a function of time is:
 
-\[p(s|t) = \frac{1}{ 1 + e^{\;\beta t } }\]
+\[p(s) = \frac{1}{ 1 + e^{\;\beta t } }\]
 
 The \(\beta\) parameter is unknown and be esimated using Markov Chain
 Monte Carlo sampling. MCMC samples from the prior for each parameter,
@@ -534,7 +540,7 @@ transition is around 10:00 pm for sleeping and 6:00 am for waking. We
 address this by adding an offset, called a bias, to adjust the location
 of the logistic function. The logistic function now is:
 
-\[p(t) = \frac{1}{ 1 + e^{\;\beta t + \alpha} }\]
+\[P(s) = \frac{1}{ 1 + e^{\;\beta t + \alpha} }\]
 
 This introduces another unknown parameter, \(\alpha\), which we will
 also find from Markov Chain Monte Carlo.
@@ -698,7 +704,7 @@ depends on the time, in a manner defined by the logistic function.
 \(p(t_i)\) is the logistic function with the independent variable time,
 so this becomes:
 
-\[ P(\text{sleep} | t_i) = \text{Ber}(\frac{1}{1 + e^{(\beta t_i + \alpha)}})\]
+\[ P(\text{sleep}) = \text{Ber}(\frac{1}{1 + e^{(\beta t_i + \alpha)}})\]
 
 The goal of MCMC is to find the \(\alpha\) and \(\beta\) parameters
 using the data and assuming normal priors.
@@ -1082,10 +1088,10 @@ asleep, there is a 40\% probability my phone is charging.
 Applying Baye's Equation, the final posterior probabilty for sleep at a
 given time knowing the condition of my light and phone is:
 
-\[P(s | t, L, C) = \frac{(P(L|s) * P(C|s) * P(s|t)}{P(L|s) * P(C|s) * P(s) + P(L|\bar{s}) * P(C|\bar{s}) * P(\bar{s})}\]
+\[P(s | L, C) = \frac{(P(L|s) * P(C|s) * P(s)}{P(L|s) * P(C|s) * P(s) + P(L|\bar{s}) * P(C|\bar{s}) * P(\bar{s})}\]
 
-We have all the parts we need as the prior \(P(s|t)\) was calculated
-from MCMC. We simply apply Bayes Rule with all the evidence.
+We have all the parts we need as the prior \(P(s)\) was calculated from
+MCMC. We simply apply Bayes Rule with all the evidence.
 
     \begin{Verbatim}[commandchars=\\\{\}]
 {\color{incolor}In [{\color{incolor}23}]:} \PY{n}{alpha\PYZus{}sleep\PYZus{}est} \PY{o}{=} \PY{n}{alpha\PYZus{}est}
@@ -1609,13 +1615,14 @@ In this report, I used real-world data and Bayesian Inference to form
 models about my sleep patterns. I first used Markov Chain Monte Carlo to
 find the parameters for the posterior probabilty distribution of sleep
 given the time. Then, I updated the model using Baye's Rule and
-additional evidence. The final model for the probability of sleep given
-the time, phone status, and light condition has the form:
+additional evidence. The final model for the probability of sleep at a
+specific time knowing my phone status, and light condition has the form:
 
-\[P(s | t, L, C) = \frac{(P(L|s) * P(C|s) * P(s|t)}{P(L|s) * P(C|s) * P(s) + P(L|\bar{s}) * P(C|\bar{s}) * P(\bar{s})}\]
+\[P(s | L, C) = \frac{(P(L|s) * P(C|s) * P(s)}{P(L|s) * P(C|s) * P(s) + P(L|\bar{s}) * P(C|\bar{s}) * P(\bar{s})}\]
 
-where \(P(s|t)\) was the posterior found from MCMC. The final model can
-also be supplemented by three additional models showing:
+where \(P(s)\) was the posterior probability of sleep as a function of
+time found from MCMC. The final model can also be supplemented by three
+additional models showing:
 
 \begin{verbatim}
 * Posterior probability I am asleep in the evening at a given time
