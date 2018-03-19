@@ -1,0 +1,16 @@
+\contentsline {section}{\numberline {1}Discrete Variables Bayesian Inference Using MCMC}{1}{section.1}
+\contentsline {subsubsection}{\numberline {1.0.1}Bayesian Belief Network with Discrete Varibles}{1}{subsubsection.1.0.1}
+\contentsline {subsection}{\numberline {1.1}A. Discrete Bayesian Network in PyMC3}{2}{subsection.1.1}
+\contentsline {subsubsection}{\numberline {1.1.1}Construct the Model Graph}{3}{subsubsection.1.1.1}
+\contentsline {subsubsection}{\numberline {1.1.2}Sample from the Posterior Using the Gibbs Metropolis Algorithm}{4}{subsubsection.1.1.2}
+\contentsline {subsection}{\numberline {1.2}Evaluate the Trace to Find Probabilities}{4}{subsection.1.2}
+\contentsline {subsubsection}{\numberline {1.2.1}Approximate Probabilities with No Evidence}{6}{subsubsection.1.2.1}
+\contentsline {subsection}{\numberline {1.3}Model Accounting for Observations}{6}{subsection.1.3}
+\contentsline {subsubsection}{\numberline {1.3.1}Approximate Probabilities with Evidence}{8}{subsubsection.1.3.1}
+\contentsline {section}{\numberline {2}B. Exact Evaluation of the Joint Probability}{9}{section.2}
+\contentsline {subsubsection}{\numberline {2.0.1}Exact Posterior Probability with No Evidence}{12}{subsubsection.2.0.1}
+\contentsline {subsubsection}{\numberline {2.0.2}Exact Posterior Probability with Evidence}{12}{subsubsection.2.0.2}
+\contentsline {section}{\numberline {3}Comparison of Approximate and Exact}{13}{section.3}
+\contentsline {subsection}{\numberline {3.1}Comparison with No Evidence}{15}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.2}Comparisons with Evidence}{16}{subsection.3.2}
+\contentsline {section}{\numberline {4}Conclusions}{18}{section.4}
