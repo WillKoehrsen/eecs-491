@@ -1,0 +1,24 @@
+\contentsline {section}{\numberline {1}Introduction: Predicting Student Performance Using Bayesian Linear Regression}{2}{section.1}
+\contentsline {section}{\numberline {2}Problem Statement}{2}{section.2}
+\contentsline {subsection}{\numberline {2.1}Dataset}{2}{subsection.2.1}
+\contentsline {subsubsection}{\numberline {2.1.1}Features (Explanatory Variables)}{3}{subsubsection.2.1.1}
+\contentsline {section}{\numberline {3}Bayesian Network}{3}{section.3}
+\contentsline {section}{\numberline {4}Bayesian Linear Regression}{3}{section.4}
+\contentsline {section}{\numberline {5}Standard Machine Learning Supervised Regression Models}{4}{section.5}
+\contentsline {subsection}{\numberline {5.1}Read in Data and Examine}{5}{subsection.5.1}
+\contentsline {subsection}{\numberline {5.2}Data Preparation}{7}{subsection.5.2}
+\contentsline {subsection}{\numberline {5.3}Pairplot of Final Variables}{8}{subsection.5.3}
+\contentsline {section}{\numberline {6}Evaluate Standard Machine Learning Models for a Benchmark}{10}{section.6}
+\contentsline {subsection}{\numberline {6.1}Metrics}{10}{subsection.6.1}
+\contentsline {subsection}{\numberline {6.2}Machine Learning Model Results}{11}{subsection.6.2}
+\contentsline {section}{\numberline {7}Implementing Bayesian Linear Regression}{14}{section.7}
+\contentsline {subsubsection}{\numberline {7.0.1}Formula for Linear Regression}{14}{subsubsection.7.0.1}
+\contentsline {section}{\numberline {8}Examine Bayesian Model Results}{15}{section.8}
+\contentsline {subsection}{\numberline {8.1}Interpretations of Weights}{19}{subsection.8.1}
+\contentsline {section}{\numberline {9}Evaluate Bayesian Model Using Most Likely Values for Weights}{19}{section.9}
+\contentsline {section}{\numberline {10}Query Model}{22}{section.10}
+\contentsline {section}{\numberline {11}Student T Prior Distribution}{25}{section.11}
+\contentsline {subsection}{\numberline {11.1}Examine Samples from New Model}{26}{subsection.11.1}
+\contentsline {section}{\numberline {12}Evaluate the New Model}{28}{section.12}
+\contentsline {subsection}{\numberline {12.1}Query T-Distribution Model}{30}{subsection.12.1}
+\contentsline {section}{\numberline {13}Conclusions}{33}{section.13}

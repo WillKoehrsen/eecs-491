@@ -1,0 +1,24 @@
+\BOOKMARK [1][-]{section.1}{Introduction: Predicting Student Performance Using Bayesian Linear Regression}{}% 1
+\BOOKMARK [1][-]{section.2}{Problem Statement}{}% 2
+\BOOKMARK [2][-]{subsection.2.1}{Dataset}{section.2}% 3
+\BOOKMARK [3][-]{subsubsection.2.1.1}{Features \(Explanatory Variables\)}{subsection.2.1}% 4
+\BOOKMARK [1][-]{section.3}{Bayesian Network}{}% 5
+\BOOKMARK [1][-]{section.4}{Bayesian Linear Regression}{}% 6
+\BOOKMARK [1][-]{section.5}{Standard Machine Learning Supervised Regression Models}{}% 7
+\BOOKMARK [2][-]{subsection.5.1}{Read in Data and Examine}{section.5}% 8
+\BOOKMARK [2][-]{subsection.5.2}{Data Preparation}{section.5}% 9
+\BOOKMARK [2][-]{subsection.5.3}{Pairplot of Final Variables}{section.5}% 10
+\BOOKMARK [1][-]{section.6}{Evaluate Standard Machine Learning Models for a Benchmark}{}% 11
+\BOOKMARK [2][-]{subsection.6.1}{Metrics}{section.6}% 12
+\BOOKMARK [2][-]{subsection.6.2}{Machine Learning Model Results}{section.6}% 13
+\BOOKMARK [1][-]{section.7}{Implementing Bayesian Linear Regression}{}% 14
+\BOOKMARK [2][-]{subsubsection.7.0.1}{Formula for Linear Regression}{section.7}% 15
+\BOOKMARK [1][-]{section.8}{Examine Bayesian Model Results}{}% 16
+\BOOKMARK [2][-]{subsection.8.1}{Interpretations of Weights}{section.8}% 17
+\BOOKMARK [1][-]{section.9}{Evaluate Bayesian Model Using Most Likely Values for Weights}{}% 18
+\BOOKMARK [1][-]{section.10}{Query Model}{}% 19
+\BOOKMARK [1][-]{section.11}{Student T Prior Distribution}{}% 20
+\BOOKMARK [2][-]{subsection.11.1}{Examine Samples from New Model}{section.11}% 21
+\BOOKMARK [1][-]{section.12}{Evaluate the New Model}{}% 22
+\BOOKMARK [2][-]{subsection.12.1}{Query T-Distribution Model}{section.12}% 23
+\BOOKMARK [1][-]{section.13}{Conclusions}{}% 24

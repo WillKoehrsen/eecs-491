@@ -10,7 +10,7 @@
 
 
     
-\documentclass[11pt]{article}
+\documentclass[12pt]{article}
 
     
     
@@ -142,6 +142,8 @@
     \def\lt{<}
     % Document parameters
     \title{Bayesian Inference in Larger Models}
+    \author{William Koehrsen wjk68}
+    \date{March 26, 2018}
     
     
     
@@ -263,7 +265,7 @@
       breaklinks=true,  % so long urls are correctly broken across lines
       colorlinks=true,
       urlcolor=urlcolor,
-      linkcolor=linkcolor,
+      linkcolor=blue,
       citecolor=citecolor,
       }
     % Slightly bigger margins than the latex defaults
@@ -276,38 +278,40 @@
     
     
     \maketitle
+    \tableofcontents
     
-    
-
-    
-    \hypertarget{inference-in-larger-graphical-models-student-performance-estimation}{%
-\section{Inference in Larger Graphical Models: Student Performance
-Estimation}\label{inference-in-larger-graphical-models-student-performance-estimation}}
-
-\hypertarget{william-koehrsen-wjk68}{%
-\subsection{William Koehrsen wjk68}\label{william-koehrsen-wjk68}}
+   
 
     \hypertarget{introduction}{%
-\section{Introduction}\label{introduction}}
+\section{Introduction: Predicting Student Performance Using Bayesian Linear Regression}\label{introduction}}
 
-In this notebook, I look at predicting students outcomes using Bayesian
-linear regression. Student grades are influenced by many factors, and
-using a linear model allows us to determine the relationships between
-these variables and the final performance.
+In this notebook, I look at predicting student outcomes from a set of
+demographic and character indicators formulating the problem as a
+supervised regression task. I develop a Bayesian linear regression for
+estimating final student grades and compare it with several traditional
+machine learning models. Student grades are influenced by many factors,
+and using a linear model allows us to determine the relationships
+between these variables and the final performance. Moreover, Bayesian
+Linear Regression has several advantages over traditional machine
+learning methods as we will examine.
 
 \hypertarget{problem-statement}{%
 \section{Problem Statement}\label{problem-statement}}
 
-This is a supervised regression problem: we have labels, the final
+This is a supervised regression problem: we have known labels, the final
 performance of students, that we wish to predict from a set of known
 features. The labels are continuous (from 1-20) which makes this a
 regression problem (we could also formulate it as a classification with
-20 discrete classes but we will treat the grades as continuous). There
-are many standard machine learning approaches that can be used to create
-a model mapping the features in the training data to the labels. These
-models can be easily built in scikit-learn and then tested against a
-hold-out testing set. We will look at several standard machine learning
-models in addition to Bayesian Linear Regression for comparison.
+20 discrete classes but we will treat the grades as continuous). As a
+machine learning task, the problem is broken up into two sections: we
+train the model on a training set of data and then make preditions on a
+hold-out testing set. During training the model learns a mapping between
+the features and the labels. In testing, we evaluate how well this model
+generalizes to new data points. There are numerous standard machine
+learning approaches for supervised regression, most of which can be
+quickly built, trained, and evaluated in scikit-learn. We will compare
+the Bayesian Linear Regression method to several other machine learning
+approaches.
 
 \hypertarget{dataset}{%
 \subsection{Dataset}\label{dataset}}
@@ -316,67 +320,76 @@ The data about student performance was collected from a Portuguese
 secondary school and is available at the
 \href{http://archive.ics.uci.edu/ml/datasets/Student+Performance}{UCI
 machine learning repository}. The target variable to predict is
-\texttt{G3}, the final student grade ranging from 0 to 20. There are 30
-features in the original data, but in order to reduce dimensionality, I
-calculate the Pearson Correlation Coefficient between all the features
-and the response and only retain the features with a correlation
-coefficient greater than 0.2 in absolute magnitude. Given that we are
-performing linear regression, selecting variables that are highly
-correlated with the response should improve the performance of the
-model. Before perfomring the correlation analysis, I one-hot encode all
-the variables.
+\texttt{G3}, the final student grade ranging from 1 to 20. There are 30
+features (explanatory variables) in the original data, but in order to
+reduce dimensionality I retain only the most highly correlated features
+with the response. To carry out feature reduction, I calculate the
+Pearson Correlation Coefficient between all the features and the
+response and retain only the features with a absolute magnitude of the
+correlation coefficient greater than 0.2. Given that we are performing
+linear regression, selecting variables that are highly linearly
+correlated with the response should improve the performance of the model
+by removing noise from irrelevant features.
 
-\hypertarget{features}{%
-\subsubsection{Features}\label{features}}
+\hypertarget{features-explanatory-variables}{%
+\subsubsection{Features (Explanatory
+Variables)}\label{features-explanatory-variables}}
 
-The final set of five features selected are as follows:
+The final set of five features selected using the cut-off of 0.2 for the
+absolute magnitude of the correlation coefficient with the response are:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  failures: number of previous class failures, numeric, the number of
-  classes is \(1 <= n <3\) else 4.
+  \texttt{failures}: number of previous class failures, numeric, the
+  feature represents the number of classes if \(1 <= n <3\) else the
+  value is 4.
 \item
-  higher\_yes: binary 0 if the student does not want to pursue higher
-  education and 1 if the student does want to pursue higher education.
+  \texttt{higher\_yes}: binary, 0 if the student does not want to pursue
+  higher education and 1 if the student does want to pursue higher
+  education.
 \item
-  Medu: Mother's education, numeric, 0 = none, 1 = primary education
-  (4th grade), 2 = 5th to 9th grade, 3 = secondary education, 4 = higher
-  education
+  \texttt{Medu}: Mother's education, numeric, 0 = none, 1 = primary
+  education (4th grade), 2 = 5th to 9th grade, 3 = secondary education,
+  4 = higher education
 \item
-  studytime: time of studying per week, numeric, 1: \textless{}2 hours,
-  2: 2 to 5 hours, 3: 5 to 10 hours, 4: \textgreater{}10 hours.
+  \texttt{studytime}: time of studying per week, numeric, 1:
+  \textless{}2 hours, 2: 2 to 5 hours, 3: 5 to 10 hours, 4:
+  \textgreater{}10 hours
 \item
-  Dalc: daily alcohol consumption during the week, numeric, 1 very low
-  to 5 very high
+  \texttt{Dalc}: daily alcohol consumption during the week, numeric, 1
+  very low to 5 very high
 \end{enumerate}
 
 \hypertarget{bayesian-network}{%
-\subsection{Bayesian Network}\label{bayesian-network}}
+\section{Bayesian Network}\label{bayesian-network}}
 
-In effect, our final network looks like this:
+The complete network showing the features and the response is:
 
 We have five different variables, all of which affect the final grade to
 some extent. Instead of specifying prior probabilities for each feature
-and conditional probabilities between the response (final score) and the
+and conditional probabilities between the response (final grade) and the
 feature, we will use Bayesian Linear Regression to determine the weights
-between the features and the response. This is taking a machine learning
-approach to the problem, but we will use Bayesian Inference to create
-our model.
+for each of the features. This is taking a machine learning approach to
+the problem, but to use probabilistic programming, we will create a
+Bayesian Linear Regression model where the final model weights are
+determined by Markov Chain Monte Carlo methods (in particular the
+N-UTurns Sampler) rather than choosing the weights which minimize the
+mean-squared error as in ordinary least-squares regression.
 
 \hypertarget{bayesian-linear-regression}{%
 \section{Bayesian Linear Regression}\label{bayesian-linear-regression}}
 
-The standard linear regression is
+The standard linear regression model is
 
 \[ Y = X\beta + \epsilon \]
 
 Where Y is the target, X is the predictor matrix, \(\beta\) is the
 weights vector, and \(\epsilon\) is an error term (assumed to be
-normally distributed. The weights are found using ordinary least squares
-to minimum the residual sum of squares between the observations
-(training data) and the fit.
+normally distributed). The weights are found using ordinary least
+squares to minimum the residual sum of squares between the observations
+(training data) and the fitted model.
 
 In a Bayesian framework, Linear Regression takes the form
 
@@ -393,40 +406,51 @@ The Bayesian Linear Regression framework has two main advantages:
 \tightlist
 \item
   Priors: Any previous knowledge about the problem can be quantified by
-  placing prior probabilities on the model parameters. For example, if
-  we believe one of the explanatory variables has a one-to-one linear
-  relationship with the response, then we can assign the intial starting
-  value of 1 to the corresponding weight.
+  placing prior probabilities on the model parameters. For example, we
+  can assume that the model parameters come from Normal Distributions
+  centered at different values. We can use other distributions such as
+  the Student T-Distribution for the priors of the parameters as well.
+  If we have knowledge about the values of the parameters, we could use
+  these as starting values for the sampling.
 \item
   Uncertainty: Bayesian inference using Markov Chain Monte Carlo does
   not yield a single estimate for each weight, but rather a posterior
   \emph{distribution} from which we can draw conclusions about how
   likely different values of the weights \(\beta\) are in our model.
   With fewer data points, there will be more uncertainty in \(\beta\)
-  and the posteriors distributions will thus be very wide.
+  and the posterior distributions will be very wide. When we need to
+  make predictions from the model, we can use the entire range of
+  samples to calculate a range of estimates rather than a single value.
+  We can then specify a confidence interval for our estimate in addition
+  to a most likely single value.
 \end{itemize}
 
-\hypertarget{comparison-to-other-models}{%
-\subsection{Comparison to other
-Models}\label{comparison-to-other-models}}
+    \hypertarget{standard-machine-learning-supervised-regression-models}{%
+\section{Standard Machine Learning Supervised Regression
+Models}\label{standard-machine-learning-supervised-regression-models}}
 
 We will start off by solving this regression problem using several
 standard machine learning models from scikit-learn. This library makes
 creating, training, and evaluating models very simple.
 
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}1}]:} \PY{c+c1}{\PYZsh{} Pandas and numpy for data manipulation}
-        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
-        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
-        \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{seed}\PY{p}{(}\PY{l+m+mi}{42}\PY{p}{)}
-        
-        \PY{c+c1}{\PYZsh{} Matplotlib and seaborn for plotting}
-        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
-        \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
-        
-        \PY{k+kn}{import} \PY{n+nn}{seaborn} \PY{k}{as} \PY{n+nn}{sns}
-        
-        \PY{k+kn}{from} \PY{n+nn}{IPython}\PY{n+nn}{.}\PY{n+nn}{core}\PY{n+nn}{.}\PY{n+nn}{pylabtools} \PY{k}{import} \PY{n}{figsize}
+{\color{incolor}In [{\color{incolor}14}]:} \PY{c+c1}{\PYZsh{} Pandas and numpy for data manipulation}
+         \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+         \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+         \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{seed}\PY{p}{(}\PY{l+m+mi}{42}\PY{p}{)}
+         
+         \PY{k+kn}{from} \PY{n+nn}{scipy} \PY{k}{import} \PY{n}{stats} 
+         
+         \PY{c+c1}{\PYZsh{} Matplotlib and seaborn for plotting}
+         \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+         \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+         
+         \PY{k+kn}{import} \PY{n+nn}{matplotlib}
+         \PY{n}{matplotlib}\PY{o}{.}\PY{n}{rcParams}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{font.size}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{16}
+         
+         \PY{k+kn}{import} \PY{n+nn}{seaborn} \PY{k}{as} \PY{n+nn}{sns}
+         
+         \PY{k+kn}{from} \PY{n+nn}{IPython}\PY{n+nn}{.}\PY{n+nn}{core}\PY{n+nn}{.}\PY{n+nn}{pylabtools} \PY{k}{import} \PY{n}{figsize}
 \end{Verbatim}
 
 
@@ -518,7 +542,9 @@ grade using a summary and a histogram.
 \end{Verbatim}
             
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}6}]:} \PY{c+c1}{\PYZsh{} Histogram of final grades}
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{figsize}\PY{p}{(}\PY{l+m+mi}{9}\PY{p}{,} \PY{l+m+mi}{7}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Histogram of final grades}
         \PY{n}{plt}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{math}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{G3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{edgecolor} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{k}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{color} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{darkblue}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{bins} \PY{o}{=} \PY{l+m+mi}{19}\PY{p}{)}
         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Grade}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{;} \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{;} \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Distribution of Grades}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
         \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{21}\PY{p}{)}\PY{p}{)}\PY{p}{;}
@@ -526,12 +552,12 @@ grade using a summary and a histogram.
 
 
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_9_0.png}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_10_0.png}
     \end{center}
     { \hspace*{\fill} \\}
     
     \hypertarget{data-preparation}{%
-\section{Data Preparation}\label{data-preparation}}
+\subsection{Data Preparation}\label{data-preparation}}
 
 Data preparation will consist of a few steps:
 
@@ -539,77 +565,99 @@ Data preparation will consist of a few steps:
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  One-hot encoding of categorical variables
+  One-hot encoding of categorical variables.
 \item
-  Finding the most correlated variables with the response (final grade)
+  Finding the most correlated variables with the response (final grade).
+\item
+  Choosing only those variables with an absolute magnitude of the
+  correlation coefficient greater than 0.2.
 \item
   Split the data into training and testing sets for model fitting and
-  evaluation
+  evaluation.
 \end{enumerate}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}7}]:} \PY{k}{def} \PY{n+nf}{format\PYZus{}data}\PY{p}{(}\PY{n}{df}\PY{p}{)}\PY{p}{:}
-            \PY{c+c1}{\PYZsh{} Targets are final grade of student}
-            \PY{n}{labels} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{G3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
-            \PY{c+c1}{\PYZsh{} Drop the school and the grades from features}
-            \PY{n}{df} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{n}{columns}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{school}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{G1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{G2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{G3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
-            
-            \PY{c+c1}{\PYZsh{} One\PYZhy{}Hot Encoding of Categorical Variables}
-            \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{get\PYZus{}dummies}\PY{p}{(}\PY{n}{df}\PY{p}{)}
-            
-            \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n}{labels}\PY{p}{)}
-            
-            \PY{n}{most\PYZus{}correlated} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{corr}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{ascending}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
-            
-            \PY{c+c1}{\PYZsh{} Keep correlations greater than 0.2 in absolute value}
-            \PY{n}{most\PYZus{}correlated} \PY{o}{=} \PY{n}{most\PYZus{}correlated}\PY{p}{[}\PY{n}{most\PYZus{}correlated} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{l+m+mf}{0.2}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]}
-            
-            \PY{n}{df} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{ix}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{n}{most\PYZus{}correlated}\PY{o}{.}\PY{n}{index}\PY{p}{]}
-            \PY{n}{df} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{n}{columns} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{higher\PYZus{}no}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
-            
-            \PY{c+c1}{\PYZsh{} Split into training/testing sets with 25\PYZpc{} split}
-            \PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{(}\PY{n}{df}\PY{p}{,} \PY{n}{labels}\PY{p}{,} 
-                                                                \PY{n}{test\PYZus{}size} \PY{o}{=} \PY{l+m+mf}{0.25}\PY{p}{,}
-                                                               \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{42}\PY{p}{)}
-            
-            \PY{k}{return} \PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}test}
-            
+{\color{incolor}In [{\color{incolor}10}]:} \PY{k}{def} \PY{n+nf}{format\PYZus{}data}\PY{p}{(}\PY{n}{df}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{} Targets are final grade of student}
+             \PY{n}{labels} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{G3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+             \PY{c+c1}{\PYZsh{} Drop the school and the grades from features}
+             \PY{n}{df} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{n}{columns}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{school}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{G1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{G2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{G3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{} One\PYZhy{}Hot Encoding of Categorical Variables}
+             \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{get\PYZus{}dummies}\PY{p}{(}\PY{n}{df}\PY{p}{)}
+             
+             \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n}{labels}\PY{p}{)}
+             
+             \PY{n}{most\PYZus{}correlated} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{corr}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{ascending}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{} Keep correlations greater than 0.2 in absolute value}
+             \PY{n}{most\PYZus{}correlated} \PY{o}{=} \PY{n}{most\PYZus{}correlated}\PY{p}{[}\PY{n}{most\PYZus{}correlated} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{l+m+mf}{0.2}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]}
+             
+             \PY{n}{df} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{ix}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{n}{most\PYZus{}correlated}\PY{o}{.}\PY{n}{index}\PY{p}{]}
+             \PY{n}{df} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{n}{columns} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{higher\PYZus{}no}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{} Split into training/testing sets with 25\PYZpc{} split}
+             \PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{(}\PY{n}{df}\PY{p}{,} \PY{n}{labels}\PY{p}{,} 
+                                                                 \PY{n}{test\PYZus{}size} \PY{o}{=} \PY{l+m+mf}{0.25}\PY{p}{,}
+                                                                \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{42}\PY{p}{)}
+             
+             \PY{k}{return} \PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}test}
+             
 \end{Verbatim}
 
 
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{X\PYZus{}train\PYZus{}math}\PY{p}{,} \PY{n}{X\PYZus{}test\PYZus{}math}\PY{p}{,} \PY{n}{y\PYZus{}train\PYZus{}math}\PY{p}{,} \PY{n}{y\PYZus{}test\PYZus{}math} \PY{o}{=} \PY{n}{format\PYZus{}data}\PY{p}{(}\PY{n}{math}\PY{p}{)}
-        \PY{n}{X\PYZus{}train\PYZus{}math}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n}{X\PYZus{}train\PYZus{}math}\PY{p}{,} \PY{n}{X\PYZus{}test\PYZus{}math}\PY{p}{,} \PY{n}{y\PYZus{}train\PYZus{}math}\PY{p}{,} \PY{n}{y\PYZus{}test\PYZus{}math} \PY{o}{=} \PY{n}{format\PYZus{}data}\PY{p}{(}\PY{n}{math}\PY{p}{)}
+         \PY{n}{X\PYZus{}train\PYZus{}math}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
 \end{Verbatim}
 
 
 \begin{Verbatim}[commandchars=\\\{\}]
-{\color{outcolor}Out[{\color{outcolor}8}]:}      failures  higher\_yes  Medu  studytime  Dalc
-        619         0           1     3          2     1
-        596         0           1     4          2     1
-        550         0           1     2          2     2
-        516         0           1     4          2     2
-        472         0           1     2          1     1
+{\color{outcolor}Out[{\color{outcolor}11}]:}      failures  higher\_yes  Medu  studytime  Dalc
+         619         0           1     3          2     1
+         596         0           1     4          2     1
+         550         0           1     2          2     2
+         516         0           1     4          2     2
+         472         0           1     2          1     1
 \end{Verbatim}
             
-    There are 6 variables in the final dataset, although two are one-hot
-encoding of the same variable. From these six variables, we will try to
-create a linear regression model that is able to predict student
-performance.
+    There are 5 variables in the final dataset representing the features
+with the greatest correlation with the response. From these five
+variables, we will try to create a linear regression model that is able
+to predict student performance.
 
     \hypertarget{pairplot-of-final-variables}{%
 \subsection{Pairplot of Final
 Variables}\label{pairplot-of-final-variables}}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{X\PYZus{}train\PYZus{}labels} \PY{o}{=} \PY{n}{X\PYZus{}train\PYZus{}math}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
-        \PY{n}{X\PYZus{}train\PYZus{}labels}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n}{y\PYZus{}train\PYZus{}math}\PY{p}{)}
-        \PY{n}{sns}\PY{o}{.}\PY{n}{pairplot}\PY{p}{(}\PY{n}{X\PYZus{}train\PYZus{}labels}\PY{p}{)}\PY{p}{;}
+{\color{incolor}In [{\color{incolor}20}]:} \PY{n}{X\PYZus{}train\PYZus{}labels} \PY{o}{=} \PY{n}{X\PYZus{}train\PYZus{}math}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+         \PY{n}{X\PYZus{}train\PYZus{}labels}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{final\PYZus{}grade}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n}{y\PYZus{}train\PYZus{}math}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Calculate correlation coefficient}
+         \PY{k}{def} \PY{n+nf}{corrfunc}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{o}{*}\PY{o}{*}\PY{n}{kws}\PY{p}{)}\PY{p}{:}
+             \PY{n}{r}\PY{p}{,} \PY{n}{\PYZus{}} \PY{o}{=} \PY{n}{stats}\PY{o}{.}\PY{n}{pearsonr}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{)}
+             \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{gca}\PY{p}{(}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{annotate}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{r = }\PY{l+s+si}{\PYZob{}:.2f\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{r}\PY{p}{)}\PY{p}{,}
+                         \PY{n}{xy}\PY{o}{=}\PY{p}{(}\PY{o}{.}\PY{l+m+mi}{1}\PY{p}{,} \PY{o}{.}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{,} \PY{n}{xycoords}\PY{o}{=}\PY{n}{ax}\PY{o}{.}\PY{n}{transAxes}\PY{p}{,}
+                        \PY{n}{size} \PY{o}{=} \PY{l+m+mi}{20}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Pair grid set up}
+         \PY{n}{g} \PY{o}{=} \PY{n}{sns}\PY{o}{.}\PY{n}{PairGrid}\PY{p}{(}\PY{n}{X\PYZus{}train\PYZus{}labels}\PY{p}{,} \PY{n}{palette}\PY{o}{=}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{red}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Scatter plot on the upper triangle}
+         \PY{n}{g}\PY{o}{.}\PY{n}{map\PYZus{}upper}\PY{p}{(}\PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{,} \PY{n}{s}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Distribution on the diagonal}
+         \PY{n}{g}\PY{o}{.}\PY{n}{map\PYZus{}diag}\PY{p}{(}\PY{n}{sns}\PY{o}{.}\PY{n}{distplot}\PY{p}{,} \PY{n}{kde}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Correlation coefficients on the lower triangle}
+         \PY{n}{g}\PY{o}{.}\PY{n}{map\PYZus{}lower}\PY{p}{(}\PY{n}{corrfunc}\PY{p}{)}\PY{p}{;}
 \end{Verbatim}
 
 
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_15_0.png}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_16_0.png}
     \end{center}
     { \hspace*{\fill} \\}
     
@@ -639,8 +687,8 @@ following models:
   Gradient Boosting Regressor with 20 trees
 \end{enumerate}
 
-The overall baseline will simply be guessing the median grade of the
-training final scores as the final score for all training examples
+The overall baseline will be guessing the median grade of the training
+final scores as the final score for all testing examples.
 
 \hypertarget{metrics}{%
 \subsection{Metrics}\label{metrics}}
@@ -663,7 +711,7 @@ performance. This is no one single best metric for regression and that
 is why we use two different measures.
 
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}10}]:} \PY{k}{def} \PY{n+nf}{evaluate}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}test}\PY{p}{)}\PY{p}{:}
+{\color{incolor}In [{\color{incolor}21}]:} \PY{k}{def} \PY{n+nf}{evaluate}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}test}\PY{p}{)}\PY{p}{:}
              \PY{c+c1}{\PYZsh{} Names of models}
              \PY{n}{model\PYZus{}name\PYZus{}list} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Linear Regression}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ElasticNet Regression}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
                                \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Random Forest}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Extra Trees}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SVM}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
@@ -707,7 +755,7 @@ is why we use two different measures.
 
 
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}11}]:} \PY{n}{math\PYZus{}results} \PY{o}{=} \PY{n}{evaluate}\PY{p}{(}\PY{n}{X\PYZus{}train\PYZus{}math}\PY{p}{,} \PY{n}{X\PYZus{}test\PYZus{}math}\PY{p}{,} \PY{n}{y\PYZus{}train\PYZus{}math}\PY{p}{,} \PY{n}{y\PYZus{}test\PYZus{}math}\PY{p}{)}
+{\color{incolor}In [{\color{incolor}22}]:} \PY{n}{math\PYZus{}results} \PY{o}{=} \PY{n}{evaluate}\PY{p}{(}\PY{n}{X\PYZus{}train\PYZus{}math}\PY{p}{,} \PY{n}{X\PYZus{}test\PYZus{}math}\PY{p}{,} \PY{n}{y\PYZus{}train\PYZus{}math}\PY{p}{,} \PY{n}{y\PYZus{}test\PYZus{}math}\PY{p}{)}
 \end{Verbatim}
 
 
@@ -716,7 +764,7 @@ is why we use two different measures.
 Results}\label{machine-learning-model-results}}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}12}]:} \PY{n}{figsize}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{,} \PY{l+m+mi}{7}\PY{p}{)}
+{\color{incolor}In [{\color{incolor}23}]:} \PY{n}{figsize}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{,} \PY{l+m+mi}{7}\PY{p}{)}
          \PY{c+c1}{\PYZsh{} Root mean squared error}
          \PY{n}{ax} \PY{o}{=} \PY{n}{math\PYZus{}results}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rmse}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{ascending} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}\PY{o}{.}\PY{n}{plot}\PY{o}{.}\PY{n}{bar}\PY{p}{(}\PY{n}{y} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rmse}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{color} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
          \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Model RMSE Comparison}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{;} \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{RMSE}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
@@ -728,20 +776,21 @@ Results}\label{machine-learning-model-results}}
 
 
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_20_0.png}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_21_0.png}
     \end{center}
     { \hspace*{\fill} \\}
     
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_20_1.png}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_21_1.png}
     \end{center}
     { \hspace*{\fill} \\}
     
     From the metrics, we can see that the Support Vector Machine Regression
 performs the best followed by the tree base learning methods. All
 methods perform better than the median baseline. I did not do any
-hyperparameter tuning with these models, and we are only using them as a
-baseline for comparison.
+hyperparameter tuning with these models and performance could likely be
+improved using optimization with cross validation. We can use these
+scores as a reasonable baseline for comparison.
 
     \hypertarget{implementing-bayesian-linear-regression}{%
 \section{Implementing Bayesian Linear
@@ -756,7 +805,7 @@ from the posterior for each of the variables in the formula, along with
 an intercept and a variance.
 
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}13}]:} \PY{n}{X\PYZus{}train\PYZus{}math}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n}{y\PYZus{}train\PYZus{}math}\PY{p}{)}
+{\color{incolor}In [{\color{incolor}24}]:} \PY{n}{X\PYZus{}train\PYZus{}math}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n}{y\PYZus{}train\PYZus{}math}\PY{p}{)}
          \PY{n}{formula} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{y \PYZti{} }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ + }\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZpc{}s}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{n}{variable} \PY{k}{for} \PY{n}{variable} \PY{o+ow}{in} \PY{n}{X\PYZus{}train\PYZus{}math}\PY{o}{.}\PY{n}{columns}\PY{p}{[}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]}\PY{p}{)}
 \end{Verbatim}
 
@@ -766,12 +815,12 @@ an intercept and a variance.
 Regression}\label{formula-for-linear-regression}}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}14}]:} \PY{n}{formula}
+{\color{incolor}In [{\color{incolor}25}]:} \PY{n}{formula}
 \end{Verbatim}
 
 
 \begin{Verbatim}[commandchars=\\\{\}]
-{\color{outcolor}Out[{\color{outcolor}14}]:} 'y \textasciitilde{} failures + higher\_yes + Medu + studytime + Dalc'
+{\color{outcolor}Out[{\color{outcolor}25}]:} 'y \textasciitilde{} failures + higher\_yes + Medu + studytime + Dalc'
 \end{Verbatim}
             
     Now, we can create the model using PyMC3 and perform Markov Chain Monte
@@ -789,7 +838,7 @@ features are drawn from normal distributions, an assumption we will
 alter in a later iteration.
 
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}15}]:} \PY{k}{with} \PY{n}{pm}\PY{o}{.}\PY{n}{Model}\PY{p}{(}\PY{p}{)} \PY{k}{as} \PY{n}{normal\PYZus{}model}\PY{p}{:}
+{\color{incolor}In [{\color{incolor}26}]:} \PY{k}{with} \PY{n}{pm}\PY{o}{.}\PY{n}{Model}\PY{p}{(}\PY{p}{)} \PY{k}{as} \PY{n}{normal\PYZus{}model}\PY{p}{:}
              \PY{c+c1}{\PYZsh{} Error term}
              \PY{n}{pm}\PY{o}{.}\PY{n}{GLM}\PY{o}{.}\PY{n}{from\PYZus{}formula}\PY{p}{(}\PY{n}{formula}\PY{p}{,} \PY{n}{X\PYZus{}train\PYZus{}math}\PY{p}{)}
              
@@ -803,9 +852,6 @@ Auto-assigning NUTS sampler{\ldots}
 Initializing NUTS using jitter+adapt\_diag{\ldots}
 Sequential sampling (2 chains in 1 job)
 NUTS: [sd\_log\_\_, Dalc, studytime, Medu, higher\_yes, failures, Intercept]
-100\%|██████████| 2500/2500 [00:23<00:00, 105.90it/s]
-100\%|██████████| 2500/2500 [00:18<00:00, 138.65it/s]
-The acceptance probability does not match the target. It is 0.8941821997505642, but should be close to 0.8. Try to increase the number of tuning steps.
 
     \end{Verbatim}
 
@@ -822,8 +868,9 @@ than Hamiltonian Monte Carlo which is in turn more efficient than Markov
 Chain Monte Carlo. HMC converges more quickly than standard MCMC because
 it avoids the random walk behavior and is an informed sampling method.
 
-    \hypertarget{examine-results}{%
-\section{Examine Results}\label{examine-results}}
+    \hypertarget{examine-bayesian-model-results}{%
+\section{Examine Bayesian Model
+Results}\label{examine-bayesian-model-results}}
 
 Rather than provide us with a single estimate for each of the weights,
 Markov Chain Monte Carlo sampling gives us a distribution of samples for
@@ -833,12 +880,12 @@ examining the results of a model run. For a start, we can use
 sampled by the model.
 
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}16}]:} \PY{n}{pm}\PY{o}{.}\PY{n}{traceplot}\PY{p}{(}\PY{n}{normal\PYZus{}trace}\PY{p}{)}\PY{p}{;}
+{\color{incolor}In [{\color{incolor}27}]:} \PY{n}{pm}\PY{o}{.}\PY{n}{traceplot}\PY{p}{(}\PY{n}{normal\PYZus{}trace}\PY{p}{)}\PY{p}{;}
 \end{Verbatim}
 
 
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_31_0.png}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_32_0.png}
     \end{center}
     { \hspace*{\fill} \\}
     
@@ -856,12 +903,12 @@ allows us to see the uncertainty in each sample. The forestplot is
 easily constructed from the trace using \texttt{pm.forestplot}.
 
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}17}]:} \PY{n}{pm}\PY{o}{.}\PY{n}{forestplot}\PY{p}{(}\PY{n}{normal\PYZus{}trace}\PY{p}{)}\PY{p}{;}
+{\color{incolor}In [{\color{incolor}28}]:} \PY{n}{pm}\PY{o}{.}\PY{n}{forestplot}\PY{p}{(}\PY{n}{normal\PYZus{}trace}\PY{p}{)}\PY{p}{;}
 \end{Verbatim}
 
 
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_33_0.png}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_34_0.png}
     \end{center}
     { \hspace*{\fill} \\}
     
@@ -878,17 +925,17 @@ parameter (or the histogram for discrete variables). This again allows
 us to visualize the distribution of samples.
 
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}18}]:} \PY{n}{pm}\PY{o}{.}\PY{n}{densityplot}\PY{p}{(}\PY{n}{normal\PYZus{}trace}\PY{p}{)}\PY{p}{;}
+{\color{incolor}In [{\color{incolor}29}]:} \PY{n}{pm}\PY{o}{.}\PY{n}{densityplot}\PY{p}{(}\PY{n}{normal\PYZus{}trace}\PY{p}{)}\PY{p}{;}
 \end{Verbatim}
 
 
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_36_0.png}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_37_0.png}
     \end{center}
     { \hspace*{\fill} \\}
     
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}19}]:} \PY{k}{for} \PY{n}{variable} \PY{o+ow}{in} \PY{n}{normal\PYZus{}trace}\PY{o}{.}\PY{n}{varnames}\PY{p}{:}
+{\color{incolor}In [{\color{incolor}30}]:} \PY{k}{for} \PY{n}{variable} \PY{o+ow}{in} \PY{n}{normal\PYZus{}trace}\PY{o}{.}\PY{n}{varnames}\PY{p}{:}
              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Variable: }\PY{l+s+si}{\PYZob{}:10\PYZcb{}}\PY{l+s+s1}{ Median weight in model: }\PY{l+s+si}{\PYZob{}:.4f\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{variable}\PY{p}{,} 
                                                                          \PY{n}{np}\PY{o}{.}\PY{n}{median}\PY{p}{(}\PY{n}{normal\PYZus{}trace}\PY{p}{[}\PY{n}{variable}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{)}
 \end{Verbatim}
@@ -907,7 +954,8 @@ Variable: sd         Median weight in model: 2.2607
     \end{Verbatim}
 
     \hypertarget{interpretations-of-weights}{%
-\section{Interpretations of Weights}\label{interpretations-of-weights}}
+\subsection{Interpretations of
+Weights}\label{interpretations-of-weights}}
 
 Based on the sign and location of the weights, we can make the following
 inferences regarding the features in our dataset:
@@ -931,16 +979,16 @@ inferences regarding the features in our dataset:
   students final grade
 \end{itemize}
 
-    \hypertarget{make-predictions-using-most-likely-values}{%
-\subsection{Make Predictions Using Most Likely
-Values}\label{make-predictions-using-most-likely-values}}
+    \hypertarget{evaluate-bayesian-model-using-most-likely-values-for-weights}{%
+\section{Evaluate Bayesian Model Using Most Likely Values for
+Weights}\label{evaluate-bayesian-model-using-most-likely-values-for-weights}}
 
 Now, we can make predictions for students outcomes using the trace
 samples. To come up with a single estimate, we take the mean of all the
-parameter samples.
+parameter samples as the single value of the parameter.
 
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}20}]:} \PY{k}{def} \PY{n+nf}{evaluate\PYZus{}trace}\PY{p}{(}\PY{n}{trace}\PY{p}{,} \PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{model\PYZus{}results}\PY{p}{)}\PY{p}{:}
+{\color{incolor}In [{\color{incolor}31}]:} \PY{k}{def} \PY{n+nf}{evaluate\PYZus{}trace}\PY{p}{(}\PY{n}{trace}\PY{p}{,} \PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{model\PYZus{}results}\PY{p}{)}\PY{p}{:}
              
              \PY{c+c1}{\PYZsh{} Dictionary of all sampled values for each parameter}
              \PY{n}{var\PYZus{}dict} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
@@ -1004,7 +1052,7 @@ parameter samples.
 
 
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}21}]:} \PY{n}{results} \PY{o}{=} \PY{n}{evaluate\PYZus{}trace}\PY{p}{(}\PY{n}{normal\PYZus{}trace}\PY{p}{,} \PY{n}{X\PYZus{}train\PYZus{}math}\PY{p}{,} \PY{n}{X\PYZus{}test\PYZus{}math}\PY{p}{,} \PY{n}{y\PYZus{}train\PYZus{}math}\PY{p}{,} \PY{n}{y\PYZus{}test\PYZus{}math}\PY{p}{,} \PY{n}{math\PYZus{}results}\PY{p}{)}
+{\color{incolor}In [{\color{incolor}32}]:} \PY{n}{results} \PY{o}{=} \PY{n}{evaluate\PYZus{}trace}\PY{p}{(}\PY{n}{normal\PYZus{}trace}\PY{p}{,} \PY{n}{X\PYZus{}train\PYZus{}math}\PY{p}{,} \PY{n}{X\PYZus{}test\PYZus{}math}\PY{p}{,} \PY{n}{y\PYZus{}train\PYZus{}math}\PY{p}{,} \PY{n}{y\PYZus{}test\PYZus{}math}\PY{p}{,} \PY{n}{math\PYZus{}results}\PY{p}{)}
 \end{Verbatim}
 
 
@@ -1015,18 +1063,21 @@ Model MAPE: 0.1393
     \end{Verbatim}
 
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_41_1.png}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_42_1.png}
     \end{center}
     { \hspace*{\fill} \\}
     
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_41_2.png}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_42_2.png}
     \end{center}
     { \hspace*{\fill} \\}
     
     Our first attempt at creating a Bayesian Generalized Linear Model does
 not do that well in comparison to other models. To improve the model, we
-could draw more samples or try selecting additional features.
+could draw more samples or try selecting additional features. However,
+there are other benefits to a Bayesian model such as uncertainty
+estimates that might make the tradeoff of slightly lower performance
+acceptable.
 
     \hypertarget{query-model}{%
 \section{Query Model}\label{query-model}}
@@ -1038,7 +1089,7 @@ of a single number. This shows that there is uncertainty in our
 estimate.
 
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}22}]:} \PY{k}{def} \PY{n+nf}{query\PYZus{}model}\PY{p}{(}\PY{n}{trace}\PY{p}{,} \PY{n}{new\PYZus{}observation}\PY{p}{)}\PY{p}{:}
+{\color{incolor}In [{\color{incolor}33}]:} \PY{k}{def} \PY{n+nf}{query\PYZus{}model}\PY{p}{(}\PY{n}{trace}\PY{p}{,} \PY{n}{new\PYZus{}observation}\PY{p}{)}\PY{p}{:}
               \PY{c+c1}{\PYZsh{} Dictionary of all sampled values for each parameter}
              \PY{n}{var\PYZus{}dict} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
              \PY{k}{for} \PY{n}{variable} \PY{o+ow}{in} \PY{n}{trace}\PY{o}{.}\PY{n}{varnames}\PY{p}{:}
@@ -1064,7 +1115,7 @@ estimate.
 
 
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}23}]:} \PY{n}{observation} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Intercept}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Medu}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{4}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{failures}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{0}\PY{p}{,} 
+{\color{incolor}In [{\color{incolor}34}]:} \PY{n}{observation} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Intercept}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Medu}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{4}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{failures}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{0}\PY{p}{,} 
                                      \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{higher\PYZus{}yes}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{studytime}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{3}\PY{p}{,}
                                      \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Dalc}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{1}\PY{p}{,} \PY{p}{\PYZcb{}}\PY{p}{,} \PY{n}{index} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
          \PY{n}{query\PYZus{}model}\PY{p}{(}\PY{n}{normal\PYZus{}trace}\PY{p}{,} \PY{n}{observation}\PY{p}{)}
@@ -1078,12 +1129,12 @@ Average Estimate = 13.9301
     \end{Verbatim}
 
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_45_1.png}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_46_1.png}
     \end{center}
     { \hspace*{\fill} \\}
     
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}24}]:} \PY{n}{observation} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Intercept}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Medu}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{failures}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{2}\PY{p}{,} 
+{\color{incolor}In [{\color{incolor}35}]:} \PY{n}{observation} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Intercept}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Medu}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{failures}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{2}\PY{p}{,} 
                                      \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{higher\PYZus{}yes}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{studytime}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{2}\PY{p}{,}
                                      \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Dalc}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{2}\PY{p}{,} \PY{p}{\PYZcb{}}\PY{p}{,} \PY{n}{index} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
          \PY{n}{query\PYZus{}model}\PY{p}{(}\PY{n}{normal\PYZus{}trace}\PY{p}{,} \PY{n}{observation}\PY{p}{)}
@@ -1097,7 +1148,7 @@ Average Estimate = 9.4627
     \end{Verbatim}
 
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_46_1.png}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_47_1.png}
     \end{center}
     { \hspace*{\fill} \\}
     
@@ -1129,16 +1180,16 @@ call. The function then knows to sample from the T distribution rather
 than from the normal for all the samples.
 
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}25}]:} \PY{n}{formula}
+{\color{incolor}In [{\color{incolor}36}]:} \PY{n}{formula}
 \end{Verbatim}
 
 
 \begin{Verbatim}[commandchars=\\\{\}]
-{\color{outcolor}Out[{\color{outcolor}25}]:} 'y \textasciitilde{} failures + higher\_yes + Medu + studytime + Dalc'
+{\color{outcolor}Out[{\color{outcolor}36}]:} 'y \textasciitilde{} failures + higher\_yes + Medu + studytime + Dalc'
 \end{Verbatim}
             
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}26}]:} \PY{n}{X\PYZus{}train\PYZus{}math}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n}{y\PYZus{}train\PYZus{}math}\PY{p}{)}
+{\color{incolor}In [{\color{incolor}37}]:} \PY{n}{X\PYZus{}train\PYZus{}math}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n}{y\PYZus{}train\PYZus{}math}\PY{p}{)}
          
          \PY{k}{with} \PY{n}{pm}\PY{o}{.}\PY{n}{Model}\PY{p}{(}\PY{p}{)} \PY{k}{as} \PY{n}{t\PYZus{}model}\PY{p}{:}
              \PY{n}{family} \PY{o}{=} \PY{n}{pm}\PY{o}{.}\PY{n}{glm}\PY{o}{.}\PY{n}{families}\PY{o}{.}\PY{n}{StudentT}\PY{p}{(}\PY{p}{)}
@@ -1155,32 +1206,29 @@ Auto-assigning NUTS sampler{\ldots}
 Initializing NUTS using jitter+adapt\_diag{\ldots}
 Sequential sampling (2 chains in 1 job)
 NUTS: [lam\_log\_\_, Dalc, studytime, Medu, higher\_yes, failures, Intercept]
-100\%|██████████| 2500/2500 [00:21<00:00, 117.44it/s]
-100\%|██████████| 2500/2500 [00:17<00:00, 142.89it/s]
-The acceptance probability does not match the target. It is 0.8834000488954877, but should be close to 0.8. Try to increase the number of tuning steps.
-
     \end{Verbatim}
 
-    \hypertarget{investigate-trace}{%
-\subsection{Investigate Trace}\label{investigate-trace}}
+    \hypertarget{examine-samples-from-new-model}{%
+\subsection{Examine Samples from New
+Model}\label{examine-samples-from-new-model}}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}27}]:} \PY{n}{pm}\PY{o}{.}\PY{n}{traceplot}\PY{p}{(}\PY{n}{t\PYZus{}trace}\PY{p}{)}\PY{p}{;}
-\end{Verbatim}
-
-
-    \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_52_0.png}
-    \end{center}
-    { \hspace*{\fill} \\}
-    
-    \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}28}]:} \PY{n}{pm}\PY{o}{.}\PY{n}{forestplot}\PY{p}{(}\PY{n}{t\PYZus{}trace}\PY{p}{)}\PY{p}{;}
+{\color{incolor}In [{\color{incolor}38}]:} \PY{n}{pm}\PY{o}{.}\PY{n}{traceplot}\PY{p}{(}\PY{n}{t\PYZus{}trace}\PY{p}{)}\PY{p}{;}
 \end{Verbatim}
 
 
     \begin{center}
     \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_53_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}39}]:} \PY{n}{pm}\PY{o}{.}\PY{n}{forestplot}\PY{p}{(}\PY{n}{t\PYZus{}trace}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_54_0.png}
     \end{center}
     { \hspace*{\fill} \\}
     
@@ -1190,10 +1238,10 @@ have the highest amount of uncertainty as was observed for the model
 using a normal prior distribution.
 
     \hypertarget{evaluate-the-new-model}{%
-\subsection{Evaluate the New Model}\label{evaluate-the-new-model}}
+\section{Evaluate the New Model}\label{evaluate-the-new-model}}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}29}]:} \PY{n}{results} \PY{o}{=} \PY{n}{evaluate\PYZus{}trace}\PY{p}{(}\PY{n}{t\PYZus{}trace}\PY{p}{,} \PY{n}{X\PYZus{}train\PYZus{}math}\PY{p}{,} \PY{n}{X\PYZus{}test\PYZus{}math}\PY{p}{,} \PY{n}{y\PYZus{}train\PYZus{}math}\PY{p}{,} \PY{n}{y\PYZus{}test\PYZus{}math}\PY{p}{,} \PY{n}{math\PYZus{}results}\PY{p}{)}
+{\color{incolor}In [{\color{incolor}40}]:} \PY{n}{results} \PY{o}{=} \PY{n}{evaluate\PYZus{}trace}\PY{p}{(}\PY{n}{t\PYZus{}trace}\PY{p}{,} \PY{n}{X\PYZus{}train\PYZus{}math}\PY{p}{,} \PY{n}{X\PYZus{}test\PYZus{}math}\PY{p}{,} \PY{n}{y\PYZus{}train\PYZus{}math}\PY{p}{,} \PY{n}{y\PYZus{}test\PYZus{}math}\PY{p}{,} \PY{n}{math\PYZus{}results}\PY{p}{)}
 \end{Verbatim}
 
 
@@ -1204,28 +1252,29 @@ Model MAPE: 0.1330
     \end{Verbatim}
 
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_56_1.png}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_57_1.png}
     \end{center}
     { \hspace*{\fill} \\}
     
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_56_2.png}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_57_2.png}
     \end{center}
     { \hspace*{\fill} \\}
     
     The t-distribution metrics are nearly identical to those from the normal
 distribution. As the number of samples/datapoints increases, the prior
-has less and less impact on the final results because the likelihoods
-come to dominate the parameters drawn from the posterior. We can do the
-same querying of the new model to view the predictions for a new
-student.
+has less impact on the final results because the likelihoods come to
+dominate the parameters drawn from the posterior. We can do the same
+querying of the new model to view the predictions for observations from
+a new student. Again, we will plot the entire range of predicted values
+to show our uncertainty in the prediction.
 
     \hypertarget{query-t-distribution-model}{%
 \subsection{Query T-Distribution
 Model}\label{query-t-distribution-model}}
 
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}30}]:} \PY{n}{observation} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Intercept}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Medu}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{4}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{failures}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{0}\PY{p}{,} 
+{\color{incolor}In [{\color{incolor}41}]:} \PY{n}{observation} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Intercept}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Medu}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{4}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{failures}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{0}\PY{p}{,} 
                                      \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{higher\PYZus{}yes}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{studytime}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{3}\PY{p}{,}
                                      \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Dalc}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{1}\PY{p}{,} \PY{p}{\PYZcb{}}\PY{p}{,} \PY{n}{index} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
          \PY{n}{query\PYZus{}model}\PY{p}{(}\PY{n}{t\PYZus{}trace}\PY{p}{,} \PY{n}{observation}\PY{p}{)}
@@ -1239,12 +1288,12 @@ Average Estimate = 13.7615
     \end{Verbatim}
 
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_59_1.png}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_60_1.png}
     \end{center}
     { \hspace*{\fill} \\}
     
     \begin{Verbatim}[commandchars=\\\{\}]
-{\color{incolor}In [{\color{incolor}31}]:} \PY{n}{observation} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Intercept}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Medu}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{failures}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{2}\PY{p}{,} 
+{\color{incolor}In [{\color{incolor}42}]:} \PY{n}{observation} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Intercept}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Medu}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{failures}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{2}\PY{p}{,} 
                                      \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{higher\PYZus{}yes}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{studytime}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{2}\PY{p}{,}
                                      \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Dalc}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{2}\PY{p}{,} \PY{p}{\PYZcb{}}\PY{p}{,} \PY{n}{index} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
          \PY{n}{query\PYZus{}model}\PY{p}{(}\PY{n}{t\PYZus{}trace}\PY{p}{,} \PY{n}{observation}\PY{p}{)}
@@ -1258,7 +1307,7 @@ Average Estimate = 9.2458
     \end{Verbatim}
 
     \begin{center}
-    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_60_1.png}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_61_1.png}
     \end{center}
     { \hspace*{\fill} \\}
     
