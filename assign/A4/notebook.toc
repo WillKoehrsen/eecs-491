@@ -1,0 +1,18 @@
+\contentsline {section}{\numberline {1}Introduction}{2}{section.1}
+\contentsline {subsection}{\numberline {1.1}Soft Classification}{2}{subsection.1.1}
+\contentsline {section}{\numberline {2}Metric: Log Likelihood}{3}{section.2}
+\contentsline {section}{\numberline {3}Expectation-Step: Assign Cluster Responsibilities}{3}{section.3}
+\contentsline {section}{\numberline {4}Maximization Step: Update the Parameters of the Gaussian Distributions}{5}{section.4}
+\contentsline {subsection}{\numberline {4.1}Cluster Soft Counts}{5}{subsection.4.1}
+\contentsline {subsection}{\numberline {4.2}Cluster Weights}{5}{subsection.4.2}
+\contentsline {section}{\numberline {5}Update Means of Gaussians}{6}{section.5}
+\contentsline {section}{\numberline {6}Update Covariances}{7}{section.6}
+\contentsline {section}{\numberline {7}Complete Expectation Maximization Algorithm}{8}{section.7}
+\contentsline {subsection}{\numberline {7.1}Generate Testing Data}{9}{subsection.7.1}
+\contentsline {section}{\numberline {8}Two Clusters of Gaussian Data}{10}{section.8}
+\contentsline {subsection}{\numberline {8.1}Visualize Generated Data}{10}{subsection.8.1}
+\contentsline {subsection}{\numberline {8.2}Run Expectation Maximization Algorithm on Two Clusters Data}{11}{subsection.8.2}
+\contentsline {subsection}{\numberline {8.3}Visualize Results for 2 Clusters}{12}{subsection.8.3}
+\contentsline {section}{\numberline {9}Test with 3 Clusters}{15}{section.9}
+\contentsline {subsection}{\numberline {9.1}Run Algorithm on 3 Clusters}{16}{subsection.9.1}
+\contentsline {section}{\numberline {10}Conclusions}{19}{section.10}

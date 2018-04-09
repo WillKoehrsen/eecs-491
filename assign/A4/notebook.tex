@@ -1,0 +1,1073 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[12pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{P1 and P2 Expectation Maximization Implementation}
+    \author{Will Koehrsen wjk68}
+    \date{April 9, 2018}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=blue,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    \tableofcontents
+   
+\hypertarget{introduction}{%
+\section{Introduction}\label{introduction}}
+
+In this notebook we will explore using the expectation maximization
+algorithm in order to separate data generated from multiple Gaussian
+distributions. We will concentrate on artificially generated
+two-dimensional data so we can visualize the results of our algorithms,
+but the Expectation Maximization model developed is generalizable to
+higher dimensions. Our model will be built on the assumption that the
+generating distribution for the data is Gaussian hence the name Gaussian
+mixture models. A Gaussian is completely defined by the mean (location)
+\(\mu\) and the covariance matrix (spread) \(\sigma\) and using these
+parameters, we can find the posterior probability that a given data
+point is from a specific distribution which allows us to make soft
+classifications of observations.
+
+\hypertarget{soft-classification}{%
+\subsection{Soft Classification}\label{soft-classification}}
+
+For classification problems, we are looking to separate data points into
+different clusters (groupings) based on some measure of similarity.
+There are numerous methods for doing this which fall into 2 categories:
+hard and soft classification. In a hard classification, such as that
+arrived at in K-Means clustering, a data point can belong to only a
+single cluster. In contrast, for a soft classification, we specify a
+probability that a data point is from a given cluster. This lets us
+represent uncertainty about our classification. With the
+expectation-maximization algorithm, we can calculate a posterior
+probability that a given data point is from a specific cluster given the
+values of the data and the parameters (weights, means, and covariances)
+of the underlying distributions. In this notebook we will look at making
+soft classifications of data points based on a Gaussian mixture model
+and applying the expectation maximization algorithm.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{c+c1}{\PYZsh{} Numpy and pandas for data manipulation}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        
+        \PY{c+c1}{\PYZsh{} Matplotlib for plotting}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+        
+        \PY{c+c1}{\PYZsh{} Change default size of text on plots}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}
+        \PY{n}{matplotlib}\PY{o}{.}\PY{n}{rcParams}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{font.size}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{18}
+        
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{mlab} \PY{k}{as} \PY{n+nn}{mlab}
+        
+        \PY{c+c1}{\PYZsh{} Multivariate normal for finding likelihoods of data given a distribution}
+        \PY{k+kn}{from} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{stats} \PY{k}{import} \PY{n}{multivariate\PYZus{}normal}
+\end{Verbatim}
+
+
+    \hypertarget{metric-log-likelihood}{%
+\section{Metric: Log Likelihood}\label{metric-log-likelihood}}
+
+In order to assess the ``goodness'' of our classifications, we need a
+metric which in the case of a Gaussian mixture model is the log
+likelihood of the data given the Gaussian distributions. This lets us
+know if we should continue iterations of the EM algorithm or if we have
+reached a maximum likelihood for the data.
+
+The log likelihood for a mixture of Gaussians is the probability of
+observing a set of data under particular values of the parameters
+(weights, means, and covariances) for the Gaussians. This is used to
+assess covergence of EM: the algorithm continues until the log
+likelihood of the data stops increasing at some specified rate.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{c+c1}{\PYZsh{} Compute the log(sum\PYZus{}i exp(Z\PYZus{}i)) for an array Z}
+        \PY{k}{def} \PY{n+nf}{log\PYZus{}sum\PYZus{}exp}\PY{p}{(}\PY{n}{Z}\PY{p}{)}\PY{p}{:}
+            \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{n}{Z}\PY{p}{)} \PY{o}{+} \PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{n}{Z} \PY{o}{\PYZhy{}} \PY{n}{np}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{n}{Z}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Compute the loglikelihood of data for a Gaussian Mixture Model}
+        \PY{c+c1}{\PYZsh{} with the specified weights, means, and covariances}
+        \PY{k}{def} \PY{n+nf}{loglikelihood}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{weights}\PY{p}{,} \PY{n}{means}\PY{p}{,} \PY{n}{covs}\PY{p}{)}\PY{p}{:}
+            \PY{n}{num\PYZus{}clusters} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{means}\PY{p}{)}
+            \PY{n}{num\PYZus{}dim} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+            
+            \PY{n}{ll} \PY{o}{=} \PY{l+m+mi}{0}
+            
+            \PY{c+c1}{\PYZsh{} The log likelihood is summed over all the data points}
+            \PY{k}{for} \PY{n}{d} \PY{o+ow}{in} \PY{n}{data}\PY{p}{:}
+                \PY{n}{Z} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{num\PYZus{}clusters}\PY{p}{)}
+                \PY{c+c1}{\PYZsh{} There is a contribution to the log likelihood for every cluster for every data point}
+                \PY{k}{for} \PY{n}{k} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{num\PYZus{}clusters}\PY{p}{)}\PY{p}{:}
+                    \PY{n}{delta} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{d}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{means}\PY{p}{[}\PY{n}{k}\PY{p}{]}
+                    \PY{n}{exponent\PYZus{}term} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{delta}\PY{o}{.}\PY{n}{T}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{inv}\PY{p}{(}\PY{n}{covs}\PY{p}{[}\PY{n}{k}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{n}{delta}\PY{p}{)}\PY{p}{)}
+        
+                    \PY{c+c1}{\PYZsh{} Log likelihood contribution for this data point and this cluster}
+                    \PY{n}{Z}\PY{p}{[}\PY{n}{k}\PY{p}{]} \PY{o}{+}\PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{weights}\PY{p}{[}\PY{n}{k}\PY{p}{]}\PY{p}{)}
+                    \PY{n}{Z}\PY{p}{[}\PY{n}{k}\PY{p}{]} \PY{o}{\PYZhy{}}\PY{o}{=} \PY{l+m+mi}{1}\PY{o}{/}\PY{l+m+mi}{2} \PY{o}{*} \PY{p}{(}\PY{n}{num\PYZus{}dim} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{l+m+mi}{2} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{p}{)} \PY{o}{+} \PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{det}\PY{p}{(}\PY{n}{covs}\PY{p}{[}\PY{n}{k}\PY{p}{]}\PY{p}{)}\PY{p}{)} \PY{o}{+} \PY{n}{exponent\PYZus{}term}\PY{p}{)}
+        
+                \PY{c+c1}{\PYZsh{} Increase log likelihood by data point across all clusters}
+                \PY{n}{ll} \PY{o}{+}\PY{o}{=} \PY{n}{log\PYZus{}sum\PYZus{}exp}\PY{p}{(}\PY{n}{Z}\PY{p}{)}
+                    
+            \PY{k}{return} \PY{n}{ll}
+\end{Verbatim}
+
+
+    \hypertarget{expectation-step-assign-cluster-responsibilities}{%
+\section{Expectation-Step: Assign Cluster
+Responsibilities}\label{expectation-step-assign-cluster-responsibilities}}
+
+The E step of the Expectation Maximization algorithm assigns
+responsibilities of data points to clusters based on the parameters
+(means and covariances) of the clusters. The responsibilities are
+fractions between 0 and 1, and for a single data point, the
+responsibilities sum to 1. We will denote \(r_{ik}\) as the
+responsibility of data point \(i\) to cluster \(k\). In contrast to hard
+classification methods, each data point can belong to multiple clusters
+which allows us to represent uncertainty about classifiction
+predictions.
+
+For a given data point, the responsibility summed over all clusters must
+equal 1:
+
+\[r_{i1} + r_{i2} + \ldots + r_{ik} = 1\]
+
+The responsilibity of a particular cluster for a data point is the
+probability the data point comes from that cluster given the data point
+and the cluster parameters. We can express this in terms of Bayes Rule:
+
+\[r_{ik} = p(C_k | i) = \frac{p(i | C_k)p(C_k)}{p(i)}\]
+
+To determine unnormalized cluster responsibilities, we need to take the
+likelihood of the data point under the cluster parameters multiplied by
+the weight of the cluster, \(\pi_k\). This is the numerator in Bayes
+Theorem and is expressed as:
+
+\[r_{ik} \propto \pi_k N(x_i | \mu_k, \Sigma_k)\]
+
+With \(N(x_i | \mu_k, \Sigma_k)\) the Gaussian distribution of cluster
+\(k\) with mean \(\mu_k\) and covariance \(\Sigma_k\).
+
+We can normalize the responsibiliy by dividing by the normalization
+constant, which for data point \(i\) is the sum over the clusters of the
+likelihoods of the data point in that cluster times the cluster weight.
+
+\[r_{ik} = \frac{\pi_k N(x_i | \mu_k, \Sigma_k)}
+{\sum_{k=1}^{K} \pi_k N(x_i | \mu_k, \Sigma_k)}\]
+
+The final value of \(r_{ik}\) must be between 0 and 1 and represents the
+responsibility of cluster \(k\) for data point \(i\) given the mean and
+covariance of the cluster.
+
+To compute the likelihood of drawing a data point from a Guassian
+distribution, we can use the SciPy function
+\texttt{multivariate\_normal.pdf(x,\ mean,\ cov)}
+
+This returns the likelihood of observing a data point, \(x\), given the
+Gaussian distribution defined by the mean and covariance.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{c+c1}{\PYZsh{} Calculate all the responsibilities for the data points}
+        \PY{c+c1}{\PYZsh{} under the specified Gaussian distributions}
+        \PY{c+c1}{\PYZsh{} Responsibility is the weight of the cluster times the likelihood}
+        \PY{c+c1}{\PYZsh{} of the data point under the cluster parameters}
+        \PY{k}{def} \PY{n+nf}{compute\PYZus{}responsibilities}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{weights}\PY{p}{,} \PY{n}{means}\PY{p}{,} \PY{n}{covs}\PY{p}{)}\PY{p}{:}
+            \PY{n}{num\PYZus{}data} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{data}\PY{p}{)}
+            \PY{n}{num\PYZus{}clusters} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{means}\PY{p}{)}
+            
+            \PY{n}{resps} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{num\PYZus{}data}\PY{p}{,} \PY{n}{num\PYZus{}clusters}\PY{p}{)}\PY{p}{)}
+            
+            \PY{c+c1}{\PYZsh{} Iterate through each data point}
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{num\PYZus{}data}\PY{p}{)}\PY{p}{:}
+                \PY{c+c1}{\PYZsh{} Iterate through each cluster}
+                \PY{k}{for} \PY{n}{k} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{num\PYZus{}clusters}\PY{p}{)}\PY{p}{:}
+                    \PY{c+c1}{\PYZsh{} Responsibility of cluster k for data point i}
+                    \PY{n}{resps}\PY{p}{[}\PY{n}{i}\PY{p}{,} \PY{n}{k}\PY{p}{]} \PY{o}{=} \PY{n}{weights}\PY{p}{[}\PY{n}{k}\PY{p}{]} \PY{o}{*} \PY{n}{multivariate\PYZus{}normal}\PY{o}{.}\PY{n}{pdf}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{n}{means}\PY{p}{[}\PY{n}{k}\PY{p}{]}\PY{p}{,} \PY{n}{covs}\PY{p}{[}\PY{n}{k}\PY{p}{]}\PY{p}{)}
+              
+            \PY{c+c1}{\PYZsh{} Calculate total responsibility for each data point}
+            \PY{n}{row\PYZus{}sums} \PY{o}{=} \PY{n}{resps}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{newaxis}\PY{p}{]}
+            
+            \PY{c+c1}{\PYZsh{} Normalize the responsibilities by the sum}
+            \PY{n}{resps} \PY{o}{=} \PY{n}{resps} \PY{o}{/} \PY{n}{row\PYZus{}sums}
+            
+            \PY{k}{return} \PY{n}{resps}
+\end{Verbatim}
+
+
+    \hypertarget{maximization-step-update-the-parameters-of-the-gaussian-distributions}{%
+\section{Maximization Step: Update the Parameters of the Gaussian
+Distributions}\label{maximization-step-update-the-parameters-of-the-gaussian-distributions}}
+
+Once the data point responsibilities have been assigned, the Gaussian
+distribution parameters must be updated to reflect the assignments of
+the data points. There are three parameters that must be calculated
+during the maximization step: the cluster weights \(\hat{\pi}_k\), the
+cluster means, \(\hat{\mu}_k\), and the cluster covariance matrices,
+\(\hat{\Sigma}_k\). The weights, means, and covariances are calculated
+for each of the Gaussians based upon the data points and their
+responsibilities. This step is called the maximization step because we
+are maximizing the likelihood of the data points by adjusting the
+Gaussian distributions to match the data assignments.
+
+\hypertarget{cluster-soft-counts}{%
+\subsection{Cluster Soft Counts}\label{cluster-soft-counts}}
+
+The first step is to compute the soft counts for the clusters: this is
+the sum of all the responsibilities for a given cluster.
+
+\[N^{\text{soft}}_k = r_{1k} + r_{2k} + \ldots + r_{Nk} = \sum_{i=1}^{N} r_{ik}\]
+
+Each cluster will have at least some fractional responsibility for every
+data point. This is different from K-means, where each data point is
+assigned to only one cluster.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{c+c1}{\PYZsh{} Sums the responsibilities for a given cluster}
+        \PY{k}{def} \PY{n+nf}{compute\PYZus{}soft\PYZus{}counts}\PY{p}{(}\PY{n}{resps}\PY{p}{)}\PY{p}{:}
+            \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{resps}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{cluster-weights}{%
+\subsection{Cluster Weights}\label{cluster-weights}}
+
+The cluster weights give a measure of how much each cluster is
+represented across the entire data set. The weight for a cluster \(k\)
+is represented by \(\hat{\pi}_k\). The cluster weight is the ratio of
+the soft count for that cluster \(N^{\text{soft}}_k\) to the sum over
+the soft counts of all clusters. The sum of all soft counts is
+equivalent to the total number of data points.
+
+\[\hat{\pi}_k = \frac{N^{\text{soft}}_k}{N}\]
+
+The cluster weight serves as the prior for the cluster. With no other
+information, the posterior probability that a data point is from a
+cluster would collapse to the prior probability. In other words, if we
+had no information about the cluster parameters, we could still assign
+responsibilities based on the cluster weights. If one cluster is
+responsible for more data points, that will be reflected by a greater
+cluster weight.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{c+c1}{\PYZsh{} Calculate cluster weights}
+        \PY{c+c1}{\PYZsh{} The weight for a cluster is the soft count of the cluster}
+        \PY{c+c1}{\PYZsh{} divided by the total soft counts}
+        \PY{k}{def} \PY{n+nf}{compute\PYZus{}weights}\PY{p}{(}\PY{n}{counts}\PY{p}{)}\PY{p}{:}
+            \PY{n}{num\PYZus{}clusters} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{counts}\PY{p}{)}
+            \PY{n}{weights} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{num\PYZus{}clusters}\PY{p}{)}
+            
+            \PY{c+c1}{\PYZsh{} Calculate weight for each cluster}
+            \PY{k}{for} \PY{n}{k} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{num\PYZus{}clusters}\PY{p}{)}\PY{p}{:}
+                \PY{n}{weights}\PY{p}{[}\PY{n}{k}\PY{p}{]} \PY{o}{=} \PY{n}{counts}\PY{p}{[}\PY{n}{k}\PY{p}{]} \PY{o}{/} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{counts}\PY{p}{)}
+                
+            \PY{k}{return} \PY{n}{weights}
+\end{Verbatim}
+
+
+    \hypertarget{update-means-of-gaussians}{%
+\section{Update Means of Gaussians}\label{update-means-of-gaussians}}
+
+The first parameters, the weights of the distributions, \(\hat{\pi}_k\)
+have been calculated. The next parameter is the mean of the Gaussian
+distribution, \(\hat{\mu}_k\).
+
+The mean of a cluster is the weighted average of all data points divided
+by the soft count of the cluster. The weighted average of a data point
+is the coordinates of the data point multiplied by the responsibility of
+the cluster for that data point. The following equation calculates the
+new coordinates of the mean of cluster \(k\).
+
+\[\hat{\mu}_k = \frac{1}{N^{\text{soft}}_k} \sum_{i=1}^{N} r_{ik}x_i\]
+
+We see that the final cluster mean is a weighted average over all the
+data points, unlike in K-Means, where the new means are calculated based
+only on the data points assigned to a cluster. The update step for the
+mean is repeated for each Gaussian distribution to find the new means of
+all the clusters.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{k}{def} \PY{n+nf}{compute\PYZus{}means}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{resps}\PY{p}{,} \PY{n}{counts}\PY{p}{)}\PY{p}{:}
+            \PY{n}{num\PYZus{}clusters} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{counts}\PY{p}{)}
+            \PY{n}{num\PYZus{}data} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{data}\PY{p}{)}
+            
+            \PY{n}{means} \PY{o}{=} \PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{]} \PY{o}{*} \PY{n}{num\PYZus{}clusters}
+            
+            \PY{c+c1}{\PYZsh{} For each cluster, calculate the new location of the mean}
+            \PY{k}{for} \PY{n}{k} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{num\PYZus{}clusters}\PY{p}{)}\PY{p}{:}
+                \PY{n}{weighted\PYZus{}sum} \PY{o}{=} \PY{l+m+mf}{0.}
+                
+                \PY{c+c1}{\PYZsh{} Iterate over all data points}
+                \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{num\PYZus{}data}\PY{p}{)}\PY{p}{:}
+                    \PY{c+c1}{\PYZsh{} Weighted sum is the responsibility times the coordinates of the point}
+                    \PY{n}{weighted\PYZus{}sum} \PY{o}{+}\PY{o}{=} \PY{n}{resps}\PY{p}{[}\PY{n}{i}\PY{p}{,} \PY{n}{k}\PY{p}{]} \PY{o}{*} \PY{n}{data}\PY{p}{[}\PY{n}{i}\PY{p}{]}
+                   
+                \PY{c+c1}{\PYZsh{} Multiply the weighted value by 1 / soft count for the cluster}
+                \PY{n}{means}\PY{p}{[}\PY{n}{k}\PY{p}{]} \PY{o}{=} \PY{n}{weighted\PYZus{}sum} \PY{o}{*} \PY{l+m+mi}{1} \PY{o}{/} \PY{n}{counts}\PY{p}{[}\PY{n}{k}\PY{p}{]}
+                
+            \PY{k}{return} \PY{n}{means}
+\end{Verbatim}
+
+
+    \hypertarget{update-covariances}{%
+\section{Update Covariances}\label{update-covariances}}
+
+The third and final parameter to update in the Maximization step is the
+covariance matrix of the Gaussian distribution. The covariance matrix,
+like the means, is also a weighted average. In this case, it is the
+outer product summed over all data points weighted by the cluster
+responsibility for each data point. The final value of the covariance is
+then normalized using the soft count for the cluster. The outer product
+for the covariance is the matrix product of the difference between the
+data point and the cluster mean:
+
+\[(x_i - \hat{\mu}_k)(x_i - \hat{\mu}_k)^T\]
+
+Where \((x_i - \hat{\mu}_k)\) is a \(d \times 1\) column vector and
+\((x_i - \hat{\mu}_k)^T\) is a \(1 \times d\) row vector. The result of
+the multiplication is a \(d \times d\) covariance matrix. For a
+2-dimensional data set, the covariance matrix has the form:
+
+\[\Sigma = \left( \begin{array}{cc}
+\sigma_{x}^2 & \sigma_{xy}^2 \\
+\sigma_{xy}^2 & \sigma_{y}^2 \\
+ \end{array} \right) \]
+
+The covariance matrix can only be calculated \emph{after} the means for
+the clusters have been determined.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{c+c1}{\PYZsh{} Compute new covariances given the data, the responsibilities}
+        \PY{c+c1}{\PYZsh{} of each cluster for each data point, the calculated soft counts, and the calculated means}
+        \PY{k}{def} \PY{n+nf}{compute\PYZus{}covariances}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{resp}\PY{p}{,} \PY{n}{counts}\PY{p}{,} \PY{n}{means}\PY{p}{)}\PY{p}{:}
+            \PY{n}{num\PYZus{}clusters} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{counts}\PY{p}{)}
+            \PY{n}{num\PYZus{}dim} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+            \PY{n}{num\PYZus{}data} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{data}\PY{p}{)}
+            \PY{n}{covariances} \PY{o}{=} \PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{num\PYZus{}dim}\PY{p}{,} \PY{n}{num\PYZus{}dim}\PY{p}{)}\PY{p}{)}\PY{p}{]} \PY{o}{*} \PY{n}{num\PYZus{}clusters}
+            
+            \PY{c+c1}{\PYZsh{} Iterate through all clusters}
+            \PY{k}{for} \PY{n}{k} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{num\PYZus{}clusters}\PY{p}{)}\PY{p}{:}
+                \PY{n}{weighted\PYZus{}sum} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{num\PYZus{}dim}\PY{p}{,} \PY{n}{num\PYZus{}dim}\PY{p}{)}\PY{p}{)}
+                
+                \PY{c+c1}{\PYZsh{} Iterate through all data points}
+                \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{num\PYZus{}data}\PY{p}{)}\PY{p}{:}
+                    \PY{c+c1}{\PYZsh{} Compute the contribution to the covariance matrix of the data point}
+                    \PY{n}{weighted\PYZus{}sum} \PY{o}{+}\PY{o}{=} \PY{n}{resp}\PY{p}{[}\PY{n}{i}\PY{p}{,} \PY{n}{k}\PY{p}{]} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{outer}\PY{p}{(}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{means}\PY{p}{[}\PY{n}{k}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{means}\PY{p}{[}\PY{n}{k}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{T}\PY{p}{)}
+                    
+                \PY{c+c1}{\PYZsh{} To normalize the covariances, divide by the soft count of the cluster}
+                \PY{n}{covariances}\PY{p}{[}\PY{n}{k}\PY{p}{]} \PY{o}{=} \PY{n}{weighted\PYZus{}sum} \PY{o}{/} \PY{n}{counts}\PY{p}{[}\PY{n}{k}\PY{p}{]}
+                
+            \PY{k}{return} \PY{n}{covariances}
+\end{Verbatim}
+
+
+    \hypertarget{complete-expectation-maximization-algorithm}{%
+\section{Complete Expectation Maximization
+Algorithm}\label{complete-expectation-maximization-algorithm}}
+
+The final step is to put all of the code together. Given initial
+parameter estimates, we
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Expectation: assign responsibilities for each data point to each
+  cluster, \(r_{ik}\)
+\item
+  Maximization: calculate new parameters for the distributions given the
+  responsibilities: \(\hat{\pi}_k\), \(\hat{\mu}_k\), \(\hat{\Sigma}_k\)
+\item
+  Determine log likelihood of data with the new distributions
+\item
+  Repeat steps 1-3 until log likelihood is no longer increasing at
+  specified rate or until the maximum number of iterations is reached.
+\end{enumerate}
+
+All of this can be encapsulated in one overall function with the helper
+functions developed previously. The main part of the function is a loop
+that continues until the maximum number of iterations is reached or the
+increase in the log likelihood is below a specified threshold.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{k}{def} \PY{n+nf}{EM\PYZus{}algorithm}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{init\PYZus{}means}\PY{p}{,} \PY{n}{init\PYZus{}covariances}\PY{p}{,} \PY{n}{init\PYZus{}weights}\PY{p}{,} \PY{n}{maxiter} \PY{o}{=} \PY{l+m+mi}{1000}\PY{p}{,} \PY{n}{thresh} \PY{o}{=} \PY{l+m+mf}{1e\PYZhy{}4}\PY{p}{)}\PY{p}{:}
+            \PY{n}{means} \PY{o}{=} \PY{n}{init\PYZus{}means}\PY{p}{[}\PY{p}{:}\PY{p}{]}
+            \PY{n}{covariances} \PY{o}{=} \PY{n}{init\PYZus{}covariances}\PY{p}{[}\PY{p}{:}\PY{p}{]}
+            \PY{n}{weights} \PY{o}{=} \PY{n}{init\PYZus{}weights}\PY{p}{[}\PY{p}{:}\PY{p}{]}
+            
+            \PY{n}{num\PYZus{}data} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{data}\PY{p}{)}
+            \PY{n}{num\PYZus{}dim} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+            \PY{n}{num\PYZus{}clusters} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{means}\PY{p}{)}
+            
+            \PY{n}{resp} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{num\PYZus{}data}\PY{p}{,} \PY{n}{num\PYZus{}clusters}\PY{p}{)}\PY{p}{)}
+            \PY{n}{ll} \PY{o}{=} \PY{n}{loglikelihood}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{weights}\PY{p}{,} \PY{n}{means}\PY{p}{,} \PY{n}{covariances}\PY{p}{)}
+            \PY{n}{ll\PYZus{}trace} \PY{o}{=} \PY{p}{[}\PY{n}{ll}\PY{p}{]}
+            
+            \PY{k}{for} \PY{n}{it} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{maxiter}\PY{p}{)}\PY{p}{:}
+                \PY{k}{if} \PY{n}{it} \PY{o}{\PYZpc{}} \PY{l+m+mi}{5} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:}
+                    \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Iteration }\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{n}{it}\PY{p}{)}
+                
+                \PY{c+c1}{\PYZsh{} Expectation Step}
+                \PY{c+c1}{\PYZsh{} Assign responsibilities to data points for each cluster}
+                \PY{n}{resp} \PY{o}{=} \PY{n}{compute\PYZus{}responsibilities}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{weights}\PY{p}{,} \PY{n}{means}\PY{p}{,} \PY{n}{covariances}\PY{p}{)}
+                
+                \PY{c+c1}{\PYZsh{} Maximization Step}
+                \PY{c+c1}{\PYZsh{} Calculate new parameters based on responsibilities and data}
+                \PY{n}{counts} \PY{o}{=} \PY{n}{compute\PYZus{}soft\PYZus{}counts}\PY{p}{(}\PY{n}{resp}\PY{p}{)}
+                \PY{n}{weights} \PY{o}{=} \PY{n}{compute\PYZus{}weights}\PY{p}{(}\PY{n}{counts}\PY{p}{)}
+                \PY{n}{means} \PY{o}{=} \PY{n}{compute\PYZus{}means}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{resp}\PY{p}{,} \PY{n}{counts}\PY{p}{)}
+                \PY{n}{covariances} \PY{o}{=} \PY{n}{compute\PYZus{}covariances}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{resp}\PY{p}{,} \PY{n}{counts}\PY{p}{,} \PY{n}{means}\PY{p}{)}
+                
+                \PY{n}{ll\PYZus{}next} \PY{o}{=} \PY{n}{loglikelihood}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{weights}\PY{p}{,} \PY{n}{means}\PY{p}{,} \PY{n}{covariances}\PY{p}{)}
+                \PY{n}{ll\PYZus{}trace}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{ll\PYZus{}next}\PY{p}{)}
+                
+                \PY{k}{if} \PY{p}{(}\PY{n}{ll\PYZus{}next} \PY{o}{\PYZhy{}} \PY{n}{ll} \PY{o}{\PYZlt{}} \PY{n}{thresh}\PY{p}{)} \PY{o+ow}{and} \PY{p}{(}\PY{n}{ll\PYZus{}next} \PY{o}{\PYZgt{}} \PY{o}{\PYZhy{}}\PY{n}{np}\PY{o}{.}\PY{n}{inf}\PY{p}{)}\PY{p}{:}
+                    \PY{k}{break}
+                \PY{n}{ll} \PY{o}{=} \PY{n}{ll\PYZus{}next}
+            
+            \PY{n}{out} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{weights}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{weights}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{means}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{means}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{covs}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{covariances}\PY{p}{,}
+                   \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{loglike}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{ll\PYZus{}trace}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{resp}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{resp}\PY{p}{\PYZcb{}}
+            
+            \PY{k}{return} \PY{n}{out}
+\end{Verbatim}
+
+
+    \hypertarget{generate-testing-data}{%
+\subsection{Generate Testing Data}\label{generate-testing-data}}
+
+We now need to define a function which can generate observations from a
+mixture of Gaussians. This function will take in a desired number of
+data points, initial means, initial covariances, and initial weights and
+will return a data set. The data points are randomly generated from the
+specified Gaussians which means that we know the correct parameters of
+the generation distributions.
+
+Using the data, we can run the expectation maximization algorithm and
+compare the resulting means, covariances, and weights to those we passed
+into the function (which serve as the ``ground truth''). We can also
+visualize the data and the final Gaussian mixtures to determine how well
+the algorithm is able to separate the data points.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{c+c1}{\PYZsh{} Generate a number of data points from the specified mixture of Gaussians}
+        \PY{c+c1}{\PYZsh{} These data will serve as testing observations for the EM algoritm}
+        \PY{k}{def} \PY{n+nf}{generate\PYZus{}data}\PY{p}{(}\PY{n}{num\PYZus{}data}\PY{p}{,} \PY{n}{means}\PY{p}{,} \PY{n}{covariances}\PY{p}{,} \PY{n}{weights}\PY{p}{)}\PY{p}{:}
+            \PY{n}{num\PYZus{}clusters} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{weights}\PY{p}{)}
+            \PY{n}{data} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+            
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{num\PYZus{}data}\PY{p}{)}\PY{p}{:}
+                \PY{c+c1}{\PYZsh{} Randomly select one of the distributions to generate the data from}
+                \PY{n}{k} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{choice}\PY{p}{(}\PY{n}{num\PYZus{}clusters}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{p} \PY{o}{=} \PY{n}{weights}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+                
+                \PY{c+c1}{\PYZsh{} Generate the data given the mean and covariance matrix of the distribution}
+                \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{multivariate\PYZus{}normal}\PY{p}{(}\PY{n}{means}\PY{p}{[}\PY{n}{k}\PY{p}{]}\PY{p}{,} \PY{n}{covariances}\PY{p}{[}\PY{n}{k}\PY{p}{]}\PY{p}{)}
+                
+                \PY{n}{data}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+                
+            \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{data}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{two-clusters-of-gaussian-data}{%
+\section{Two Clusters of Gaussian
+Data}\label{two-clusters-of-gaussian-data}}
+
+We will start off by generating data from two Gaussian clusters that are
+well separated. The initial weights will be spread evenly among the two
+clusters.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{init\PYZus{}means} \PY{o}{=} \PY{p}{[}
+             \PY{p}{[}\PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{]}\PY{p}{,}
+             \PY{p}{[}\PY{l+m+mi}{8}\PY{p}{,} \PY{l+m+mi}{7}\PY{p}{]}
+         \PY{p}{]}
+         
+         \PY{n}{init\PYZus{}covariances} \PY{o}{=} \PY{p}{[}
+             \PY{p}{[}\PY{p}{[}\PY{l+m+mf}{0.35}\PY{p}{,} \PY{l+m+mf}{0.23}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+m+mf}{0.23}\PY{p}{,} \PY{l+m+mf}{0.35}\PY{p}{]}\PY{p}{]}\PY{p}{,}
+             \PY{p}{[}\PY{p}{[}\PY{l+m+mf}{0.1}\PY{p}{,} \PY{l+m+mf}{0.42}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+m+mf}{0.42}\PY{p}{,} \PY{l+m+mf}{0.1}\PY{p}{]}\PY{p}{]}
+         \PY{p}{]}
+         
+         \PY{n}{init\PYZus{}weights} \PY{o}{=} \PY{p}{[}\PY{l+m+mf}{0.5}\PY{p}{,} \PY{l+m+mf}{0.5}\PY{p}{]}
+         
+         \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{seed}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}
+         \PY{n}{two\PYZus{}clusters\PYZus{}data} \PY{o}{=} \PY{n}{generate\PYZus{}data}\PY{p}{(}\PY{l+m+mi}{100}\PY{p}{,} \PY{n}{init\PYZus{}means}\PY{p}{,} \PY{n}{init\PYZus{}covariances}\PY{p}{,} \PY{n}{init\PYZus{}weights}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{visualize-generated-data}{%
+\subsection{Visualize Generated Data}\label{visualize-generated-data}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{k}{def} \PY{n+nf}{plot\PYZus{}data}\PY{p}{(}\PY{n}{data}\PY{p}{)}\PY{p}{:}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{,} \PY{l+m+mi}{6}\PY{p}{)}\PY{p}{)}
+             \PY{n}{p} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{data}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{c} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{navy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{marker} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{o}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{k}{return} \PY{n}{p}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n}{p} \PY{o}{=} \PY{n}{plot\PYZus{}data}\PY{p}{(}\PY{n}{two\PYZus{}clusters\PYZus{}data}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_23_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    We see that the generated data are fairly separated into two distinct
+clusters. These distributions should be relatively easy for the
+algorithm to separate into the respective distributions.
+
+    \hypertarget{run-expectation-maximization-algorithm-on-two-clusters-data}{%
+\subsection{Run Expectation Maximization Algorithm on Two Clusters
+Data}\label{run-expectation-maximization-algorithm-on-two-clusters-data}}
+
+To initialize the algorithm, we will select two random data points as
+the Gaussian means, the covariance of the data will be the initial
+covariance, and the initial weights will be uniform for the clusters.
+The initial covariance is clearly an overestimate because we are using
+the covariance of the entire dataset and not each individual
+distribution, but hopefully the algorithm will still converge in
+reasonable time.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{seed}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Initialize the parameters and run EM}
+         \PY{k}{def} \PY{n+nf}{initialize\PYZus{}and\PYZus{}run}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{n\PYZus{}cluster}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{} Select two random points as starting means}
+             \PY{n}{selected} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{choice}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{data}\PY{p}{)}\PY{p}{,} \PY{n}{n\PYZus{}cluster}\PY{p}{,} \PY{n}{replace} \PY{o}{=} \PY{k+kc}{False}\PY{p}{)}
+             \PY{n}{initial\PYZus{}means} \PY{o}{=} \PY{p}{[}\PY{n}{data}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{selected}\PY{p}{]}
+             
+             \PY{c+c1}{\PYZsh{} The initial covariances will be the covariance of the entire dataset}
+             \PY{n}{initial\PYZus{}covs} \PY{o}{=} \PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{cov}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{rowvar}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{]} \PY{o}{*} \PY{n}{n\PYZus{}cluster}
+             
+             \PY{c+c1}{\PYZsh{} Equal initial weights}
+             \PY{n}{initial\PYZus{}weights} \PY{o}{=} \PY{p}{[}\PY{l+m+mf}{1.}\PY{o}{/}\PY{n}{n\PYZus{}cluster}\PY{p}{]} \PY{o}{*} \PY{n}{n\PYZus{}cluster}
+             
+             \PY{n}{initial} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{data}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{weights}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{initial\PYZus{}weights}\PY{p}{,}
+                        \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{means}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{initial\PYZus{}means}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{covs}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{initial\PYZus{}covs}\PY{p}{\PYZcb{}}
+             
+             \PY{c+c1}{\PYZsh{} Run the algorithm with initial parameters}
+             \PY{n}{results} \PY{o}{=} \PY{n}{EM\PYZus{}algorithm}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{initial\PYZus{}means}\PY{p}{,} \PY{n}{initial\PYZus{}covs}\PY{p}{,} \PY{n}{initial\PYZus{}weights}\PY{p}{)}
+             
+             \PY{k}{return} \PY{n}{initial}\PY{p}{,} \PY{n}{results}
+             
+         \PY{n}{initial}\PY{p}{,} \PY{n}{results} \PY{o}{=} \PY{n}{initialize\PYZus{}and\PYZus{}run}\PY{p}{(}\PY{n}{two\PYZus{}clusters\PYZus{}data}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Iteration 0
+Iteration 5
+Iteration 10
+Iteration 15
+
+    \end{Verbatim}
+
+    \hypertarget{visualize-results-for-2-clusters}{%
+\subsection{Visualize Results for 2
+Clusters}\label{visualize-results-for-2-clusters}}
+
+The results returned by the algorithm are in dictionary form with the
+following entries:
+
+\begin{itemize}
+\tightlist
+\item
+  weights: the final distribution weights
+\item
+  means: the final means of the Guassians
+\item
+  covs: the final covariances of the Gaussians
+\item
+  loglike: a trace of the log-likelihood of the data over the course of
+  the algorith,
+\item
+  resp: the final responsility of each Gaussian distribution for each
+  data point
+\end{itemize}
+
+We can show the initial parameters and the final parameters on top of
+the data to demonstrate the effectiveness of the algorithm. The trace of
+the log likelihood is also plotted to show how the data gets ``more
+likely'' as the algorithm runs.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{c+c1}{\PYZsh{} Plot the log likelihood trace.}
+         \PY{c+c1}{\PYZsh{} Plot the data points with the initial parameters}
+         \PY{c+c1}{\PYZsh{} Plot the data points with the final parameters after EM algorith,}
+         \PY{k}{def} \PY{n+nf}{plot\PYZus{}results}\PY{p}{(}\PY{n}{initial}\PY{p}{,} \PY{n}{results}\PY{p}{)}\PY{p}{:}
+             \PY{n}{data} \PY{o}{=} \PY{n}{initial}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+             
+             \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{6}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{)}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{results}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{loglike}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bo\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Iteration}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{;} \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Log Likelihood}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Trace of Log Likelihood}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{;} \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+             
+             \PY{n}{delta} \PY{o}{=} \PY{l+m+mf}{0.2}
+             \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{min}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{n}{delta}\PY{p}{)}
+             \PY{n}{y} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{min}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{n}{delta}\PY{p}{)}
+             \PY{n}{X}\PY{p}{,} \PY{n}{Y} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{meshgrid}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{)}
+             
+             \PY{n}{col} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{green}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{red}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{magenta}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+             
+             \PY{n}{initial\PYZus{}data} \PY{o}{=} \PY{k+kc}{True}
+             \PY{c+c1}{\PYZsh{} Plot the initial estimates and then the final results}
+             \PY{k}{for} \PY{n}{d} \PY{o+ow}{in} \PY{p}{[}\PY{n}{initial}\PY{p}{,} \PY{n}{results}\PY{p}{]}\PY{p}{:}
+                 \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{8}\PY{p}{,} \PY{l+m+mi}{6}\PY{p}{)}\PY{p}{)}
+                 \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{data}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ko}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                 
+                 \PY{c+c1}{\PYZsh{} Iterate through the Gaussians}
+                 \PY{k}{for} \PY{n}{k} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{d}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{means}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                     
+                     \PY{c+c1}{\PYZsh{} Extract information}
+                     \PY{n}{mean} \PY{o}{=} \PY{n}{d}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{means}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{n}{k}\PY{p}{]}
+                     \PY{n}{cov} \PY{o}{=} \PY{n}{d}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{covs}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{n}{k}\PY{p}{]}
+                     
+                     \PY{c+c1}{\PYZsh{} Find the parameters of the standard deviations}
+                     \PY{n}{sigmax} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{cov}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+                     \PY{n}{sigmay} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{cov}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+                     \PY{n}{sigmaxy} \PY{o}{=} \PY{n}{cov}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+                     
+                     \PY{c+c1}{\PYZsh{} Generate the bivariate normal from the standard deviations}
+                     \PY{n}{Z} \PY{o}{=} \PY{n}{mlab}\PY{o}{.}\PY{n}{bivariate\PYZus{}normal}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{Y}\PY{p}{,} \PY{n}{sigmax}\PY{p}{,} \PY{n}{sigmay}\PY{p}{,}
+                                              \PY{n}{mean}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{mean}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{sigmaxy}\PY{p}{)}
+             
+                     \PY{n}{plt}\PY{o}{.}\PY{n}{contour}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{Y}\PY{p}{,} \PY{n}{Z}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{n}{colors} \PY{o}{=} \PY{n}{col}\PY{p}{[}\PY{n}{k}\PY{p}{]}\PY{p}{)}
+                  
+                 \PY{c+c1}{\PYZsh{} Add the correct title}
+                 \PY{k}{if} \PY{n}{initial\PYZus{}data}\PY{p}{:}
+                     \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Initial Estimates}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                     \PY{n}{initial\PYZus{}data} \PY{o}{=} \PY{k+kc}{False}
+                     \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+                 \PY{k}{else}\PY{p}{:}
+                     \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Final Results}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                     \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+                     
+                 
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{n}{plot\PYZus{}results}\PY{p}{(}\PY{n}{initial}\PY{p}{,} \PY{n}{results}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_29_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_29_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_29_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    We can see that the algorithm arrives at a very reasonable separation of
+the data. The initial variance was too high as expected, but the final
+result of the algorithm shows a smaller variance.
+
+    \hypertarget{test-with-3-clusters}{%
+\section{Test with 3 Clusters}\label{test-with-3-clusters}}
+
+We can repeat the same process but this time with 3 clusters and an
+uneven weighting of the distributions. The process to generate the data
+is the same as before as is the inialization and running of the
+algorithm.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{c+c1}{\PYZsh{} Specify initial parameters of data}
+         \PY{n}{init\PYZus{}means} \PY{o}{=} \PY{p}{[}
+             \PY{p}{[}\PY{l+m+mf}{1.5}\PY{p}{,} \PY{l+m+mi}{6}\PY{p}{]}\PY{p}{,}
+             \PY{p}{[}\PY{l+m+mf}{7.9}\PY{p}{,} \PY{l+m+mf}{4.3}\PY{p}{]}\PY{p}{,}
+             \PY{p}{[}\PY{l+m+mf}{15.3}\PY{p}{,} \PY{l+m+mf}{5.4}\PY{p}{]}
+         \PY{p}{]}
+         
+         \PY{n}{init\PYZus{}covariances} \PY{o}{=} \PY{p}{[}
+             \PY{p}{[}\PY{p}{[}\PY{l+m+mf}{0.4}\PY{p}{,} \PY{l+m+mf}{0.1}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+m+mf}{0.1}\PY{p}{,} \PY{l+m+mf}{0.5}\PY{p}{]}\PY{p}{]}\PY{p}{,}
+             \PY{p}{[}\PY{p}{[}\PY{l+m+mf}{0.18}\PY{p}{,} \PY{l+m+mf}{0.5}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+m+mf}{0.5}\PY{p}{,} \PY{l+m+mf}{0.12}\PY{p}{]}\PY{p}{]}\PY{p}{,}
+             \PY{p}{[}\PY{p}{[}\PY{l+m+mf}{0.33}\PY{p}{,} \PY{l+m+mf}{0.35}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+m+mf}{0.35}\PY{p}{,} \PY{l+m+mf}{0.4}\PY{p}{]}\PY{p}{]}
+         \PY{p}{]}
+         
+         \PY{n}{init\PYZus{}weights} \PY{o}{=} \PY{p}{[}\PY{l+m+mf}{0.25}\PY{p}{,} \PY{l+m+mf}{0.5}\PY{p}{,} \PY{l+m+mf}{0.25}\PY{p}{]}
+         
+         \PY{n}{three\PYZus{}clusters\PYZus{}data} \PY{o}{=} \PY{n}{generate\PYZus{}data}\PY{p}{(}\PY{l+m+mi}{180}\PY{p}{,} \PY{n}{init\PYZus{}means}\PY{p}{,} \PY{n}{init\PYZus{}covariances}\PY{p}{,} \PY{n}{init\PYZus{}weights}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{n}{plot\PYZus{}data}\PY{p}{(}\PY{n}{three\PYZus{}clusters\PYZus{}data}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_33_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{run-algorithm-on-3-clusters}{%
+\subsection{Run Algorithm on 3
+Clusters}\label{run-algorithm-on-3-clusters}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{n}{initial}\PY{p}{,} \PY{n}{results}\PY{o}{=} \PY{n}{initialize\PYZus{}and\PYZus{}run}\PY{p}{(}\PY{n}{three\PYZus{}clusters\PYZus{}data}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Iteration 0
+Iteration 5
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{n}{plot\PYZus{}results}\PY{p}{(}\PY{n}{initial}\PY{p}{,} \PY{n}{results}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_36_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_36_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_36_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    With three clusters the results are still very good. The Expectation
+Maximization algorithm is able to determine the underlying Gaussian
+distributions that generated the data. Granted, the clusters were well
+separated and the algorithm would likely not perform as well if given
+data that was more mixed. We will test this in the next notebook where
+we look at clustering the MNIST digits using principal components and
+the Expectation Maximization algorithm.
+
+    \hypertarget{conclusions}{%
+\section{Conclusions}\label{conclusions}}
+
+In this notebook we looked at how to soft classify data point using a
+Gaussian mixture model and the expectation maximization algorithm. Soft
+classification allows us to assign fractional responsibilities to data
+points for each cluster rather than strict class assignments. These
+fractional assignments show that there is some amount of uncertainty in
+the classifications. For many real-world problems, a data point might
+belong to multiple classes, such as in document topic classification,
+and Gaussian mixture models give us the framework for classifying data
+points in multiple categories.
+
+The expectation maximization algorithm works based on two steps: the
+expectation step involves assigning a responsibility of each cluster to
+each data point based on the current cluster (Gaussian) parameters. The
+maximization step then updates the parameters of each distribution based
+on the responsibilities and the data. For Gaussians, this means we find
+new cluster weights (representing the total responsibility of the
+cluster for all the data points), the mean of the distribution, and the
+covariance of the distribution. After finding the new cluster
+parameters, we calculate the log likelihood of the data given the
+distributions. This iterative process of assignment and updating of
+parameters continues until the log likelihood no longer increases above
+a specified threshold, or until the maximum number of iterations is
+reached. At this point, the algorithm breaks out of the iterations and
+returns the final weights, means, and covariances for the distributions.
+The expectation maximization algorithm therefore finds the parameters of
+the Gaussian distributions that maximize the likelihood of the data.
+
+As shown in this notebook, the EM algorithm works very well for distinct
+clusters. When the data is generated from Gaussians that are
+well-separated, the algorithm is able to successfully identify the
+clusters if it is provided with the number of clusters. To improve the
+convergence rate of the algorithm, we could use better starting
+parameters such as a more accurate covariance. Gaussian mixture models
+are a useful way to represent real-world data that might belong to
+multiple classes, and the expectation maximization algorithm lets us
+find the fractional assigments of the data points to the clusters and
+the parameters of the generating distributions. We will see in further
+work that the model developed here can be directly applied to real data
+classification problems.
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}

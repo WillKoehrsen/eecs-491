@@ -1,0 +1,18 @@
+\BOOKMARK [1][-]{section.1}{Introduction}{}% 1
+\BOOKMARK [2][-]{subsection.1.1}{Soft Classification}{section.1}% 2
+\BOOKMARK [1][-]{section.2}{Metric: Log Likelihood}{}% 3
+\BOOKMARK [1][-]{section.3}{Expectation-Step: Assign Cluster Responsibilities}{}% 4
+\BOOKMARK [1][-]{section.4}{Maximization Step: Update the Parameters of the Gaussian Distributions}{}% 5
+\BOOKMARK [2][-]{subsection.4.1}{Cluster Soft Counts}{section.4}% 6
+\BOOKMARK [2][-]{subsection.4.2}{Cluster Weights}{section.4}% 7
+\BOOKMARK [1][-]{section.5}{Update Means of Gaussians}{}% 8
+\BOOKMARK [1][-]{section.6}{Update Covariances}{}% 9
+\BOOKMARK [1][-]{section.7}{Complete Expectation Maximization Algorithm}{}% 10
+\BOOKMARK [2][-]{subsection.7.1}{Generate Testing Data}{section.7}% 11
+\BOOKMARK [1][-]{section.8}{Two Clusters of Gaussian Data}{}% 12
+\BOOKMARK [2][-]{subsection.8.1}{Visualize Generated Data}{section.8}% 13
+\BOOKMARK [2][-]{subsection.8.2}{Run Expectation Maximization Algorithm on Two Clusters Data}{section.8}% 14
+\BOOKMARK [2][-]{subsection.8.3}{Visualize Results for 2 Clusters}{section.8}% 15
+\BOOKMARK [1][-]{section.9}{Test with 3 Clusters}{}% 16
+\BOOKMARK [2][-]{subsection.9.1}{Run Algorithm on 3 Clusters}{section.9}% 17
+\BOOKMARK [1][-]{section.10}{Conclusions}{}% 18
