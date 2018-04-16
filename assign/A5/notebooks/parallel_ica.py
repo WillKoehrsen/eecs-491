@@ -4,7 +4,7 @@ from scipy import signal, linalg
 import warnings
 
 
-def tanh(x, alpha = 1.0):
+def logcosh(x, alpha = 1.0):
 
     x *= alpha
     
@@ -63,7 +63,7 @@ def parallel_ica(X, init_un_mixing, alpha = 1.0, max_iter = 1000, tol = 1e-4, re
     for i in range(max_iter):
         
         # Function and derivative 
-        gwtx, g_wtx = tanh(np.dot(un_mixing, X), alpha)
+        gwtx, g_wtx = logcosh(np.dot(un_mixing, X), alpha)
         
         
         new_un_mixing = symmetric_decorrelation(np.dot(gwtx, X.T) / p - g_wtx[:, np.newaxis] * un_mixing)
