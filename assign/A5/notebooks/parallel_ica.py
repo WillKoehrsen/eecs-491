@@ -51,8 +51,7 @@ def symmetric_decorrelation(un_mixing):
     
     return sym_un_mixing
 
-def parallel_ica(X, init_un_mixing, alpha = 1.0, max_iter = 1000, tol = 1e-4, 
-                 return_iter = False, print_negentropy=False):
+def parallel_ica(X, init_un_mixing, alpha = 1.0, max_iter = 1000, tol = 1e-4, print_negentropy=False):
     
     # Symmetric decorrelation of initial un-mixing components 
     un_mixing = symmetric_decorrelation(init_un_mixing)
@@ -73,8 +72,8 @@ def parallel_ica(X, init_un_mixing, alpha = 1.0, max_iter = 1000, tol = 1e-4,
         lim = max(abs(abs(np.diag(np.dot(new_un_mixing, un_mixing.T))) - 1))
         
         if print_negentropy:
-            print('Iteration: {d}\tIncrease in Negentropy: {:0.4f}.'.format(
-                i, lim))
+            print('Iteration: {} Increase in Negentropy: {:0.4f}.'.format(i, lim))
+            
         # Update un-mixing 
         un_mixing = new_un_mixing
 
@@ -86,10 +85,8 @@ def parallel_ica(X, init_un_mixing, alpha = 1.0, max_iter = 1000, tol = 1e-4,
         warnings.warn('FastICA algorithm did not converge. Considering increasing '
                       'tolerance or increasing the maximum number of iterations.')
         
-    if return_iter:
-        return un_mixing, i + 1
-    else: 
-        return un_mixing
+    
+    return un_mixing
     
     
     
@@ -105,8 +102,7 @@ def perform_fastica(X, n_components, alpha = 1.0, max_iter = 200, tol = 1e-4,
     init_un_mixing = np.asarray(np.random.normal(size = (n_components, n_components)))
     
     # Solve ica using the parallel ica algorithm
-    un_mixing = parallel_ica(X1, init_un_mixing, alpha, max_iter, tol,
-                            print_negentropy)
+    un_mixing = parallel_ica(X1, init_un_mixing, alpha, max_iter, tol, print_negentropy)
 
     # Calculate the sources
     sources = np.dot(np.dot(un_mixing, whitening), X.T).T
