@@ -1,0 +1,1041 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[12pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{P3 ICA Audio Signal Source Recovery}
+    \author{William Koehrsen wjk68}
+    \date{April 25, 2018}
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=blue,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    \tableofcontents
+    
+    
+
+    
+    \hypertarget{introduction}{%
+\section{Introduction: Audio Signal Source Recovery}\label{introduction}}
+
+In this notebook we examine using the implementation of Independent
+Component Analysis for separating mixed audio signals. Indepedent
+component analysis (ICA) finds the sparse, independent components in a
+signal under the assumption that the signal is a linear combination of
+non-Gaussian components. ICA can be used for both blind source
+separation, such as in this project, and dimensionality reduction. We
+will verify the FastICA method developed in a previous notebook using
+synthetic Laplacian data with a known mixing matrix. Then we will
+attempt to separate out the sources and the mixing matrix for an audio
+signal composed of two separate samples mixed with a random mixing
+matrix.
+
+The general equation governing ICA is that the signal is a linear
+combination of samples:
+
+\[X = AS\]
+
+where X, the signal, is the product of the mixing matrix, A, and the
+sample matrix, S. The objective is to separate out the indepedent
+samples and the estimated mixing matrix. The specific implementation of
+ICA used in this project is
+\href{https://www.cs.helsinki.fi/u/ahyvarin/papers/TNN99new.pdf}{FastICA}
+which has numerous advantages over gradient-based methods. The utility
+function used in FastICA is
+\href{https://www.cs.helsinki.fi/u/ahyvarin/papers/TR_A47_apprent.pdf}{Negentropy},
+which is a measure of the non-Gaussianity of a distribution. The
+objective is to maximize the negentropy of the independent components
+given the data.
+
+We will inspect the mixing matrix and indentified sources both visually
+and quantitatively to determine if the implementation of ICA is working
+correctly. We expect that for a signal composed of a linear combination
+of non-Gaussian components, the ICA algorithm should be able to separate
+out the sparse, independent components.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{c+c1}{\PYZsh{} Pandas and numpy for data manipulation}
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{c+c1}{\PYZsh{} Matploblit and seaborn for visualization}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+        
+        \PY{k+kn}{import} \PY{n+nn}{seaborn} \PY{k}{as} \PY{n+nn}{sns}
+        
+        \PY{c+c1}{\PYZsh{} Scipy io used for audio file management}
+        \PY{k+kn}{from} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{io} \PY{k}{import} \PY{n}{wavfile}
+        
+        \PY{c+c1}{\PYZsh{} Scipy stats.mstats used for testing distributions}
+        \PY{k+kn}{from} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{stats}\PY{n+nn}{.}\PY{n+nn}{mstats} \PY{k}{import} \PY{n}{normaltest}\PY{p}{,} \PY{n}{skewtest}\PY{p}{,} \PY{n}{kurtosistest}
+\end{Verbatim}
+
+
+    \hypertarget{import-fastica-algorithm}{%
+\subsection{Import FastICA Algorithm}\label{import-fastica-algorithm}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{c+c1}{\PYZsh{} Import algorithm developed in previous notebook}
+        \PY{k+kn}{from} \PY{n+nn}{parallel\PYZus{}ica} \PY{k}{import} \PY{n}{perform\PYZus{}fastica}
+\end{Verbatim}
+
+
+    \hypertarget{functions-from-demo}{%
+\subsection{Functions from Demo}\label{functions-from-demo}}
+
+    A number of functions were developed in the demo, primarily to help with
+processing the audio data and drawing mixing matrices. We will use these
+functions with a few minor modifications of the plotting format.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{c+c1}{\PYZsh{} Normalize audio amplitude between \PYZhy{}0.5 and 0.5}
+        \PY{k}{def} \PY{n+nf}{audionorm}\PY{p}{(}\PY{n}{data}\PY{p}{)}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{} ensure data is ndarray with float numbers}
+            \PY{n}{data} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{asarray}\PY{p}{(}\PY{n}{data}\PY{p}{)}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{float}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{} calculate lower and upper bound}
+            \PY{n}{lbound}\PY{p}{,} \PY{n}{ubound} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{min}\PY{p}{(}\PY{n}{data}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{n}{data}\PY{p}{)}
+            \PY{k}{if} \PY{n}{lbound} \PY{o}{==} \PY{n}{ubound}\PY{p}{:}
+                \PY{n}{offset} \PY{o}{=} \PY{n}{lbound}
+                \PY{n}{scalar} \PY{o}{=} \PY{l+m+mi}{1}
+                \PY{n}{data} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{size}\PY{o}{=}\PY{n}{data}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+            \PY{k}{else}\PY{p}{:}
+                \PY{n}{offset} \PY{o}{=} \PY{p}{(}\PY{n}{lbound} \PY{o}{+} \PY{n}{ubound}\PY{p}{)} \PY{o}{/} \PY{l+m+mi}{2}
+                \PY{n}{scalar} \PY{o}{=} \PY{l+m+mi}{1} \PY{o}{/} \PY{p}{(}\PY{n}{ubound} \PY{o}{\PYZhy{}} \PY{n}{lbound}\PY{p}{)}
+                \PY{n}{data} \PY{o}{=} \PY{p}{(}\PY{n}{data} \PY{o}{\PYZhy{}} \PY{n}{offset}\PY{p}{)} \PY{o}{*} \PY{n}{scalar}
+            \PY{c+c1}{\PYZsh{} return normalized data}
+            \PY{k}{return} \PY{n}{data}
+        
+        \PY{c+c1}{\PYZsh{} Mix a matrix of samples using a random mixing matrix}
+        \PY{k}{def} \PY{n+nf}{simpleMixer}\PY{p}{(}\PY{n}{S}\PY{p}{)}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{} Set seed for consistent runs}
+            \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{seed}\PY{p}{(}\PY{l+m+mi}{42}\PY{p}{)}
+            \PY{n}{nchannel} \PY{o}{=} \PY{n}{S}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+            \PY{c+c1}{\PYZsh{} generate a random matrix}
+            \PY{n}{A} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{uniform}\PY{p}{(}\PY{n}{size} \PY{o}{=} \PY{p}{(}\PY{n}{nchannel}\PY{p}{,}\PY{n}{nchannel}\PY{p}{)}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{} generate mixed audio data}
+            \PY{n}{X} \PY{o}{=} \PY{n}{A}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{S}\PY{p}{)}
+            
+            \PY{k}{return} \PY{n}{X}\PY{p}{,} \PY{n}{A}
+        
+        \PY{c+c1}{\PYZsh{} Plot the mixed signal with the mixing matrix}
+        \PY{k}{def} \PY{n+nf}{drawDataWithMixingMatrix}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{mat}\PY{p}{,} \PY{n}{ground\PYZus{}truth}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}\PY{p}{:}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{,} \PY{l+m+mi}{6}\PY{p}{)}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{} plot data points}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{data}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{s}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{alpha} \PY{o}{=} \PY{l+m+mf}{0.6}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{} calculate axis length}
+            \PY{n}{lenAxis} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{square}\PY{p}{(}\PY{n}{mat}\PY{p}{)}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{} calculate scale for illustration}
+            \PY{n}{scale} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{min}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{data}\PY{p}{)}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)} \PY{o}{/} \PY{n}{lenAxis}\PY{o}{.}\PY{n}{T}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{} draw axis as arrow}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{arrow}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{n}{scale} \PY{o}{*} \PY{n}{mat}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{scale} \PY{o}{*} \PY{n}{mat}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{shape}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{full}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{arrow}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{n}{scale} \PY{o}{*} \PY{n}{mat}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{scale} \PY{o}{*} \PY{n}{mat}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{shape}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{full}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{k}{if} \PY{n}{ground\PYZus{}truth}\PY{p}{:}
+                \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Data with True Mixing Matrix}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{size} \PY{o}{=} \PY{l+m+mi}{18}\PY{p}{)}
+            \PY{k}{else}\PY{p}{:}
+                \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Data with Estimated Mixing Matrix}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{size} \PY{o}{=} \PY{l+m+mi}{18}\PY{p}{)}
+            
+        \PY{c+c1}{\PYZsh{} Show mixed signal with true mixing matrix and estimated mixing matrix}
+        \PY{k}{def} \PY{n+nf}{compareMixingMatrix}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{matA}\PY{p}{,} \PY{n}{matB}\PY{p}{)}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{} plot first mixing matrix}
+            \PY{n}{drawDataWithMixingMatrix}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{matA}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{} plot first mixing matrix}
+            \PY{n}{drawDataWithMixingMatrix}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{matB}\PY{p}{,} \PY{n}{ground\PYZus{}truth}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{read-in-audio-data-and-visualize}{%
+\subsubsection{Read in Audio Data and
+Visualize}\label{read-in-audio-data-and-visualize}}
+
+    The first audio sample is a piece of Bach music while the second is a
+snippet of speech. The audio files are normed between {[}-0.5, 0.5{]}
+and plotted below. We can see that each sample is slightly more than
+120,000 separate points, with each point representing an amplitude.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{c+c1}{\PYZsh{} Bach Audio}
+        \PY{n}{srate}\PY{p}{,} \PY{n}{bach\PYZus{}sample} \PY{o}{=} \PY{n}{wavfile}\PY{o}{.}\PY{n}{read}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{../data/bach.wav}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{bach\PYZus{}sample} \PY{o}{=} \PY{n}{audionorm}\PY{p}{(}\PY{n}{bach\PYZus{}sample}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{7}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{bach\PYZus{}sample}\PY{p}{,} \PY{n}{color} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{orange}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Normed Bach Sample}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+        
+        
+        \PY{c+c1}{\PYZsh{} Speech audio}
+        \PY{n}{\PYZus{}}\PY{p}{,} \PY{n}{speech\PYZus{}sample} \PY{o}{=} \PY{n}{wavfile}\PY{o}{.}\PY{n}{read}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{../data/speech.wav}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{speech\PYZus{}sample} \PY{o}{=} \PY{n}{audionorm}\PY{p}{(}\PY{n}{speech\PYZus{}sample}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{7}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{speech\PYZus{}sample}\PY{p}{,} \PY{n}{color} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{green}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Normed Speech Sample}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_10_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_10_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{check-gaussianity-of-audio-data}{%
+\section{Check Gaussianity of Audio
+Data}\label{check-gaussianity-of-audio-data}}
+
+Independent component analysis works on the assumption that the
+components of a signal are non-Gaussian. To test this, we can calculate
+the skew and kurtosis as well as the D'Agostino and Pearson's Test that
+combines the two measures to arrive at a single omnibus estimate for
+Gaussianity of the data. We will use
+\href{https://docs.scipy.org/doc/scipy-0.14.0/reference/generated/scipy.stats.mstats.normaltest.html}{\texttt{scipy.stats.mstats.normaltest}}
+which tests the Null Hypothesis that the sample is from a Gaussian
+distribution. If the p-value is less than 0.05, we can reject the null
+hypothesis, and conclude there is evidence to prove that the data is not
+Gaussian. We can also plot the histogram of the data along with a
+Gaussian and Laplacian distribution of the same size for a visualize
+comparison.
+
+The normal test calculates the \(k2\) measures defined as
+\(k2 = s^2 + k^2\) where s is the skew of the distribution and k is the
+kurtosis. The test for normality was developed by D'Agostino and Pearson
+``D'Agostino, R. and Pearson, E. S. (1973), ``Testing for departures
+from normality,'' Biometrika, 60, 613-622''. To get a sense of the skew
+and kurtosis measures, we can calculate them for the signal, a Gaussian
+distribution, and a Laplacian distribution. Combining the visual with
+the quantitative stats is a helpful way to think through concepts.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{k}{def} \PY{n+nf}{check\PYZus{}gaussianity}\PY{p}{(}\PY{n}{X}\PY{p}{)}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{} Perform D\PYZsq{}Agostino and Pearson\PYZsq{}s test to determine normality}
+            \PY{c+c1}{\PYZsh{} Combines skew and kurtosis for combined test of normality}
+            \PY{c+c1}{\PYZsh{} k2 = s\PYZca{}2 + k\PYZca{}2 where s is skew and k is kurtosis}
+            \PY{n}{test\PYZus{}result} \PY{o}{=} \PY{n}{normaltest}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Normal Test p\PYZhy{}value = }\PY{l+s+si}{\PYZob{}:0.4f\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{test\PYZus{}result}\PY{o}{.}\PY{n}{pvalue}\PY{p}{)}\PY{p}{)}
+            
+            \PY{c+c1}{\PYZsh{} Calculate actual skew and kurtosis}
+            \PY{n}{skew} \PY{o}{=} \PY{n}{skewtest}\PY{p}{(}\PY{n}{X}\PY{p}{)}\PY{o}{.}\PY{n}{statistic}
+            \PY{n}{kurtosis} \PY{o}{=} \PY{n}{kurtosistest}\PY{p}{(}\PY{n}{X}\PY{p}{)}\PY{o}{.}\PY{n}{statistic}
+            
+            \PY{c+c1}{\PYZsh{} Find Gaussian and Laplacian Distributions of same length}
+            \PY{n}{gaussian} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randn}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{X}\PY{p}{)}\PY{p}{)}
+            \PY{n}{laplacian} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{laplace}\PY{p}{(}\PY{n}{size} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{X}\PY{p}{)}\PY{p}{)}
+            
+            \PY{c+c1}{\PYZsh{} Interpret p\PYZhy{}value}
+            \PY{k}{if} \PY{n}{test\PYZus{}result}\PY{o}{.}\PY{n}{pvalue} \PY{o}{\PYZlt{}} \PY{l+m+mf}{0.05}\PY{p}{:}
+                \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Reject Null Hypothesis that sample comes}\PY{l+s+s1}{\PYZsq{}}
+                      \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ from a normal distribution at alpha = 0.05}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{k}{else}\PY{p}{:}
+                \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Fail to reject Null Hypothesis that sample}\PY{l+s+s1}{\PYZsq{}}
+                      \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ comes from a normal distribution at alpha= 0.05}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                
+                
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{Sample Distribution Skew = }\PY{l+s+si}{\PYZob{}:0.4f\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}
+                      \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{  Kurtosis = }\PY{l+s+si}{\PYZob{}:0.4f\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{skew}\PY{p}{,} \PY{n}{kurtosis}\PY{p}{)}\PY{p}{)}
+            
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Gaussian Distribution Skew = }\PY{l+s+si}{\PYZob{}:0.4f\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}
+                      \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{  Kurtosis = }\PY{l+s+si}{\PYZob{}:0.4f\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{skewtest}\PY{p}{(}\PY{n}{gaussian}\PY{p}{)}\PY{o}{.}\PY{n}{statistic}\PY{p}{,} 
+                                                    \PY{n}{kurtosistest}\PY{p}{(}\PY{n}{gaussian}\PY{p}{)}\PY{o}{.}\PY{n}{statistic}\PY{p}{)}\PY{p}{)}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Laplacian Distribution Skew = }\PY{l+s+si}{\PYZob{}:0.4f\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}
+                      \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{  Kurtosis = }\PY{l+s+si}{\PYZob{}:0.4f\PYZcb{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{skewtest}\PY{p}{(}\PY{n}{laplacian}\PY{p}{)}\PY{o}{.}\PY{n}{statistic}\PY{p}{,} 
+                                                    \PY{n}{kurtosistest}\PY{p}{(}\PY{n}{laplacian}\PY{p}{)}\PY{o}{.}\PY{n}{statistic}\PY{p}{)}\PY{p}{)}
+            
+            
+            \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{16}\PY{p}{,} \PY{l+m+mi}{8}\PY{p}{)}\PY{p}{)}
+            
+            \PY{c+c1}{\PYZsh{} Plot sample distribution}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{131}\PY{p}{)}
+            \PY{n}{sns}\PY{o}{.}\PY{n}{distplot}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{kde}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{hist}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{bins}\PY{o}{=}\PY{l+m+mi}{30}\PY{p}{,} \PY{n}{color} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{blue}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Amplitude}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{size} \PY{o}{=} \PY{l+m+mi}{14}\PY{p}{)}\PY{p}{;} \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Density}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{size} \PY{o}{=} \PY{l+m+mi}{14}\PY{p}{)}\PY{p}{;}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Sample Distribution}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{size} \PY{o}{=} \PY{l+m+mi}{18}\PY{p}{)}\PY{p}{;}
+            
+            \PY{c+c1}{\PYZsh{} Plot Gaussian Distribution of same length}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{132}\PY{p}{)}
+            \PY{n}{sns}\PY{o}{.}\PY{n}{distplot}\PY{p}{(}\PY{n}{gaussian}\PY{p}{,} \PY{n}{kde}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{hist}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{bins}\PY{o}{=}\PY{l+m+mi}{30}\PY{p}{,} \PY{n}{color} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{blue}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Amplitude}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{size} \PY{o}{=} \PY{l+m+mi}{14}\PY{p}{)}\PY{p}{;} \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Density}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{size} \PY{o}{=} \PY{l+m+mi}{14}\PY{p}{)}\PY{p}{;}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Gaussian Distribution}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{size} \PY{o}{=} \PY{l+m+mi}{18}\PY{p}{)}\PY{p}{;}
+            
+            \PY{c+c1}{\PYZsh{} Plot laplace}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{133}\PY{p}{)}
+            \PY{n}{sns}\PY{o}{.}\PY{n}{distplot}\PY{p}{(}\PY{n}{laplacian}\PY{p}{,} \PY{n}{kde}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{hist}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{bins}\PY{o}{=}\PY{l+m+mi}{30}\PY{p}{,} \PY{n}{color} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{blue}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Amplitude}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{size} \PY{o}{=} \PY{l+m+mi}{18}\PY{p}{)}\PY{p}{;} \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Density}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{size} \PY{o}{=} \PY{l+m+mi}{18}\PY{p}{)}\PY{p}{;}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Laplacian Distribution}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{size} \PY{o}{=} \PY{l+m+mi}{18}\PY{p}{)}\PY{p}{;}
+            
+            \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+            
+\end{Verbatim}
+
+
+    \hypertarget{test-check-gaussianity-function}{%
+\subsection{Test Check Gaussianity
+Function}\label{test-check-gaussianity-function}}
+
+First, we will just check the Gaussianity testing function on a dataset
+that we know is Gaussian, one generated by \texttt{np.random.randn}. The
+p-value should be much greater than 0.05, indicating that we should fail
+to reject the null hypothesis that the data is from a Gaussian
+distribution.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{check\PYZus{}gaussianity}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randn}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{bach\PYZus{}sample}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Normal Test p-value = 0.3822
+Fail to reject Null Hypothesis that sample comes from a normal distribution at alpha= 0.05
+
+Sample Distribution Skew = 0.6815  Kurtosis = 1.2080
+Gaussian Distribution Skew = 2.0214  Kurtosis = -0.9293
+Laplacian Distribution Skew = 5.0398  Kurtosis = 95.5442
+
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_14_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    The check Gaussianity function clearly identifies that this is a
+Gaussian Distribution.
+
+    \hypertarget{test-bach-audio-sample}{%
+\subsection{Test Bach Audio Sample}\label{test-bach-audio-sample}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{check\PYZus{}gaussianity}\PY{p}{(}\PY{n}{bach\PYZus{}sample}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Normal Test p-value = 0.0000
+Reject Null Hypothesis that sample comes from a normal distribution at alpha = 0.05
+
+Sample Distribution Skew = -9.9593  Kurtosis = 41.7558
+Gaussian Distribution Skew = 0.1485  Kurtosis = 2.2870
+Laplacian Distribution Skew = 2.2486  Kurtosis = 92.6014
+
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_17_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    From the test results, we fail to reject the null hypothesis that the
+Bach audio sample is from a normal distribution. Therefore, we can be
+confident that this data is not Gaussian. It also appears that the Bach
+audio follows a Laplacian distribution due to the high Kurtosis
+(\href{https://en.wikipedia.org/wiki/Kurtosis}{this is also known as
+super-Gaussianity}). A
+\href{https://en.wikipedia.org/wiki/Laplace_distribution}{Laplacian
+distribution} has excess positive kurtosis and is called
+``leptokurtic''. This distribution has a sharper peak and more weight in
+the tails than a standard Gaussian. A Laplacian Distribution is sparse,
+meaning that most of the values are concentrated at the mean with a few
+significant outliers, lending the distibution wider tails and a sharper
+peak than a Gaussian distribution.
+
+    \hypertarget{test-speech-sample}{%
+\subsection{Test Speech Sample}\label{test-speech-sample}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{check\PYZus{}gaussianity}\PY{p}{(}\PY{n}{speech\PYZus{}sample}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Normal Test p-value = 0.0000
+Reject Null Hypothesis that sample comes from a normal distribution at alpha = 0.05
+
+Sample Distribution Skew = 15.9990  Kurtosis = 84.8716
+Gaussian Distribution Skew = -0.2531  Kurtosis = 0.0370
+Laplacian Distribution Skew = 1.7515  Kurtosis = 95.4982
+
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_20_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    The speech audio sample also does not follow a normal distribution from
+the results of the test. We can therefore move forward with attempting
+to separate out the samples from a linear combination of the two
+independent, non-Gaussian audio samples.
+
+    \hypertarget{mix-bach-and-speech-samples}{%
+\subsection{Mix Bach and Speech
+Samples}\label{mix-bach-and-speech-samples}}
+
+The signal we will analyze is a linear combination of the two indepedent
+sources created by the equation
+
+\[X = AS\]
+
+X is the signal, A is the mixing matrix, and S is the matrix of sources.
+In this case, the sources are mixed together using a random mixing
+matrix.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{samples} \PY{o}{=} \PY{n}{audionorm}\PY{p}{(}\PY{p}{[}\PY{n}{bach\PYZus{}sample}\PY{p}{,} \PY{n}{speech\PYZus{}sample}\PY{p}{]}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Standardize samples}
+         \PY{n}{samples} \PY{o}{=} \PY{p}{(}\PY{n}{samples}\PY{o}{.}\PY{n}{T} \PY{o}{/} \PY{n}{samples}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{T}
+         
+         \PY{c+c1}{\PYZsh{} Mix samples in linear combination with random mixing matrix}
+         \PY{n}{X}\PY{p}{,} \PY{n}{true\PYZus{}A} \PY{o}{=} \PY{n}{simpleMixer}\PY{p}{(}\PY{n}{samples}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Plot the mixed data}
+         \PY{n}{drawDataWithMixingMatrix}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{true\PYZus{}A}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_23_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{visualize-samples-and-mixed-signal}{%
+\subsection{Visualize Samples and Mixed
+Signal}\label{visualize-samples-and-mixed-signal}}
+
+To get a sense of what the mixing matrix is doing, we can look at the
+individual samples and the combined signal.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{k}{def} \PY{n+nf}{plot\PYZus{}samples\PYZus{}mixed}\PY{p}{(}\PY{n}{samples}\PY{p}{,} \PY{n}{signal}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{} Independent Samples}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{,} \PY{l+m+mi}{6}\PY{p}{)}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{samples}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{p}{:}\PY{p}{]}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Sample 1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{samples}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{p}{:}\PY{p}{]}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Sample 2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Samples}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{size} \PY{o}{=} \PY{l+m+mi}{18}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}\PY{p}{;} 
+             
+             \PY{c+c1}{\PYZsh{} Mixed signal}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{,} \PY{l+m+mi}{6}\PY{p}{)}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{signal}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{p}{:}\PY{p}{]}\PY{p}{,} \PY{n}{alpha} \PY{o}{=} \PY{l+m+mf}{1.0}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mixed 1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{signal}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{p}{:}\PY{p}{]}\PY{p}{,} \PY{n}{alpha} \PY{o}{=} \PY{l+m+mf}{1.0}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mixed 2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mixed Signal}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{size} \PY{o}{=} \PY{l+m+mi}{18}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n}{plot\PYZus{}samples\PYZus{}mixed}\PY{p}{(}\PY{n}{samples}\PY{p}{,} \PY{n}{X}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_26_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_26_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{verify-ica-implementation}{%
+\section{Verify ICA Implementation}\label{verify-ica-implementation}}
+
+Before separating the audio sources, we will verify the ICA
+implementation using synthetic data. The data is generated from a
+Laplacian Distribution and combined with a defined mixing matrix so we
+know that the overall signal is a linear combination of non-Gaussian
+components and the ICA method should function very well on this data.
+
+    \hypertarget{generate-synthetic-laplacian-data}{%
+\subsection{Generate Synthetic Laplacian
+Data}\label{generate-synthetic-laplacian-data}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{c+c1}{\PYZsh{} Generate a mixed signal for a number of samples and}
+         \PY{c+c1}{\PYZsh{} defined mixing matrix}
+         \PY{k}{def} \PY{n+nf}{generate\PYZus{}laplacian\PYZus{}data}\PY{p}{(}\PY{n}{n\PYZus{}samples}\PY{p}{,} \PY{n}{mixing}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{} Set seed for reproducible results}
+             \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{seed}\PY{p}{(}\PY{n}{seed} \PY{o}{=} \PY{l+m+mi}{50}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{} Laplacian distributions}
+             \PY{n}{s1} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{laplace}\PY{p}{(}\PY{n}{size} \PY{o}{=} \PY{n}{n\PYZus{}samples}\PY{p}{)}
+             \PY{n}{s2} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{laplace}\PY{p}{(}\PY{n}{size} \PY{o}{=} \PY{n}{n\PYZus{}samples}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{} Combine into one array}
+             \PY{n}{S} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n}{s1}\PY{p}{,} \PY{n}{s2}\PY{p}{]}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{} Mix samples}
+             \PY{n}{generated\PYZus{}data} \PY{o}{=} \PY{n}{mixing}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{S}\PY{p}{)}
+             
+             \PY{k}{return} \PY{n}{generated\PYZus{}data}\PY{p}{,} \PY{n}{S}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{c+c1}{\PYZsh{} Defined mixing matrix}
+         \PY{n}{verify\PYZus{}mixing} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}
+                                   \PY{p}{[}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Signal for verification}
+         \PY{n}{verify\PYZus{}signal}\PY{p}{,} \PY{n}{verify\PYZus{}samples} \PY{o}{=} \PY{n}{generate\PYZus{}laplacian\PYZus{}data}\PY{p}{(}\PY{n}{n\PYZus{}samples} \PY{o}{=} \PY{l+m+mi}{10000}\PY{p}{,} \PY{n}{mixing} \PY{o}{=} \PY{n}{verify\PYZus{}mixing}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Visualize the verification data}
+         \PY{n}{drawDataWithMixingMatrix}\PY{p}{(}\PY{n}{verify\PYZus{}signal}\PY{p}{,} \PY{n}{verify\PYZus{}mixing}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_30_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{n}{check\PYZus{}gaussianity}\PY{p}{(}\PY{n}{verify\PYZus{}samples}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{p}{:}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Normal Test p-value = 0.0000
+Reject Null Hypothesis that sample comes from a normal distribution at alpha = 0.05
+
+Sample Distribution Skew = -2.8428  Kurtosis = 26.3515
+Gaussian Distribution Skew = -0.8293  Kurtosis = -0.4725
+Laplacian Distribution Skew = 0.5005  Kurtosis = 28.1637
+
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_31_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{visualize-generated-validation-data}{%
+\subsubsection{Visualize Generated Validation
+Data}\label{visualize-generated-validation-data}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{n}{plot\PYZus{}samples\PYZus{}mixed}\PY{p}{(}\PY{n}{verify\PYZus{}samples}\PY{p}{,} \PY{n}{verify\PYZus{}signal}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_33_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_33_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{implement-ica-on-validation-data}{%
+\subsection{Implement ICA on Validation
+Data}\label{implement-ica-on-validation-data}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{c+c1}{\PYZsh{} Use developed implementation of ICA, signal must be transposed}
+         \PY{n}{mixing}\PY{p}{,} \PY{n}{sources}\PY{p}{,} \PY{n}{mean} \PY{o}{=} \PY{n}{perform\PYZus{}fastica}\PY{p}{(}\PY{n}{verify\PYZus{}signal}\PY{o}{.}\PY{n}{T}\PY{p}{,} \PY{n}{n\PYZus{}components} \PY{o}{=} \PY{l+m+mi}{2}\PY{p}{,} \PY{n}{print\PYZus{}negentropy}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Iteration: 0 Increase in Negentropy: 0.0423.
+Iteration: 1 Increase in Negentropy: 0.0085.
+Iteration: 2 Increase in Negentropy: 0.0000.
+
+    \end{Verbatim}
+
+    \hypertarget{examine-estimated-mixing-matrix}{%
+\subsection{Examine Estimated Mixing
+Matrix}\label{examine-estimated-mixing-matrix}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{n}{compareMixingMatrix}\PY{p}{(}\PY{n}{verify\PYZus{}signal}\PY{p}{,} \PY{n}{verify\PYZus{}mixing}\PY{p}{,} \PY{n}{mixing}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_37_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_37_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{True Mixing Matrix}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{verify\PYZus{}mixing}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{Estimated Mixing Matrix}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{mixing}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+True Mixing Matrix
+
+[[-1  1]
+ [ 2  2]]
+
+Estimated Mixing Matrix
+
+[[ 138.34822884 -140.37567214]
+ [ 289.40506692  269.28916873]]
+
+    \end{Verbatim}
+
+    Although the numbers in the mixing matrix are not the same, the
+independent components have been correctly identified. The
+\href{https://stats.stackexchange.com/questions/30348/is-it-acceptable-to-reverse-a-sign-of-a-principal-component-score}{signs
+on the independent components} may be reversed from the actual values
+because the signs are arbitrary. Also, ICA is a non-deterministic
+algorithm, so the exact mixing matrix will vary every run. What we can
+see from the figure is that the FastICA method has identified the
+independent components.
+
+    \hypertarget{examine-estimated-sources}{%
+\subsection{Examine Estimated Sources}\label{examine-estimated-sources}}
+
+We can also look at the estimated sources from ICA. These should be the
+same as the original within a sign change and a constant scaling factor.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{k}{def} \PY{n+nf}{plot\PYZus{}samples\PYZus{}estimates}\PY{p}{(}\PY{n}{samples}\PY{p}{,} \PY{n}{estimates}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{} Independent Samples}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{,} \PY{l+m+mi}{6}\PY{p}{)}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{samples}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{p}{:}\PY{p}{]}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Sample 1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{samples}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{p}{:}\PY{p}{]}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Sample 2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Ground Truth Samples}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{size} \PY{o}{=} \PY{l+m+mi}{18}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}\PY{p}{;} 
+             
+             \PY{c+c1}{\PYZsh{} Mixed signal}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{,} \PY{l+m+mi}{6}\PY{p}{)}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{estimates}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{p}{:}\PY{p}{]}\PY{p}{,} \PY{n}{alpha} \PY{o}{=} \PY{l+m+mf}{1.0}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mixed 1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{estimates}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{p}{:}\PY{p}{]}\PY{p}{,} \PY{n}{alpha} \PY{o}{=} \PY{l+m+mf}{1.0}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mixed 2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Estimated Samples}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{size} \PY{o}{=} \PY{l+m+mi}{18}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{n}{plot\PYZus{}samples\PYZus{}estimates}\PY{p}{(}\PY{n}{verify\PYZus{}samples}\PY{p}{,} \PY{n}{sources}\PY{o}{.}\PY{n}{T}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_42_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_42_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    From the above visuals, we can be confident that our ICA implementation
+works on a signal that is a linear combination of non-Gaussian
+components. It is able to identify the mixing matrix and the original
+sources from which the signal is derived.
+
+    \hypertarget{test-ica-on-audio-data}{%
+\section{Test ICA on Audio Data}\label{test-ica-on-audio-data}}
+
+Now it's time to apply the FastICA implementation to the mixed audio
+samples. We should be able to find an appropriate mixing matrix and
+separate out the sources.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{n}{audio\PYZus{}mixing}\PY{p}{,} \PY{n}{audio\PYZus{}sources}\PY{p}{,} \PY{n}{audio\PYZus{}mean} \PY{o}{=} \PY{n}{perform\PYZus{}fastica}\PY{p}{(}\PY{n}{X}\PY{o}{.}\PY{n}{T}\PY{p}{,} \PY{n}{n\PYZus{}components}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{print\PYZus{}negentropy}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Iteration: 0 Increase in Negentropy: 0.0078.
+Iteration: 1 Increase in Negentropy: 0.0000.
+
+    \end{Verbatim}
+
+    \hypertarget{visualize-actual-and-estimated-mixing-matrices}{%
+\subsection{Visualize Actual and Estimated Mixing
+Matrices}\label{visualize-actual-and-estimated-mixing-matrices}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{n}{compareMixingMatrix}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{true\PYZus{}A}\PY{p}{,} \PY{n}{audio\PYZus{}mixing}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_47_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_47_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{True Mixing Matrix}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{true\PYZus{}A}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{Estimated Mixing Matrix}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{audio\PYZus{}mixing}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+True Mixing Matrix
+
+[[0.37454012 0.95071431]
+ [0.73199394 0.59865848]]
+
+Estimated Mixing Matrix
+
+[[-345.98250801 -138.58964824]
+ [-218.00245656 -267.77563995]]
+
+    \end{Verbatim}
+
+    As mentioned previously, the signs on the Independent Components are
+arbitrary. However, we can see that the algorithm was able to identify
+the independent components as seen in the mixing matrix.
+
+We also see from the printed information that the Negentropy of the
+independent components decreased over the iterations. The FastICA
+implementation maximizes the non-Gaussianity of the Independent
+Components.
+
+    \hypertarget{visualize-actual-and-estimated-sources}{%
+\subsection{Visualize Actual and Estimated
+Sources}\label{visualize-actual-and-estimated-sources}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{n}{plot\PYZus{}samples\PYZus{}estimates}\PY{p}{(}\PY{n}{samples}\PY{p}{,} \PY{n}{audio\PYZus{}sources}\PY{o}{.}\PY{n}{T}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_51_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_51_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Again, we see that within a sign change and a constant scaling factor,
+the ICA method separated out the sources. Given the mixing matrix plot
+and the source plot, we can have confidence that our implementation is
+working as expected.
+
+    \hypertarget{conclusions}{%
+\section{Conclusions}\label{conclusions}}
+
+In this notebook, we tested our developed implementation of Indepedent
+Component Analysis both on synthetic data and on audio samples. For both
+cases, the ICA method was able to identify the independent components as
+observed in the estimated mixing matrix and the sources. We did see that
+the mixing matrix does not have the same numbers as the original because
+there may be an
+\href{http://people.wku.edu/david.neal/307/Unit2/LinearComb.pdf}{infinite
+number of solutions} for the mixing matrix because the signal is a
+linear combination of the sources
+(\href{https://math.stackexchange.com/questions/204768/linear-combinations-and-solutions}{a
+linear transformation gives either one, zero, or infinite solutions.})
+There will always be
+\href{http://cs229.stanford.edu/notes/cs229-notes11.pdf}{ambiguity both
+in the mixing matrix and the sources from independent component
+analysis} because there is no method to recover the exact scaling of the
+independent sources. This answers a question from the previous notebook
+where we saw differences in sign changes and in scaling between the
+results and the known values. Overall, this assignment has demonstrated
+a fast implementation of Independent Component Analysis and verified its
+use in finding the sources in signals that are composed of linear
+combinations of non-Gaussian indepedent components.
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}

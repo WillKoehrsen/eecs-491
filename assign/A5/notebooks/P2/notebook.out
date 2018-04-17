@@ -1,0 +1,15 @@
+\BOOKMARK [1][-]{section.1}{Introduction: FastICA Verification}{}% 1
+\BOOKMARK [2][-]{subsubsection.1.0.1}{Import Algorithm}{section.1}% 2
+\BOOKMARK [1][-]{section.2}{Generate Independent Samples}{}% 3
+\BOOKMARK [2][-]{subsubsection.2.0.1}{Visualize Signals}{section.2}% 4
+\BOOKMARK [3][-]{subsubsection.2.0.2}{Add Noise}{subsubsection.2.0.1}% 5
+\BOOKMARK [1][-]{section.3}{Combine Samples Into Signal Using Mixing Matrix}{}% 6
+\BOOKMARK [2][-]{subsection.3.1}{Check for Indepedence}{section.3}% 7
+\BOOKMARK [2][-]{subsection.3.2}{Mix Samples}{section.3}% 8
+\BOOKMARK [2][-]{subsection.3.3}{Visualize Signal}{section.3}% 9
+\BOOKMARK [1][-]{section.4}{Apply Independent Component Analysis}{}% 10
+\BOOKMARK [2][-]{subsection.4.1}{Check to See if Inverse Transform is Correct}{section.4}% 11
+\BOOKMARK [2][-]{subsection.4.2}{Compare Mixing Matrix with Ground Truth}{section.4}% 12
+\BOOKMARK [2][-]{subsection.4.3}{Visualize Identified Sources}{section.4}% 13
+\BOOKMARK [1][-]{section.5}{Compare to Scikit-learn Implementation}{}% 14
+\BOOKMARK [1][-]{section.6}{Conclusions}{}% 15

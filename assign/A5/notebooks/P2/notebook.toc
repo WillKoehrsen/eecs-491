@@ -1,0 +1,16 @@
+\contentsline {section}{\numberline {1}Introduction: FastICA Verification}{1}{section.1}
+\contentsline {subsubsection}{\numberline {1.0.1}Import Algorithm}{2}{subsubsection.1.0.1}
+\contentsline {section}{\numberline {2}Generate Independent Samples}{2}{section.2}
+\contentsline {subsubsection}{\numberline {2.0.1}Visualize Signals}{2}{subsubsection.2.0.1}
+\contentsline {paragraph}{Distribution of Samples}{3}{section*.2}
+\contentsline {subsubsection}{\numberline {2.0.2}Add Noise}{4}{subsubsection.2.0.2}
+\contentsline {section}{\numberline {3}Combine Samples Into Signal Using Mixing Matrix}{5}{section.3}
+\contentsline {subsection}{\numberline {3.1}Check for Indepedence}{6}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.2}Mix Samples}{6}{subsection.3.2}
+\contentsline {subsection}{\numberline {3.3}Visualize Signal}{6}{subsection.3.3}
+\contentsline {section}{\numberline {4}Apply Independent Component Analysis}{7}{section.4}
+\contentsline {subsection}{\numberline {4.1}Check to See if Inverse Transform is Correct}{7}{subsection.4.1}
+\contentsline {subsection}{\numberline {4.2}Compare Mixing Matrix with Ground Truth}{8}{subsection.4.2}
+\contentsline {subsection}{\numberline {4.3}Visualize Identified Sources}{8}{subsection.4.3}
+\contentsline {section}{\numberline {5}Compare to Scikit-learn Implementation}{10}{section.5}
+\contentsline {section}{\numberline {6}Conclusions}{12}{section.6}

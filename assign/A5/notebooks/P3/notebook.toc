@@ -1,0 +1,20 @@
+\contentsline {section}{\numberline {1}Introduction: Audio Signal Source Recovery}{1}{section.1}
+\contentsline {subsection}{\numberline {1.1}Import FastICA Algorithm}{2}{subsection.1.1}
+\contentsline {subsection}{\numberline {1.2}Functions from Demo}{2}{subsection.1.2}
+\contentsline {subsubsection}{\numberline {1.2.1}Read in Audio Data and Visualize}{4}{subsubsection.1.2.1}
+\contentsline {section}{\numberline {2}Check Gaussianity of Audio Data}{6}{section.2}
+\contentsline {subsection}{\numberline {2.1}Test Check Gaussianity Function}{8}{subsection.2.1}
+\contentsline {subsection}{\numberline {2.2}Test Bach Audio Sample}{9}{subsection.2.2}
+\contentsline {subsection}{\numberline {2.3}Test Speech Sample}{10}{subsection.2.3}
+\contentsline {subsection}{\numberline {2.4}Mix Bach and Speech Samples}{10}{subsection.2.4}
+\contentsline {subsection}{\numberline {2.5}Visualize Samples and Mixed Signal}{11}{subsection.2.5}
+\contentsline {section}{\numberline {3}Verify ICA Implementation}{13}{section.3}
+\contentsline {subsection}{\numberline {3.1}Generate Synthetic Laplacian Data}{13}{subsection.3.1}
+\contentsline {subsubsection}{\numberline {3.1.1}Visualize Generated Validation Data}{15}{subsubsection.3.1.1}
+\contentsline {subsection}{\numberline {3.2}Implement ICA on Validation Data}{17}{subsection.3.2}
+\contentsline {subsection}{\numberline {3.3}Examine Estimated Mixing Matrix}{17}{subsection.3.3}
+\contentsline {subsection}{\numberline {3.4}Examine Estimated Sources}{20}{subsection.3.4}
+\contentsline {section}{\numberline {4}Test ICA on Audio Data}{21}{section.4}
+\contentsline {subsection}{\numberline {4.1}Visualize Actual and Estimated Mixing Matrices}{22}{subsection.4.1}
+\contentsline {subsection}{\numberline {4.2}Visualize Actual and Estimated Sources}{24}{subsection.4.2}
+\contentsline {section}{\numberline {5}Conclusions}{25}{section.5}

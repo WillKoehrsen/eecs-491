@@ -1,0 +1,11 @@
+\BOOKMARK [1][-]{section.1}{Introduction: FastICA Implementation}{}% 1
+\BOOKMARK [1][-]{section.2}{Implementation of FastICA}{}% 2
+\BOOKMARK [2][-]{subsection.2.1}{Utility Function: Negentropy}{section.2}% 3
+\BOOKMARK [1][-]{section.3}{Preprocessing}{}% 4
+\BOOKMARK [2][-]{subsection.3.1}{Centering}{section.3}% 5
+\BOOKMARK [2][-]{subsection.3.2}{Whitening Components}{section.3}% 6
+\BOOKMARK [2][-]{subsection.3.3}{Symmetric Decorrelation}{section.3}% 7
+\BOOKMARK [1][-]{section.4}{Parallel ICA}{}% 8
+\BOOKMARK [1][-]{section.5}{Fast ICA}{}% 9
+\BOOKMARK [2][-]{subsection.5.1}{Inverse ICA Transform}{section.5}% 10
+\BOOKMARK [1][-]{section.6}{Conclusions}{}% 11
