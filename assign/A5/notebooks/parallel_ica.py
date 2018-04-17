@@ -51,7 +51,8 @@ def symmetric_decorrelation(un_mixing):
     
     return sym_un_mixing
 
-def parallel_ica(X, init_un_mixing, alpha = 1.0, max_iter = 1000, tol = 1e-4, return_iter = False):
+def parallel_ica(X, init_un_mixing, alpha = 1.0, max_iter = 1000, tol = 1e-4, 
+                 return_iter = False, print_negentropy=False):
     
     # Symmetric decorrelation of initial un-mixing components 
     un_mixing = symmetric_decorrelation(init_un_mixing)
@@ -68,9 +69,12 @@ def parallel_ica(X, init_un_mixing, alpha = 1.0, max_iter = 1000, tol = 1e-4, re
         
         new_un_mixing = symmetric_decorrelation(np.dot(gwtx, X.T) / p - g_wtx[:, np.newaxis] * un_mixing)
         
-        # Calculate negative entropy based on logcosh
+        # Calculate negentropy based on logcosh
         lim = max(abs(abs(np.diag(np.dot(new_un_mixing, un_mixing.T))) - 1))
         
+        if print_negentropy:
+            print('Iteration: {d}\tIncrease in Negentropy: {:0.4f}.'.format(
+                i, lim))
         # Update un-mixing 
         un_mixing = new_un_mixing
 
@@ -91,7 +95,8 @@ def parallel_ica(X, init_un_mixing, alpha = 1.0, max_iter = 1000, tol = 1e-4, re
     
 # X = mixing * sources
 # sources = un-mixing * whitening * X
-def perform_fastica(X, n_components, alpha = 1.0, max_iter = 200, tol = 1e-4):
+def perform_fastica(X, n_components, alpha = 1.0, max_iter = 200, tol = 1e-4,
+                   print_negentropy=False):
     
     # Whiten components by subtracting mean
     X1, whitening, X_mean = whiten_components(X.T, n_components)
@@ -100,7 +105,8 @@ def perform_fastica(X, n_components, alpha = 1.0, max_iter = 200, tol = 1e-4):
     init_un_mixing = np.asarray(np.random.normal(size = (n_components, n_components)))
     
     # Solve ica using the parallel ica algorithm
-    un_mixing = parallel_ica(X1, init_un_mixing, alpha, max_iter, tol)
+    un_mixing = parallel_ica(X1, init_un_mixing, alpha, max_iter, tol,
+                            print_negentropy)
 
     # Calculate the sources
     sources = np.dot(np.dot(un_mixing, whitening), X.T).T
